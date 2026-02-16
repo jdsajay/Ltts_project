@@ -49,7 +49,7 @@ def load_rules(rule_files: list[str] | None = None) -> list[dict]:
             logger.warning("Rule file not found: %s", rule_path)
             continue
 
-        with open(rule_path, "r") as f:
+        with open(rule_path, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
 
         standard = data.get("standard", filename)
@@ -114,7 +114,7 @@ def resolve_rules_for_label(label_filename: str) -> tuple[list[dict], str]:
     profiles = {}
     if yaml_path.exists():
         import yaml as _yaml
-        with open(yaml_path, "r") as f:
+        with open(yaml_path, "r", encoding="utf-8") as f:
             raw = _yaml.safe_load(f) or {}
         profiles = raw.get("profiles", {})
 

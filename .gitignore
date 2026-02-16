@@ -26,6 +26,9 @@ build/
 .DS_Store
 Thumbs.db
 
+# PDF files (large binaries — keep locally, not in repo)
+*.pdf
+
 # ChromaDB local storage (large, rebuild from source)
 data/knowledge_base/chromadb/
 

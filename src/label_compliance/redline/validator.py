@@ -170,7 +170,7 @@ def validate_against_sample(
     # ── Step 4: Compare with our findings ─────────────
     if our_report_json and our_report_json.exists():
         import json
-        report = json.loads(our_report_json.read_text())
+        report = json.loads(our_report_json.read_text(encoding="utf-8"))
         our_gaps = report.get("gaps", [])
 
         # Also check results for failed/partial items

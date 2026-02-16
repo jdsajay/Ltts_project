@@ -117,7 +117,7 @@ _settings: Settings | None = None
 def _load_yaml() -> dict:
     """Load the YAML config file."""
     if SETTINGS_FILE.exists():
-        with open(SETTINGS_FILE, "r") as f:
+        with open(SETTINGS_FILE, "r", encoding="utf-8") as f:
             return yaml.safe_load(f) or {}
     return {}
 
