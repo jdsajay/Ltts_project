@@ -19,6 +19,16 @@ def _get_model():
     """Lazy-load the sentence-transformers model."""
     global _model
     if _model is None:
+        # Disable SSL verification for corporate proxies / firewalls
+        import os
+        import ssl
+        os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")
+        os.environ.setdefault("CURL_CA_BUNDLE", "")
+        try:
+            ssl._create_default_https_context = ssl._create_unverified_context
+        except AttributeError:
+            pass
+
         from sentence_transformers import SentenceTransformer
 
         settings = get_settings()
