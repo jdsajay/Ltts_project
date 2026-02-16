@@ -82,12 +82,12 @@ def ingest(standards_dir: Path | None, rebuild: bool):
 
     # Show KB stats
     for kb in kb_files:
-        kb_path = Path(settings.paths.knowledge_base_dir) / f"{kb['standard_id']}.json"
+        kb_path = Path(settings.paths.knowledge_base_dir) / f"{kb['iso_id']}.json"
         n_sec = len(kb.get("sections", []))
         n_req = len(kb.get("requirements", []))
         n_kw = len(kb.get("keywords", []))
         console.print(
-            f"  [green]✓[/green] {kb['standard_id']}: "
+            f"  [green]✓[/green] {kb['iso_id']}: "
             f"{n_sec} sections, {n_req} requirements, {n_kw} keywords → {kb_path.name}"
         )
 
@@ -99,7 +99,7 @@ def ingest(standards_dir: Path | None, rebuild: bool):
 
     total_indexed = 0
     for kb in kb_files:
-        kb_path = Path(settings.paths.knowledge_base_dir) / f"{kb['standard_id']}.json"
+        kb_path = Path(settings.paths.knowledge_base_dir) / f"{kb['iso_id']}.json"
         n = store.index_knowledge_base(kb_path)
         total_indexed += n
 
@@ -333,7 +333,7 @@ def run(rebuild: bool, semantic: bool, ai: bool, format: str):
 
         total = 0
         for kb in kbs:
-            kb_path = Path(settings.paths.knowledge_base_dir) / f"{kb['standard_id']}.json"
+            kb_path = Path(settings.paths.knowledge_base_dir) / f"{kb['iso_id']}.json"
             total += store.index_knowledge_base(kb_path)
         console.print(f"  [green]✓[/green] Indexed {total} chunks.\n")
     else:

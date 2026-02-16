@@ -8,8 +8,14 @@ Rules define what to check on each label.
 from __future__ import annotations
 
 from pathlib import Path
+import importlib
 
-import yaml
+try:
+    yaml = importlib.import_module("yaml")
+except ModuleNotFoundError as exc:  # pragma: no cover
+    raise ModuleNotFoundError(
+        "PyYAML is required to load compliance rules. Install it with: pip install pyyaml"
+    ) from exc
 
 from label_compliance.config import get_settings, get_root
 from label_compliance.utils.log import get_logger
@@ -113,9 +119,8 @@ def resolve_rules_for_label(label_filename: str) -> tuple[list[dict], str]:
     yaml_path = get_root() / "config" / "settings.yaml"
     profiles = {}
     if yaml_path.exists():
-        import yaml as _yaml
         with open(yaml_path, "r", encoding="utf-8") as f:
-            raw = _yaml.safe_load(f) or {}
+            raw = yaml.safe_load(f) or {}
         profiles = raw.get("profiles", {})
 
     # Try to match against profiles
