@@ -42,7 +42,9 @@ def _get_model():
 def embed_texts(texts: list[str]) -> list[list[float]]:
     """Embed a list of texts into vectors."""
     model = _get_model()
-    embeddings = model.encode(texts, show_progress_bar=len(texts) > 100)
+    # Sanitize: replace None/non-string values with empty string
+    clean_texts = [t if isinstance(t, str) else "" for t in texts]
+    embeddings = model.encode(clean_texts, show_progress_bar=len(clean_texts) > 100)
     return [e.tolist() for e in embeddings]
 
 
