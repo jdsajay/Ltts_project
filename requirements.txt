@@ -1,0 +1,23 @@
+# ── Core ──────────────────────────────────────────────
+pdfplumber>=0.10
+PyMuPDF>=1.23
+Pillow>=10.0
+pytesseract>=0.3.10
+opencv-python-headless>=4.8
+scikit-image>=0.22
+pyzbar>=0.1.9
+
+# ── Embeddings & Vector Store ─────────────────────────
+sentence-transformers>=2.2
+chromadb>=0.4
+
+# ── AI ────────────────────────────────────────────────
+ollama>=0.1
+openai>=1.0
+
+# ── Config & CLI ──────────────────────────────────────
+pyyaml>=6.0
+click>=8.1
+rich>=13.0
+python-dotenv>=1.0
+numpy>=1.26

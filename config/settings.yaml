@@ -1,0 +1,124 @@
+# ═══════════════════════════════════════════════════════
+#  Label Compliance System — Global Settings
+# ═══════════════════════════════════════════════════════
+
+# Paths (relative to project root)
+paths:
+  standards_dir: data/standards        # ISO / regulation PDFs
+  labels_dir: data/labels              # Label PDFs to check
+  knowledge_base_dir: data/knowledge_base
+  symbol_library_dir: data/symbol_library
+  output_dir: outputs
+  redline_dir: outputs/redlines
+  report_dir: outputs/reports
+  log_dir: outputs/logs
+
+# ── Knowledge Base ────────────────────────────────────
+knowledge_base:
+  # ChromaDB collection settings
+  collection_name: iso_requirements
+  # Chunk size for embedding (characters)
+  chunk_size: 500
+  chunk_overlap: 50
+  # Embedding model (sentence-transformers, runs locally)
+  embedding_model: all-MiniLM-L6-v2
+
+# ── Document Processing ──────────────────────────────
+document:
+  render_dpi: 300
+  ocr_language: eng
+  # Minimum OCR confidence to accept a word (0-100)
+  ocr_min_confidence: 30
+  # Image preprocessing for OCR
+  ocr_preprocess:
+    - grayscale
+    - threshold
+    - denoise
+
+# ── Compliance ────────────────────────────────────────
+compliance:
+  # Rule files to load (in config/rules/)
+  rule_files:
+    - iso_14607.yaml
+    - iso_15223.yaml
+  # Similarity threshold for semantic matching (0.0 - 1.0)
+  semantic_threshold: 0.65
+  # Scoring
+  score_levels:
+    compliant: 0.85       # >= 85% match → PASS
+    partial: 0.50         # >= 50% match → PARTIAL
+    # below 50% → FAIL
+
+# ── Label Profiles ────────────────────────────────────
+#  Map label filename patterns to specific rule files.
+#  Each profile has glob patterns to match label filenames
+#  and a list of rule files to check against.
+#  Labels not matching any profile use compliance.rule_files above.
+profiles:
+  breast_implant:
+    description: "CPG Gel Breast Implant labels"
+    patterns:
+      - "*ARTW*"
+      - "*CPG*"
+      - "*Gel*Breast*Implant*"
+    rule_files:
+      - iso_14607.yaml
+      - iso_15223.yaml
+  drawings:
+    description: "Engineering drawings"
+    patterns:
+      - "*DRWG*"
+    rule_files:
+      - iso_14607.yaml
+  # Example: a future device type
+  # spinal_implant:
+  #   description: "Spinal implant labels"
+  #   patterns:
+  #     - "*SPINE*"
+  #     - "*SPINAL*"
+  #   rule_files:
+  #     - iso_14630.yaml
+  #     - iso_15223.yaml
+
+# ── Redlining ───────────────────────────────────────
+redline:
+  # Annotation colors (RGB)
+  color_pass: [0, 180, 0]         # Green
+  color_fail: [220, 20, 20]       # Red
+  color_partial: [255, 165, 0]    # Orange
+  color_info: [0, 100, 200]       # Blue
+  # Annotation font size
+  font_size: 14
+  panel_width: 500
+  # Output format
+  output_format: both              # "pdf", "png", or "both"
+
+# ── AI Provider ──────────────────────────────────────
+ai:
+  # Provider: "local" (Ollama), "openai", "anthropic", "none"
+  provider: local
+  # Local model (Ollama)
+  local_model: llama3.2
+  # Temperature for reasoning
+  temperature: 0.1
+  # Max tokens for response
+  max_tokens: 2000
+  # Enable AI reasoning for ambiguous cases
+  enable_reasoning: true
+
+# ── Processing ───────────────────────────────────────
+processing:
+  # Batch size for processing labels
+  batch_size: 50
+  # Max parallel workers
+  max_workers: 4
+  # Resume from last checkpoint
+  resume: true
+
+# ── Logging ─────────────────────────────────────────
+logging:
+  level: INFO
+  # Log to file
+  file: outputs/logs/compliance.log
+  # Log format
+  format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"

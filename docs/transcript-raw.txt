@@ -1,0 +1,445 @@
+
+Durga Kothapalli
+0 minutes 4 seconds0:04
+Durga Kothapalli 0 minutes 4 seconds
+I to Ajay mentor is another team in J&J, right? Is that my correct understanding?
+BV
+
+Bharath Kumar V
+0 minutes 10 seconds0:10
+Bharath Kumar V 0 minutes 10 seconds
+Yes, exactly. It's kind of a pick on the view and Mentor is a recently surgical devices. They collaborated the name and that is Mentor.
+
+Durga Kothapalli
+0 minutes 11 seconds0:11
+Durga Kothapalli 0 minutes 11 seconds
+Nothing.
+Durga Kothapalli 0 minutes 16 seconds
+Enter OK.
+
+Suraj Dubey
+0 minutes 17 seconds0:17
+Suraj Dubey 0 minutes 17 seconds
+Yeah, initially Mentor was a different organization which is accord by JNJ.
+D
+
+Divya Sai Ajay Jasti
+0 minutes 18 seconds0:18
+Divya Sai Ajay Jasti 0 minutes 18 seconds
+Sure.
+BV
+
+Bharath Kumar V
+0 minutes 22 seconds0:22
+Bharath Kumar V 0 minutes 22 seconds
+And.
+
+Suraj Dubey
+0 minutes 28 seconds0:28
+Suraj Dubey 0 minutes 28 seconds
+Sorry.
+Suraj Dubey 0 minutes 30 seconds
+I think you're talking mute.
+SM
+Saikiran Madduluru
+0 minutes 33 seconds0:33
+Saikiran Madduluru 0 minutes 33 seconds
+Yes, yes, I'm sorry, yeah.
+Bharath Kumar V 2 minutes 4 seconds
+And each steps will take one or two weeks and three to four weeks Max for the redline markup and then again two to three weeks for the execute and change parallel.
+
+Durga Kothapalli
+2 minutes 13 seconds2:13
+Durga Kothapalli 2 minutes 13 seconds
+OK, so if you guys have any sample labels, can you flash us so that we just want to get some of them? OK.
+BV
+Bharath Kumar V
+2 minutes 18 seconds2:18
+Bharath Kumar V 2 minutes 18 seconds
+Yeah, that I I'll go to that one. I'll ask Sai Sai you can bring it up that by the time I'll finish this. So this is the the medium one. So compared to the previous one here you will add get a collaboration and create layout. English and electronic translation will be added here which is additional 3 weeks.
+Bharath Kumar V 2 minutes 36 seconds
+And same.
+Bharath Kumar V 2 minutes 38 seconds
+You can have the a translation outsource approval is also there and then approval change order will be there so that will be additional. So it is taking 6 to 8 months for the medium process. So this is the third one which they're having a high complexity which is the complete all the creations of labels, redlining, mockup, layout.
+D
+Divya Sai Ajay Jasti
+2 minutes 52 seconds2:52
+Divya Sai Ajay Jasti 2 minutes 52 seconds
+Yeah.
+BV
+Bharath Kumar V
+2 minutes 58 seconds2:58
+Bharath Kumar V 2 minutes 58 seconds
+Change orders, design history, file update, BOM update, everything will falls in. This is the one we are taking 12 to 8 months.
+Bharath Kumar V 3 minutes 7 seconds
+Just what you owe you this is.
+
+Durga Kothapalli
+3 minutes 9 seconds3:09
+Durga Kothapalli 3 minutes 9 seconds
+And also there is another around 20 step kind of a process in one of the PowerPoint slides. You guys show it to me.
+BV
+Bharath Kumar V
+3 minutes 15 seconds3:15
+Bharath Kumar V 3 minutes 15 seconds
+That is our proposal. I'd say that is our L&T proposal compared to the other other as per our experience in the other projects we proposed in silly right now this this 12 steps has been maybe you can consider this is a 20 steps.
+
+Durga Kothapalli
+3 minutes 19 seconds3:19
+Durga Kothapalli 3 minutes 19 seconds
+That is our thing, our thing.
+
+Suraj Dubey
+10 minutes 9 seconds10:09
+Suraj Dubey 10 minutes 9 seconds
+No, no, no Durga red line is priority. I would say yes, it is priority. Bharath mean to say red line is not fixed to update only one thing. It's like based on the regulatory comments, we have to update the red line Bharath.
+BV
+Bharath Kumar V
+10 minutes 9 seconds10:09
+Bharath Kumar V 10 minutes 9 seconds
+Priority though God, that's what I'm telling.
+
+Durga Kothapalli
+10 minutes 12 seconds10:12
+Durga Kothapalli 10 minutes 12 seconds
+OK.
+Durga Kothapalli 10 minutes 24 seconds
+That's fine. That that's fine. That becomes requirement for me, right? So it is not the one standard thing. It is where is bain by regulatory. So regulatory is my truth. So I need to look at that and based on that I need to work on what need to be redlined.
+
+Suraj Dubey
+10 minutes 28 seconds10:28
+Suraj Dubey 10 minutes 28 seconds
+Yes.
+Suraj Dubey 10 minutes 32 seconds
+Yeah.
+Suraj Dubey 10 minutes 40 seconds
+Exactly. That is the right answer or right question, yes.
+
+Durga Kothapalli
+10 minutes 40 seconds10:40
+Durga Kothapalli 10 minutes 40 seconds
+Right, the type of the label.
+Durga Kothapalli 10 minutes 43 seconds
+So what I'm asking is OK then OK then we are final with the redlining. OK, next steps is I would like to know maybe a use case or something. Walk us, walk us through me and Ajay, what is the steps involved high level and what are the things actually is going to be done regularly?
+Durga Kothapalli 11 minutes 2 seconds
+So every label is different based on corresponding regulatory thing. So just walk us through and so that we can design a system for it.
+
+Suraj Dubey
+11 minutes 8 seconds11:08
+Suraj Dubey 11 minutes 8 seconds
+Mhm.
+Suraj Dubey 11 minutes 13 seconds
+Yes. So for that I would say Sai, please share your screen, open any the template which needs to be updated as per the regulatory requirement and so I'm going to unmute. Thank you.
+SM
+Saikiran Madduluru
+11 minutes 25 seconds11:25
+Saikiran Madduluru 11 minutes 25 seconds
+Yeah, just give me a minute.
+Saikiran Madduluru 11 minutes 37 seconds
+Yeah, I'm just sharing my screen. Let me know if it is visible.
+Saikiran Madduluru 11 minutes 56 seconds
+As a divisible.
+
+Suraj Dubey
+12 minutes12:00
+Suraj Dubey 12 minutes
+Yes, for me, yes.
+SM
+Saikiran Madduluru
+12 minutes 1 second12:01
+Saikiran Madduluru 12 minutes 1 second
+OK, let's go with like that. We have two different kinds of artworks for the laden indexes. They both follow different different kinds. So I'm just gonna give you the how laden document looks like. Think here I can tell.
+D
+Divya Sai Ajay Jasti
+12 minutes 2 seconds12:02
+Divya Sai Ajay Jasti 12 minutes 2 seconds
+Yes, we can see your screen.
+SM
+Saikiran Madduluru
+12 minutes 18 seconds12:18
+Saikiran Madduluru 12 minutes 18 seconds
+Sizers. Let's go with this one.
+Saikiran Madduluru 12 minutes 28 seconds
+So this is how a one of the template looks like from the laden part.
+
+Durga Kothapalli
+12 minutes 37 seconds12:37
+Durga Kothapalli 12 minutes 37 seconds
+What is Laden? Laden is a a location.
+SM
+Saikiran Madduluru
+12 minutes 37 seconds12:37
+Saikiran Madduluru 12 minutes 37 seconds
+What in from? It's a different branch. It's in Netherlands.
+
+Durga Kothapalli
+12 minutes 43 seconds12:43
+Durga Kothapalli 12 minutes 43 seconds
+Another line.
+
+
+OK, yeah, there there is this project is signed for two locations label migrate. One is Laden which is in Europe and the other one is in Texas.
+
+Suraj Dubey
+12 minutes 52 seconds12:52
+Suraj Dubey 12 minutes 52 seconds
+It's nothing. It's a manufacturing site, Targa, just keep it in mind.
+SM
+Saikiran Madduluru
+12 minutes 53 seconds12:53
+Saikiran Madduluru 12 minutes 53 seconds
+Hello.
+
+Durga Kothapalli
+12 minutes 54 seconds12:54
+Durga Kothapalli 12 minutes 54 seconds
+OK.
+SM
+Saikiran Madduluru
+12 minutes 54 seconds12:54
+Saikiran Madduluru 12 minutes 54 seconds
+I just put it side by side for both of them.
+BV
+Bharath Kumar V
+12 minutes 57 seconds12:57
+Bharath Kumar V 12 minutes 57 seconds
+That's the product sense idea.
+SM
+Saikiran Madduluru
+12 minutes 58 seconds12:58
+Saikiran Madduluru 12 minutes 58 seconds
+Yeah, so the left side that you are seeing here, this is Texas label.
+Saikiran Madduluru 13 minutes 5 seconds
+Right here, what you're seeing on right side is laden label.
+Saikiran Madduluru 13 minutes 11 seconds
+These are two different things do different layout and.
+
+Durga Kothapalli
+13 minutes 12 seconds13:12
+Durga Kothapalli 13 minutes 12 seconds
+OK.
+BV
+Bharath Kumar V
+28 minutes 35 seconds28:35
+Bharath Kumar V 28 minutes 35 seconds
+Sure. No issues. Do you have any question? Thanks, Google. Thanks.
+D
+Divya Sai Ajay Jasti
+28 minutes 36 seconds28:36
+Divya Sai Ajay Jasti 28 minutes 36 seconds
+I have a few more questions. Yeah, I have. I have multiple questions. I'll I'll go ahead. Sure, sure. I'll I'll go.
+
+Durga Kothapalli
+28 minutes 37 seconds28:37
+Durga Kothapalli 28 minutes 37 seconds
+Ajay, Ajay take it.
+Durga Kothapalli 28 minutes 40 seconds
+I'm dropping apology.
+D
+Divya Sai Ajay Jasti
+28 minutes 46 seconds28:46
+Divya Sai Ajay Jasti 28 minutes 46 seconds
+Yeah, my first question would be like the template which we currently saw, right? The change which the surface thing need to be added that comes under like which section? Is it like small, medium or complex?
+BV
+Bharath Kumar V
+28 minutes 56 seconds28:56
+Bharath Kumar V 28 minutes 56 seconds
+Mhm, mhm.
+D
+Divya Sai Ajay Jasti
+29 minutes 4 seconds29:04
+Divya Sai Ajay Jasti 29 minutes 4 seconds
+Change.
+BV
+Bharath Kumar V
+29 minutes 4 seconds29:04
+Bharath Kumar V 29 minutes 4 seconds
+All it will falls under all category.
+D
+Divya Sai Ajay Jasti
+29 minutes 9 seconds29:09
+Divya Sai Ajay Jasti 29 minutes 9 seconds
+Oh no, no, the particular template which you showed me. So that changed that specific change.
+Divya Sai Ajay Jasti 29 minutes 15 seconds
+Based on that, I'll visualize like how complex.
+BV
+Bharath Kumar V
+29 minutes 17 seconds29:17
+Bharath Kumar V 29 minutes 17 seconds
+No, no. So don't don't mix the PowerPoint presentation and the red line here.
+D
+Divya Sai Ajay Jasti
+29 minutes 22 seconds29:22
+Divya Sai Ajay Jasti 29 minutes 22 seconds
+OK.
+
+Suraj Dubey
+29 minutes 23 seconds29:23
+Suraj Dubey 29 minutes 23 seconds
+OK.
+BV
+Bharath Kumar V
+29 minutes 23 seconds29:23
+Bharath Kumar V 29 minutes 23 seconds
+OK, this red line can be leveraged for any kind of updates.
+D
+Divya Sai Ajay Jasti
+29 minutes 28 seconds29:28
+Divya Sai Ajay Jasti 29 minutes 28 seconds
+OK, I get it. I get it now. So I connected to dots. OK, I get it. So my and also my next question would be so let's say if we are looking at a particular template, right, let's say you just have showed me for some company call company so for that specific.
+BV
+Bharath Kumar V
+29 minutes 30 seconds29:30
+Bharath Kumar V 29 minutes 30 seconds
+Yeah, mhm.
+D
+Divya Sai Ajay Jasti
+29 minutes 47 seconds29:47
+Divya Sai Ajay Jasti 29 minutes 47 seconds
+The company for that specific template. So would we get the same information every time with the changes?
+BV
+Bharath Kumar V
+29 minutes 54 seconds29:54
+Bharath Kumar V 29 minutes 54 seconds
+That's why. That's why I said specifically the word classification. If you are looking for some newborn care products, this classic this ISO won't applicable. If you are looking for some I contract related steps that ISO will be different.
+
+
+harath Kumar V
+30 minutes 10 seconds30:10
+Bharath Kumar V 30 minutes 10 seconds
+Yeah.
+Bharath Kumar V 30 minutes 13 seconds
+What?
+D
+Divya Sai Ajay Jasti
+30 minutes 13 seconds30:13
+Divya Sai Ajay Jasti 30 minutes 13 seconds
+It's own ISO. It might have its own ISO. Yeah, based on it, yeah.
+BV
+Bharath Kumar V
+39 minutes 48 seconds39:48
+Bharath Kumar V 39 minutes 48 seconds
+You are based out in US, right?
+D
+Divya Sai Ajay Jasti
+39 minutes 49 seconds39:49
+Divya Sai Ajay Jasti 39 minutes 49 seconds
+Yeah, yeah, yeah.
+BV
+Bharath Kumar V
+39 minutes 51 seconds39:51
+Bharath Kumar V 39 minutes 51 seconds
+Then Sai is the right person. Uh, Sai.
+
+Suraj Dubey
+39 minutes 51 seconds39:51
+Suraj Dubey 39 minutes 51 seconds
+You can reach out to me or Sai.
+D
+Divya Sai Ajay Jasti
+39 minutes 55 seconds39:55
+Divya Sai Ajay Jasti 39 minutes 55 seconds
+Sure, sounds good.
+
+Suraj Dubey
+39 minutes 57 seconds39:57
+Suraj Dubey 39 minutes 57 seconds
+Sai is the right person actually, but if Sai is not available or he both are.
+BV
+Bharath Kumar V
+39 minutes 58 seconds39:58
+Bharath Kumar V 39 minutes 58 seconds
+Yeah.
+Bharath Kumar V 40 minutes
+And.
+Bharath Kumar V 40 minutes 4 seconds
+No, so I will help you. In case of anything then we can schedule, we all can sync up.
+
+Suraj Dubey
+40 minutes 10 seconds40:10
+Suraj Dubey 40 minutes 10 seconds
+Uh huh.
+D
+Divya Sai Ajay Jasti
+40 minutes 10 seconds40:10
+Divya Sai Ajay Jasti 40 minutes 10 seconds
+Perfect. Sounds good. Yeah, I'll, I'll go through the data and I'll see like what what I'll I can start with.
+BV
+Bharath Kumar V
+40 minutes 12 seconds40:12
+Bharath Kumar V 40 minutes 12 seconds
+OK.
+D
+Divya Sai Ajay Jasti
+40 minutes 17 seconds40:17
+Divya Sai Ajay Jasti 40 minutes 17 seconds
+Yeah.
+
+Suraj Dubey
+40 minutes 17 seconds40:17
+Suraj Dubey 40 minutes 17 seconds
+Sounds great.
+BV
+Bharath Kumar V
+40 minutes 18 seconds40:18
+Bharath Kumar V 40 minutes 18 seconds
+But.
+D
+Divya Sai Ajay Jasti
+40 minutes 22 seconds40:22
+Divya Sai Ajay Jasti 40 minutes 22 seconds
+Any any questions or?
+BV
+Bharath Kumar V
+40 minutes 22 seconds40:22
+Bharath Kumar V 40 minutes 22 seconds
+OK, nothing for me. Ram, you want to add anything As for your understanding, Ram?
+RR
+Ramanath Roy
+40 minutes 28 seconds40:28
+Ramanath Roy 40 minutes 28 seconds
+No, you... No, no, you covered everything. I don't have anything extra.
+BV
+Bharath Kumar V
+40 minutes 35 seconds40:35
+Bharath Kumar V 40 minutes 35 seconds
+OK.
+Bharath Kumar V 40 minutes 38 seconds
+Finder.
+
+Suraj Dubey
+40 minutes 38 seconds40:38
+Suraj Dubey 40 minutes 38 seconds
+OK, then let's stop. Thank you.
+BV
+Bharath Kumar V
+40 minutes 41 seconds40:41
+Bharath Kumar V 40 minutes 41 seconds
+Thank you, Divya, Suraj, Sai, VK. Please stay. That's all. Bye. Thank you all. Bye, bye.
+D
+Divya Sai Ajay Jasti
+40 minutes 41 seconds40:41
+Divya Sai Ajay Jasti 40 minutes 41 seconds
+Thank you. Thanks for joining.
+
+Suraj Dubey
+40 minutes 44 seconds40:44
+Suraj Dubey 40 minutes 44 seconds
+Bye. OK, bye.
+D
+Divya Sai Ajay Jasti
+40 minutes 45 seconds40:45
+Divya Sai Ajay Jasti 40 minutes 45 seconds
+Thank you.
+SM
+Saikiran Madduluru
+40 minutes 48 seconds40:48
+Saikiran Madduluru 40 minutes 48 seconds
+Yeah.
+
+Suraj Dubey
+40 minutes 52 seconds40:52
+Suraj Dubey 40 minutes 52 seconds
+OK.
+
+

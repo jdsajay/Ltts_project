@@ -1,0 +1,345 @@
+# ═══════════════════════════════════════════════════════
+#  ISO 14607:2024 — Breast Implants — Label Requirements
+# ═══════════════════════════════════════════════════════
+#
+#  This file defines EVERY checkable requirement from
+#  ISO 14607:2024 sections 9–11 (packaging & labelling).
+#  Each rule has:
+#    - id: unique rule identifier
+#    - iso_ref: section/clause reference
+#    - description: human-readable text
+#    - category: grouping (symbol, text, dimension, visual)
+#    - check_type: how to verify (text_match, pattern, measurement, visual)
+#    - markers: OCR text patterns that indicate compliance
+#    - severity: critical / major / minor
+#    - new_in_2024: true if this is a NEW requirement in 2024 edition
+#    - specs: measurable specifications (size, font, etc.)
+
+standard: ISO 14607:2024
+title: "Non-active surgical implants — Mammary implants — Particular requirements"
+edition: "Fourth edition 2024-03"
+
+rules:
+
+  # ── Section 9: Packaging ──────────────────────────
+  - id: ISO14607-9.1
+    iso_ref: "9.1"
+    description: "Implant shall be supplied in sealed sterile packaging"
+    category: packaging
+    check_type: text_match
+    markers: ["sterile", "sealed", "packaging"]
+    severity: critical
+    new_in_2024: false
+
+  - id: ISO14607-9.2
+    iso_ref: "9.2"
+    description: "Double packaging system — inner and outer pack"
+    category: packaging
+    check_type: text_match
+    markers: ["inner", "outer", "double"]
+    severity: major
+    new_in_2024: false
+
+  # ── Section 10: Information supplied by manufacturer ─
+  - id: ISO14607-10.1
+    iso_ref: "10.1"
+    description: "Instructions for use shall accompany the implant"
+    category: text
+    check_type: text_match
+    markers: ["instructions for use", "IFU", "instructions"]
+    severity: critical
+    new_in_2024: false
+
+  # ── Section 11: Labelling ────────────────────────────
+
+  # 11.1 General
+  - id: ISO14607-11.1
+    iso_ref: "11.1"
+    description: "Labels shall comply with ISO 14630 and ISO 15223-1"
+    category: text
+    check_type: text_match
+    markers: ["ISO 14630", "ISO 15223"]
+    severity: critical
+    new_in_2024: false
+
+  # 11.2 Information on unit container
+  - id: ISO14607-11.2-volume
+    iso_ref: "11.2"
+    description: "Nominal volume stated on the unit container label"
+    category: dimension
+    check_type: pattern
+    markers: ["cc", "ml", "volume"]
+    pattern: "\\d+\\s*(?:cc|ml|mL)"
+    severity: critical
+    new_in_2024: false
+
+  - id: ISO14607-11.2-type
+    iso_ref: "11.2"
+    description: "Implant type/model stated on the unit container"
+    category: text
+    check_type: text_match
+    markers: ["CPG", "model", "type", "gel", "saline"]
+    severity: critical
+    new_in_2024: false
+
+  # 11.3 Labelling — specific requirements
+  - id: ISO14607-11.3a-dimensions
+    iso_ref: "11.3 a)"
+    description: "Implant dimensions: width, height/diameter, projection"
+    category: dimension
+    check_type: pattern
+    markers: ["width", "height", "projection", "diameter", "cm", "mm"]
+    pattern: "\\d+\\.?\\d*\\s*(?:cm|mm)"
+    specs:
+      must_include: ["width OR diameter", "projection"]
+    severity: critical
+    new_in_2024: false
+
+  - id: ISO14607-11.3a-volume-label
+    iso_ref: "11.3 a)"
+    description: "Volume also stated on the implant label (not just container)"
+    category: dimension
+    check_type: pattern
+    markers: ["cc", "ml", "volume"]
+    pattern: "\\d+\\s*(?:cc|ml)"
+    severity: critical
+    new_in_2024: false
+
+  - id: ISO14607-11.3b-shell-desc
+    iso_ref: "11.3 b)"
+    description: "Description of the implant shell(s)"
+    category: text
+    check_type: text_match
+    markers: ["shell", "barrier", "layer", "silicone elastomer"]
+    severity: major
+    new_in_2024: false
+
+  - id: ISO14607-11.3c-surface
+    iso_ref: "11.3 c)"
+    description: "Surface classification per normative Annex G, Table G.2"
+    category: symbol
+    check_type: text_match
+    markers:
+      - "surface classification"
+      - "NTX"
+      - "smooth"
+      - "micro-textured"
+      - "macro-textured"
+      - "surface complexity"
+      - "texturization"
+      - "roughness"
+      - "pore size"
+    specs:
+      table_ref: "Table G.2"
+      valid_classifications:
+        - {code: "NTX", description: "Not textured (smooth)"}
+        - {code: "SLC", description: "Surface with low complexity"}
+        - {code: "SLO", description: "Surface with low open-pore features"}
+        - {code: "CRC", description: "Surface with complex closed-pore features"}
+        - {code: "CRO", description: "Surface with complex open-pore features"}
+    severity: critical
+    new_in_2024: true   # ← KEY NEW REQUIREMENT
+
+  - id: ISO14607-11.3d-fill
+    iso_ref: "11.3 d)"
+    description: "Description of the implant fill material"
+    category: text
+    check_type: text_match
+    markers: ["gel", "saline", "fill", "silicone gel", "cohesive"]
+    severity: major
+    new_in_2024: false
+
+  # 11.4 Shelf life
+  - id: ISO14607-11.4
+    iso_ref: "11.4"
+    description: "Shelf life / use-by date on packaging"
+    category: text
+    check_type: pattern
+    markers: ["expir", "use by", "use-by", "EXPDATE", "shelf life"]
+    pattern: "\\d{4}-\\d{2}-\\d{2}"
+    severity: critical
+    new_in_2024: false
+
+  # 11.5 UDI
+  - id: ISO14607-11.5-udi
+    iso_ref: "11.5"
+    description: "Unique Device Identifier (UDI) on label"
+    category: symbol
+    check_type: text_match
+    markers: ["UDI", "UDI-DI", "UDI-PI"]
+    severity: critical
+    new_in_2024: false
+
+  - id: ISO14607-11.5-udi-carrier
+    iso_ref: "11.5"
+    description: "UDI carrier (barcode or 2D DataMatrix)"
+    category: visual
+    check_type: barcode
+    markers: ["GTIN", "GS1", "DataMatrix", "(01)", "barcode"]
+    specs:
+      formats: ["GS1-128", "DataMatrix", "QR"]
+    severity: critical
+    new_in_2024: false
+
+  # ── ISO 15223-1 Symbols (required on labels) ────────
+
+  - id: SYM-manufacturer
+    iso_ref: "ISO 15223-1:2021, 5.1.1"
+    description: "Manufacturer symbol (factory icon)"
+    category: symbol
+    check_type: text_match
+    markers: ["manufacturer", "Mentor"]
+    specs:
+      min_height_mm: 3
+      symbol_ref: "ISO 7000-3082"
+    severity: critical
+    new_in_2024: false
+
+  - id: SYM-date-manufacture
+    iso_ref: "ISO 15223-1:2021, 5.1.3"
+    description: "Date of manufacture symbol"
+    category: symbol
+    check_type: pattern
+    markers: ["MFGDATE", "date of manufacture", "manufactured"]
+    pattern: "\\d{4}-\\d{2}-\\d{2}"
+    specs:
+      symbol_ref: "ISO 7000-2497"
+    severity: critical
+    new_in_2024: false
+
+  - id: SYM-use-by
+    iso_ref: "ISO 15223-1:2021, 5.1.4"
+    description: "Use-by date / expiration symbol"
+    category: symbol
+    check_type: pattern
+    markers: ["EXPDATE", "use by", "expir"]
+    pattern: "\\d{4}-\\d{2}-\\d{2}"
+    specs:
+      symbol_ref: "ISO 7000-2607"
+    severity: critical
+    new_in_2024: false
+
+  - id: SYM-batch-code
+    iso_ref: "ISO 15223-1:2021, 5.1.5"
+    description: "Batch code / LOT number symbol"
+    category: symbol
+    check_type: text_match
+    markers: ["LOT", "LOTNO", "batch", "lot"]
+    specs:
+      symbol_ref: "ISO 7000-2492"
+    severity: critical
+    new_in_2024: false
+
+  - id: SYM-serial-number
+    iso_ref: "ISO 15223-1:2021, 5.1.6"
+    description: "Serial number symbol"
+    category: symbol
+    check_type: text_match
+    markers: ["SN", "SERNO", "serial"]
+    specs:
+      symbol_ref: "ISO 7000-2498"
+    severity: critical
+    new_in_2024: false
+
+  - id: SYM-catalogue
+    iso_ref: "ISO 15223-1:2021, 5.1.7"
+    description: "Catalogue / reference number symbol"
+    category: symbol
+    check_type: text_match
+    markers: ["REF", "catalogue", "catalog", "reference number"]
+    specs:
+      symbol_ref: "ISO 7000-2493"
+    severity: critical
+    new_in_2024: false
+
+  - id: SYM-sterilization
+    iso_ref: "ISO 15223-1:2021, 5.2.1–5.2.8"
+    description: "Sterilization method symbol"
+    category: symbol
+    check_type: text_match
+    markers: ["sterile", "steriliz", "irradiat", "ethylene oxide", "aseptic"]
+    specs:
+      valid_methods:
+        - "5.2.1: Sterile — general"
+        - "5.2.4: Sterile — irradiation"
+        - "5.2.5: Sterile — ethylene oxide"
+    severity: critical
+    new_in_2024: false
+
+  - id: SYM-single-use
+    iso_ref: "ISO 15223-1:2021, 5.4.2"
+    description: "Do not reuse / single use symbol"
+    category: symbol
+    check_type: text_match
+    markers: ["single use", "do not reuse", "single-use", "not re-used"]
+    specs:
+      symbol_ref: "ISO 7000-1051"
+    severity: major
+    new_in_2024: false
+
+  - id: SYM-ce-mark
+    iso_ref: "EU MDR 2017/745, Art. 20"
+    description: "CE marking with notified body number"
+    category: symbol
+    check_type: text_match
+    markers: ["CE", "0086"]
+    specs:
+      min_height_mm: 5
+      must_include_nb_number: true
+    severity: critical
+    new_in_2024: false
+
+  # ── ISO 14630 / EU MDR ─────────────────────────────
+
+  - id: MDR-address
+    iso_ref: "ISO 14630 / EU MDR Art. 10(11)"
+    description: "Manufacturer name and full registered address"
+    category: text
+    check_type: text_match
+    markers: ["Zernikedreef", "Leiden", "Netherlands", "Irving", "Texas", "address"]
+    specs:
+      must_include: ["street", "city", "country"]
+    severity: critical
+    new_in_2024: false
+
+  - id: MDR-multilingual
+    iso_ref: "EU MDR Art. 10(11)"
+    description: "Product name in official EU member state languages"
+    category: text
+    check_type: text_match
+    markers: ["en:", "de:", "fr:", "es:", "it:", "nl:", "pt:", "pl:"]
+    specs:
+      min_languages: 3
+    severity: major
+    new_in_2024: false
+
+  - id: MDR-gtin
+    iso_ref: "EU MDR / UDI Regulation"
+    description: "GTIN barcode (GS1-128 or 2D DataMatrix)"
+    category: visual
+    check_type: barcode
+    markers: ["GTIN", "GS1", "DataMatrix", "(01)"]
+    specs:
+      formats: ["GS1-128", "DataMatrix"]
+    severity: critical
+    new_in_2024: false
+
+  # ── Annex G (Surface Classification — NEW 2024) ────
+  - id: ISO14607-G.2
+    iso_ref: "ISO 14607:2024, Annex G, Table G.2"
+    description: "Surface classification category code on label"
+    category: symbol
+    check_type: text_match
+    markers: ["NTX", "SLC", "SLO", "CRC", "CRO", "GDD", "GDS", "PUI", "MAI", "PUL", "OML", "OTH"]
+    severity: critical
+    new_in_2024: true
+
+  # ── Annex H (Implant Card) ────────────────────────
+  - id: ISO14607-H
+    iso_ref: "ISO 14607:2024, Annex H"
+    description: "Patient implant card included with product"
+    category: text
+    check_type: text_match
+    markers: ["implant card", "patient card", "patient identification"]
+    severity: major
+    new_in_2024: false

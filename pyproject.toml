@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "label-compliance"
+version = "0.1.0"
+description = "ISO-compliant medical device label verification system"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Proprietary"}
+authors = [
+    {name = "LTTS Project Team"},
+]
+
+dependencies = [
+    # PDF processing
+    "pdfplumber>=0.10",
+    "PyMuPDF>=1.23",
+    # Image / OCR
+    "Pillow>=10.0",
+    "pytesseract>=0.3.10",
+    "opencv-python-headless>=4.8",
+    "scikit-image>=0.22",
+    # Barcode
+    "pyzbar>=0.1.9",
+    # Embeddings & vector store
+    "sentence-transformers>=2.2",
+    "chromadb>=0.4",
+    # AI (local)
+    "ollama>=0.1",          # Ollama Python client
+    # AI (API - optional)
+    "openai>=1.0",
+    # Config & CLI
+    "pyyaml>=6.0",
+    "click>=8.1",
+    "rich>=13.0",
+    # Utilities
+    "python-dotenv>=1.0",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.1",
+    "mypy>=1.7",
+    "pre-commit>=3.5",
+]
+
+[project.scripts]
+label-compliance = "label_compliance.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true

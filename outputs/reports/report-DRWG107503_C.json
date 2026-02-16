@@ -1,0 +1,379 @@
+{
+  "label_name": "DRWG107503_C",
+  "pdf_file": "DRWG107503_C.pdf",
+  "generated_at": "2026-02-15T23:38:50.712694",
+  "summary": {
+    "status": "NON-COMPLIANT",
+    "score_pct": 36.5,
+    "total_rules": 28,
+    "passed": 5,
+    "partial": 10,
+    "failed": 13,
+    "critical_gaps": 18,
+    "new_2024_gaps": 2
+  },
+  "results": [
+    {
+      "rule_id": "ISO14607-9.1",
+      "description": "Implant shall be supplied in sealed sterile packaging",
+      "iso_ref": "9.1",
+      "status": "PARTIAL",
+      "confidence": 0.3333333333333333,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "sterile"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-9.2",
+      "description": "Double packaging system — inner and outer pack",
+      "iso_ref": "9.2",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-10.1",
+      "description": "Instructions for use shall accompany the implant",
+      "iso_ref": "10.1",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.1",
+      "description": "Labels shall comply with ISO 14630 and ISO 15223-1",
+      "iso_ref": "11.1",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.2-volume",
+      "description": "Nominal volume stated on the unit container label",
+      "iso_ref": "11.2",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.2-type",
+      "description": "Implant type/model stated on the unit container",
+      "iso_ref": "11.2",
+      "status": "PARTIAL",
+      "confidence": 0.2,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "gel"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.3a-dimensions",
+      "description": "Implant dimensions: width, height/diameter, projection",
+      "iso_ref": "11.3 a)",
+      "status": "PARTIAL",
+      "confidence": 0.14285714285714285,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "height"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.3a-volume-label",
+      "description": "Volume also stated on the implant label (not just container)",
+      "iso_ref": "11.3 a)",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.3b-shell-desc",
+      "description": "Description of the implant shell(s)",
+      "iso_ref": "11.3 b)",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.3c-surface",
+      "description": "Surface classification per normative Annex G, Table G.2",
+      "iso_ref": "11.3 c)",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": true,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.3d-fill",
+      "description": "Description of the implant fill material",
+      "iso_ref": "11.3 d)",
+      "status": "PASS",
+      "confidence": 0.6,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [
+        "fill",
+        "silicone gel",
+        "gel"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.4",
+      "description": "Shelf life / use-by date on packaging",
+      "iso_ref": "11.4",
+      "status": "PARTIAL",
+      "confidence": 0.16666666666666666,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "EXPDATE"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.5-udi",
+      "description": "Unique Device Identifier (UDI) on label",
+      "iso_ref": "11.5",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-11.5-udi-carrier",
+      "description": "UDI carrier (barcode or 2D DataMatrix)",
+      "iso_ref": "11.5",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "SYM-manufacturer",
+      "description": "Manufacturer symbol (factory icon)",
+      "iso_ref": "ISO 15223-1:2021, 5.1.1",
+      "status": "PASS",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "manufacturer",
+        "Mentor"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "SYM-date-manufacture",
+      "description": "Date of manufacture symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.3",
+      "status": "PARTIAL",
+      "confidence": 0.25,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "MFGDATE"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "SYM-use-by",
+      "description": "Use-by date / expiration symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.4",
+      "status": "PARTIAL",
+      "confidence": 0.25,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "EXPDATE"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "SYM-batch-code",
+      "description": "Batch code / LOT number symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.5",
+      "status": "PASS",
+      "confidence": 0.75,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "LOTNO",
+        "LOT",
+        "lot"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "SYM-serial-number",
+      "description": "Serial number symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.6",
+      "status": "PASS",
+      "confidence": 0.6666666666666666,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "SERNO",
+        "SN"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "SYM-catalogue",
+      "description": "Catalogue / reference number symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.7",
+      "status": "PARTIAL",
+      "confidence": 0.25,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "REF"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "SYM-sterilization",
+      "description": "Sterilization method symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.2.1–5.2.8",
+      "status": "PARTIAL",
+      "confidence": 0.2,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "sterile"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "SYM-single-use",
+      "description": "Do not reuse / single use symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.4.2",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "SYM-ce-mark",
+      "description": "CE marking with notified body number",
+      "iso_ref": "EU MDR 2017/745, Art. 20",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "MDR-address",
+      "description": "Manufacturer name and full registered address",
+      "iso_ref": "ISO 14630 / EU MDR Art. 10(11)",
+      "status": "PASS",
+      "confidence": 0.5,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "address",
+        "Texas",
+        "Irving"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "MDR-multilingual",
+      "description": "Product name in official EU member state languages",
+      "iso_ref": "EU MDR Art. 10(11)",
+      "status": "PARTIAL",
+      "confidence": 0.125,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [
+        "es:"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "MDR-gtin",
+      "description": "GTIN barcode (GS1-128 or 2D DataMatrix)",
+      "iso_ref": "EU MDR / UDI Regulation",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-G.2",
+      "description": "Surface classification category code on label",
+      "iso_ref": "ISO 14607:2024, Annex G, Table G.2",
+      "status": "PARTIAL",
+      "confidence": 0.16666666666666666,
+      "severity": "critical",
+      "new_in_2024": true,
+      "evidence": [
+        "OTH",
+        "MAI"
+      ],
+      "method": "text_match"
+    },
+    {
+      "rule_id": "ISO14607-H",
+      "description": "Patient implant card included with product",
+      "iso_ref": "ISO 14607:2024, Annex H",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [],
+      "method": "text_match"
+    }
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "word_count": 365,
+      "barcode_count": 4,
+      "zone_count": 316
+    },
+    {
+      "page_number": 2,
+      "word_count": 341,
+      "barcode_count": 5,
+      "zone_count": 35
+    }
+  ],
+  "font_violations": []
+}

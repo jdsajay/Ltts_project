@@ -1,0 +1,52 @@
+# Meeting Transcript (Cleaned)
+
+Source: docs/transcript-raw.txt
+
+- [00:04] Durga Kothapalli: Mentor is another team in J&J, right? Is that correct?
+- [00:10] Bharath Kumar V: Yes. Mentor is part of J&J surgical devices; it was a different organization and is now Mentor.
+- [00:17] Suraj Dubey: Initially Mentor was a different organization, acquired by JNJ.
+- [00:18] Divya Sai Ajay Jasti: Sure.
+- [02:04] Bharath Kumar V: Each step takes 1-2 weeks; redline markup 3-4 weeks max; execute and change in parallel 2-3 weeks.
+- [02:13] Durga Kothapalli: If you have sample labels, can you share them?
+- [02:18] Bharath Kumar V: I will ask Sai to bring them up. The medium process adds collaboration and layout; English and electronic translation adds 3 weeks.
+- [02:38] Bharath Kumar V: Outsource translation approval and change order add more time; medium process takes 6-8 months.
+- [02:38] Bharath Kumar V: High complexity includes full label creation, redlining, mockup, layout.
+- [02:58] Bharath Kumar V: Change orders, design history file update, BOM update; 12 to 8 months.
+- [03:09] Durga Kothapalli: There is another 20-step process shown in the PowerPoint.
+- [03:15] Bharath Kumar V: Our proposal is 12 steps; you can consider it as 20 steps.
+- [10:09] Suraj Dubey: Redline is a priority and is based on regulatory comments, not fixed to one update.
+- [10:24] Durga Kothapalli: Regulatory is the truth; I need to redline based on that.
+- [10:40] Durga Kothapalli: After redlining, walk me and Ajay through the high-level steps and what is done regularly.
+- [11:13] Suraj Dubey: Sai, please share a template that needs updating per regulatory requirements.
+- [12:01] Saikiran Madduluru: There are two kinds of artworks for the Laden indexes; I will show a template.
+- [12:02] Divya Sai Ajay Jasti: We can see your screen.
+- [12:28] Saikiran Madduluru: This is one template from the Laden part.
+- [12:37] Durga Kothapalli: What is Laden?
+- [12:37] Saikiran Madduluru: It is a branch in the Netherlands.
+- [12:43] Durga Kothapalli: The project is signed for two locations: Laden (Europe) and Texas.
+- [12:52] Suraj Dubey: It is a manufacturing site; keep it in mind.
+- [12:54] Saikiran Madduluru: I put both side by side.
+- [12:58] Saikiran Madduluru: Left is Texas label; right is Laden label; different layouts.
+- [28:35] Bharath Kumar V: Any questions?
+- [28:36] Divya Sai Ajay Jasti: I have a few questions.
+- [28:46] Divya Sai Ajay Jasti: For the template we saw, which complexity category does the change fall under?
+- [29:04] Bharath Kumar V: It can fall under any category.
+- [29:09] Divya Sai Ajay Jasti: I meant that specific template change, to visualize complexity.
+- [29:17] Bharath Kumar V: Do not mix the PPT classification with redline.
+- [29:23] Bharath Kumar V: Redline can be leveraged for any kind of updates.
+- [29:28] Divya Sai Ajay Jasti: Got it. For a specific company template, do we get the same information every time?
+- [29:54] Bharath Kumar V: Classification depends on product; ISO differs by product type.
+- [30:13] Divya Sai Ajay Jasti: Each has its own ISO.
+- [39:48] Bharath Kumar V: You are based in the US, right?
+- [39:49] Divya Sai Ajay Jasti: Yes.
+- [39:51] Bharath Kumar V: Sai is the right person.
+- [39:51] Suraj Dubey: You can reach out to me or Sai.
+- [39:58] Bharath Kumar V: I can help; we can sync if needed.
+- [40:10] Divya Sai Ajay Jasti: I will go through the data and see what I can start with.
+- [40:22] Bharath Kumar V: Nothing for me. Ram, any additions?
+- [40:28] Ramanath Roy: No, you covered everything.
+- [40:38] Suraj Dubey: Let us stop. Thank you.
+- [40:41] Bharath Kumar V: Thanks everyone. Bye.
+- [40:41] Divya Sai Ajay Jasti: Thank you.
+- [40:44] Suraj Dubey: Bye.
+- [40:48] Saikiran Madduluru: Yeah.
