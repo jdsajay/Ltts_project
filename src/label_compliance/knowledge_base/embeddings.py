@@ -19,41 +19,6 @@ def _get_model():
     """Lazy-load the sentence-transformers model."""
     global _model
     if _model is None:
-        # Disable SSL verification for corporate proxies / firewalls
-        import os
-        import ssl
-        os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
-        os.environ["CURL_CA_BUNDLE"] = ""
-        os.environ["REQUESTS_CA_BUNDLE"] = ""
-        os.environ["HF_HUB_DISABLE_SSL_VERIFY"] = "1"
-        os.environ["TRANSFORMERS_OFFLINE"] = "0"
-        try:
-            ssl._create_default_https_context = ssl._create_unverified_context
-        except AttributeError:
-            pass
-
-        # Patch requests to skip SSL verification
-        try:
-            import requests
-            old_get = requests.Session.get
-            old_post = requests.Session.post
-            old_request = requests.Session.request
-
-            def _patched_request(self, method, url, **kwargs):
-                kwargs.setdefault("verify", False)
-                return old_request(self, method, url, **kwargs)
-
-            requests.Session.request = _patched_request
-        except ImportError:
-            pass
-
-        # Suppress InsecureRequestWarning
-        try:
-            import urllib3
-            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-        except (ImportError, AttributeError):
-            pass
-
         from sentence_transformers import SentenceTransformer
 
         settings = get_settings()
