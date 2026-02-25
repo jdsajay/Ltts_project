@@ -97,14 +97,20 @@ redline:
 ai:
   # Provider: "local" (Ollama), "openai", "anthropic", "none"
   provider: local
-  # Local model (Ollama)
-  local_model: llama3.2
-  # Temperature for reasoning
+  # Vision model (Ollama) — used for image-based compliance checks
+  local_model: llama3.2-vision
+  # Text model (Ollama) — used for fast text/OCR analysis (much faster, 3B)
+  text_model: llama3.2
+  # Temperature for reasoning (low = more deterministic)
   temperature: 0.1
   # Max tokens for response
   max_tokens: 2000
   # Enable AI reasoning for ambiguous cases
   enable_reasoning: true
+  # AI mode: "smart" (only re-checks FAIL/PARTIAL rules) or "full" (all rules)
+  ai_mode: smart
+  # Max rules per AI batch (smaller = better accuracy for local models)
+  batch_size: 5
 
 # ── Processing ───────────────────────────────────────
 processing:

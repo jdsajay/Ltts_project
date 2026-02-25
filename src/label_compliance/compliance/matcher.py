@@ -39,6 +39,9 @@ class MatchResult:
     severity: str = "critical"
     new_in_2024: bool = False
     details: str = ""
+    spec_violations: list[dict] = field(default_factory=list)
+    spec_details: list[str] = field(default_factory=list)
+    specs_passed: bool = True
 
 
 def match_rule_text(
@@ -171,7 +174,7 @@ def match_rule_semantic(
 def combine_match_results(results: list[MatchResult]) -> MatchResult:
     """
     Combine multiple match results for the same rule (e.g., text + semantic).
-    Takes the best result.
+    Takes the best result, and merges all spec violations.
     """
     if not results:
         raise ValueError("Cannot combine empty results")
@@ -181,16 +184,32 @@ def combine_match_results(results: list[MatchResult]) -> MatchResult:
     # Merge evidence from all methods
     all_evidence = []
     all_locations = []
+    all_spec_violations = []
+    all_spec_details = []
     methods = []
+    any_specs_failed = False
     for r in results:
         all_evidence.extend(r.evidence)
         all_locations.extend(r.locations)
+        all_spec_violations.extend(r.spec_violations)
+        all_spec_details.extend(r.spec_details)
+        if not r.specs_passed:
+            any_specs_failed = True
         if r.method:
             methods.append(r.method)
 
     best.evidence = list(set(all_evidence))
     best.locations = all_locations
+    best.spec_violations = all_spec_violations
+    best.spec_details = list(set(all_spec_details))
+    best.specs_passed = not any_specs_failed
     best.method = "+".join(sorted(set(methods)))
+
+    # If text matched but specs failed, downgrade status
+    if best.status == "PASS" and any_specs_failed:
+        best.status = "PARTIAL"
+        best.details += " | DOWNGRADED: spec violations found"
+
     return best
 
 
@@ -198,87 +217,303 @@ def combine_match_results(results: list[MatchResult]) -> MatchResult:
 #  AI Verification Layer
 # ═══════════════════════════════════════════════════════
 
-_AI_VERIFY_PROMPT = """\
-You are an expert medical-device regulatory compliance auditor.
+import re as _re
 
-**Task**: Examine the attached label image and determine whether it satisfies the following ISO requirement.
+# ── Prompts — kept short and directive for small models ──
 
-**Requirement**:
-- Rule ID: {rule_id}
-- ISO Reference: {iso_ref}
-- Description: {description}
-- Category: {category}
-- What to look for: {markers}
+_AI_SINGLE_RULE_PROMPT = """\
+Check if this label text satisfies the ISO requirement below.
 
-**Instructions**:
-1. Carefully examine the ENTIRE label image — text, symbols, barcodes, small print, everything.
-2. Determine whether the requirement is satisfied.
-3. Respond with ONLY a JSON object (no markdown, no extra text):
+Rule: {rule_id} ({iso_ref})
+Requirement: {description}
+Look for: {markers}
 
-{{
-  "status": "PASS" or "PARTIAL" or "FAIL",
-  "confidence": 0.0 to 1.0,
-  "evidence": ["list of specific text/symbols you found that relate to this requirement"],
-  "reasoning": "One sentence explanation of your assessment"
-}}
+Label text:
+{label_text}
 
-Be strict. If the requirement asks for specific text and you cannot clearly see it, mark FAIL.
-If you see related but incomplete information, mark PARTIAL.
-Only mark PASS when you can clearly confirm the requirement is fully met.
-"""
+Respond with JSON: {{"status":"PASS" or "PARTIAL" or "FAIL","confidence":0.0-1.0,"evidence":["what you found"],"reasoning":"why"}}"""
 
-_AI_BATCH_PROMPT = """\
-You are an expert medical-device regulatory compliance auditor.
+_AI_BATCH_TEXT_PROMPT = """\
+Check if the label text below satisfies each ISO requirement.
+For each rule, decide PASS/PARTIAL/FAIL.
 
-**Task**: Examine the attached label image and check ALL of the following ISO requirements.
+Rules:
+{rules_list}
 
-**Requirements to check**:
-{rules_json}
+Label text:
+{label_text}
 
-**Instructions**:
-1. Carefully examine the ENTIRE label image — text, symbols, barcodes, small print, everything.
-2. For EACH requirement, determine whether it is satisfied.
-3. Respond with ONLY a JSON array (no markdown, no extra text), one object per rule:
+Respond with JSON: {{"results":[{{"rule_id":"id","status":"PASS/PARTIAL/FAIL","confidence":0.0-1.0,"evidence":["found"],"reasoning":"why"}}]}}"""
 
-[
-  {{
-    "rule_id": "the rule id",
-    "status": "PASS" or "PARTIAL" or "FAIL",
-    "confidence": 0.0 to 1.0,
-    "evidence": ["list of specific text/symbols found"],
-    "reasoning": "one sentence explanation"
-  }},
-  ...
-]
+_AI_VISION_PROMPT = """\
+Check if the label image satisfies each ISO requirement.
+For each rule, examine the image carefully and decide PASS/PARTIAL/FAIL.
 
-Be strict and thorough. Check every requirement against what you can actually see in the image.
-"""
+Rules:
+{rules_list}
+
+Respond with JSON: {{"results":[{{"rule_id":"id","status":"PASS/PARTIAL/FAIL","confidence":0.0-1.0,"evidence":["found"],"reasoning":"why"}}]}}"""
 
 
 def _parse_ai_json(raw: str) -> dict | list | None:
-    """Extract JSON from AI response, handling markdown code blocks."""
+    """Robustly extract JSON from AI response.
+
+    Handles:
+    - Pure JSON output (from format="json")
+    - Markdown code blocks (```json ... ```)
+    - JSON embedded in narrative text
+    - Truncated JSON (best-effort repair)
+    - Single result vs array
+    """
+    if not raw or not raw.strip():
+        return None
+
     text = raw.strip()
-    # Remove markdown code block wrappers if present
+
+    # 1. Remove markdown code block wrappers
     if text.startswith("```"):
         lines = text.split("\n")
-        lines = lines[1:]  # drop opening ```json or ```
+        lines = lines[1:]  # drop opening ```json
         if lines and lines[-1].strip() == "```":
             lines = lines[:-1]
         text = "\n".join(lines).strip()
+
+    # 2. Try direct parse first
     try:
         return json.loads(text)
     except json.JSONDecodeError:
-        # Try to find JSON in the text
-        for start_char, end_char in [("{", "}"), ("[", "]")]:
-            start = text.find(start_char)
-            end = text.rfind(end_char)
-            if start != -1 and end != -1 and end > start:
+        pass
+
+    # 3. Find the outermost { } or [ ] and try parsing
+    for start_char, end_char in [("{", "}"), ("[", "]")]:
+        start = text.find(start_char)
+        end = text.rfind(end_char)
+        if start != -1 and end != -1 and end > start:
+            candidate = text[start:end + 1]
+            try:
+                return json.loads(candidate)
+            except json.JSONDecodeError:
+                # 4. Try fixing common issues: trailing commas, unquoted values
+                fixed = _repair_json(candidate)
                 try:
-                    return json.loads(text[start : end + 1])
+                    return json.loads(fixed)
                 except json.JSONDecodeError:
-                    continue
-        logger.warning("Could not parse AI response as JSON: %s", text[:200])
-        return None
+                    pass
+
+    # 5. Try to extract individual result objects with regex
+    results = _extract_results_regex(text)
+    if results:
+        return results
+
+    logger.warning("Could not parse AI response (%d chars): %.100s…", len(text), text)
+    return None
+
+
+def _repair_json(text: str) -> str:
+    """Attempt to repair common JSON issues from LLM output."""
+    # Remove trailing commas before } or ]
+    text = _re.sub(r",\s*([}\]])", r"\1", text)
+    # Fix single quotes → double quotes (careful with apostrophes)
+    # Only do this if no double quotes exist in keys/values
+    if "'" in text and '"' not in text[:50]:
+        text = text.replace("'", '"')
+    # Fix unquoted PASS/PARTIAL/FAIL values
+    text = _re.sub(r':\s*(PASS|PARTIAL|FAIL)\b', r': "\1"', text)
+    # Fix truncation — close unclosed brackets/braces
+    open_braces = text.count("{") - text.count("}")
+    open_brackets = text.count("[") - text.count("]")
+    if open_braces > 0:
+        text += "}" * open_braces
+    if open_brackets > 0:
+        text += "]" * open_brackets
+    return text
+
+
+def _extract_results_regex(text: str) -> list[dict] | None:
+    """Last-resort: extract key fields using regex patterns."""
+    results = []
+    # Pattern: look for rule_id, status, confidence patterns
+    rule_pattern = _re.compile(
+        r'"?rule_id"?\s*:\s*"([^"]+)".*?'
+        r'"?status"?\s*:\s*"(PASS|PARTIAL|FAIL)".*?'
+        r'"?confidence"?\s*:\s*([\d.]+)',
+        _re.DOTALL | _re.IGNORECASE,
+    )
+    for match in rule_pattern.finditer(text):
+        results.append({
+            "rule_id": match.group(1),
+            "status": match.group(2).upper(),
+            "confidence": float(match.group(3)),
+            "evidence": [],
+            "reasoning": "extracted via regex fallback",
+        })
+
+    return results if results else None
+
+
+def ai_verify_rule_text(
+    rule: dict,
+    ocr_text: str,
+    ai_provider,
+) -> MatchResult:
+    """
+    Use AI to verify a rule against OCR text only (no image).
+    Fast — uses the text model (llama3.2 3B). 
+
+    Args:
+        rule: The compliance rule dict.
+        ocr_text: Full OCR text from the label.
+        ai_provider: An AIProvider instance.
+
+    Returns:
+        MatchResult with AI text-based assessment.
+    """
+    # Truncate text to avoid overwhelming the model
+    label_text = ocr_text[:2000] if len(ocr_text) > 2000 else ocr_text
+
+    prompt = _AI_SINGLE_RULE_PROMPT.format(
+        rule_id=rule.get("id", "unknown"),
+        iso_ref=rule.get("iso_ref", ""),
+        description=rule.get("description", ""),
+        markers=", ".join(rule.get("markers", [])[:8]),
+        label_text=label_text,
+    )
+
+    try:
+        raw = ai_provider.analyze(prompt)
+        parsed = _parse_ai_json(raw)
+
+        if parsed and isinstance(parsed, dict):
+            status = parsed.get("status", "FAIL").upper()
+            if status not in ("PASS", "PARTIAL", "FAIL"):
+                status = "FAIL"
+            return MatchResult(
+                rule_id=rule.get("id", "unknown"),
+                rule_description=rule.get("description", ""),
+                iso_ref=rule.get("iso_ref", ""),
+                status=status,
+                confidence=float(parsed.get("confidence", 0.5)),
+                method="ai_text",
+                evidence=parsed.get("evidence", []),
+                severity=rule.get("severity", "critical"),
+                new_in_2024=rule.get("new_in_2024", False),
+                details=parsed.get("reasoning", ""),
+            )
+        else:
+            logger.warning("AI text response not parseable for rule %s", rule.get("id"))
+
+    except Exception as e:
+        logger.error("AI text verify failed for rule %s: %s", rule.get("id"), e)
+
+    return MatchResult(
+        rule_id=rule.get("id", "unknown"),
+        rule_description=rule.get("description", ""),
+        iso_ref=rule.get("iso_ref", ""),
+        status="FAIL",
+        confidence=0.0,
+        method="ai_text",
+        severity=rule.get("severity", "critical"),
+        new_in_2024=rule.get("new_in_2024", False),
+        details="AI text analysis failed",
+    )
+
+
+def ai_verify_rules_text_batch(
+    rules: list[dict],
+    ocr_text: str,
+    ai_provider,
+    batch_size: int = 5,
+) -> list[MatchResult]:
+    """
+    Use AI text model to verify rules in small batches (no image needed).
+    Much faster than vision — suitable for confirming text presence.
+
+    Args:
+        rules: List of compliance rule dicts to verify.
+        ocr_text: Full OCR text from the label.
+        ai_provider: An AIProvider instance.
+        batch_size: Number of rules per AI call (default 5).
+
+    Returns:
+        List of MatchResult, one per rule.
+    """
+    label_text = ocr_text[:2000] if len(ocr_text) > 2000 else ocr_text
+    all_results: list[MatchResult] = []
+
+    # Split rules into small batches
+    for batch_start in range(0, len(rules), batch_size):
+        batch = rules[batch_start:batch_start + batch_size]
+
+        # Build compact rules list for prompt
+        rules_desc = "\n".join(
+            f"- {r.get('id', '?')}: {r.get('description', '')} "
+            f"(look for: {', '.join(r.get('markers', [])[:5])})"
+            for r in batch
+        )
+
+        prompt = _AI_BATCH_TEXT_PROMPT.format(
+            rules_list=rules_desc,
+            label_text=label_text,
+        )
+
+        try:
+            raw = ai_provider.analyze(prompt)
+            parsed = _parse_ai_json(raw)
+
+            # Handle wrapped format {"results": [...]}
+            if parsed and isinstance(parsed, dict) and "results" in parsed:
+                parsed = parsed["results"]
+
+            if parsed and isinstance(parsed, list):
+                ai_map = {}
+                for item in parsed:
+                    if isinstance(item, dict) and "rule_id" in item:
+                        ai_map[item["rule_id"]] = item
+
+                for rule in batch:
+                    rid = rule.get("id", "unknown")
+                    ai_result = ai_map.get(rid, {})
+                    status = ai_result.get("status", "FAIL").upper()
+                    if status not in ("PASS", "PARTIAL", "FAIL"):
+                        status = "FAIL"
+
+                    all_results.append(MatchResult(
+                        rule_id=rid,
+                        rule_description=rule.get("description", ""),
+                        iso_ref=rule.get("iso_ref", ""),
+                        status=status,
+                        confidence=float(ai_result.get("confidence", 0.0)),
+                        method="ai_text",
+                        evidence=ai_result.get("evidence", []),
+                        severity=rule.get("severity", "critical"),
+                        new_in_2024=rule.get("new_in_2024", False),
+                        details=ai_result.get("reasoning", ""),
+                    ))
+            else:
+                # Batch parse failed — fall back to individual
+                logger.warning(
+                    "AI text batch %d-%d parse failed, trying individual",
+                    batch_start, batch_start + len(batch),
+                )
+                for rule in batch:
+                    all_results.append(ai_verify_rule_text(rule, ocr_text, ai_provider))
+
+        except Exception as e:
+            logger.error("AI text batch error: %s", e)
+            for rule in batch:
+                all_results.append(MatchResult(
+                    rule_id=rule.get("id", "unknown"),
+                    rule_description=rule.get("description", ""),
+                    iso_ref=rule.get("iso_ref", ""),
+                    status="FAIL",
+                    confidence=0.0,
+                    method="ai_text",
+                    severity=rule.get("severity", "critical"),
+                    new_in_2024=rule.get("new_in_2024", False),
+                    details=f"AI text batch error: {e}",
+                ))
+
+    return all_results
 
 
 def ai_verify_rule(
@@ -287,23 +522,16 @@ def ai_verify_rule(
     ai_provider,
 ) -> MatchResult:
     """
-    Use a multimodal AI model to visually verify a single rule
+    Use a multimodal AI vision model to visually verify a single rule
     against a label page image.
-
-    Args:
-        rule: The compliance rule dict.
-        image_path: Path to the rendered page image (PNG).
-        ai_provider: An AIProvider instance (Ollama or OpenAI).
-
-    Returns:
-        MatchResult with AI-based assessment.
     """
-    prompt = _AI_VERIFY_PROMPT.format(
-        rule_id=rule.get("id", "unknown"),
-        iso_ref=rule.get("iso_ref", ""),
-        description=rule.get("description", ""),
-        category=rule.get("category", ""),
-        markers=", ".join(rule.get("markers", [])),
+    markers = rule.get("markers", [])[:8]
+    prompt = (
+        f"Check if this label image satisfies: {rule.get('id', '')} "
+        f"({rule.get('iso_ref', '')}): {rule.get('description', '')}. "
+        f"Look for: {', '.join(markers)}. "
+        f'Respond JSON: {{"status":"PASS/PARTIAL/FAIL","confidence":0.0-1.0,'
+        f'"evidence":["found"],"reasoning":"why"}}'
     )
 
     try:
@@ -314,34 +542,34 @@ def ai_verify_rule(
             status = parsed.get("status", "FAIL").upper()
             if status not in ("PASS", "PARTIAL", "FAIL"):
                 status = "FAIL"
-            confidence = float(parsed.get("confidence", 0.0))
-            evidence = parsed.get("evidence", [])
-            reasoning = parsed.get("reasoning", "")
+            return MatchResult(
+                rule_id=rule.get("id", "unknown"),
+                rule_description=rule.get("description", ""),
+                iso_ref=rule.get("iso_ref", ""),
+                status=status,
+                confidence=float(parsed.get("confidence", 0.0)),
+                method="ai_vision",
+                evidence=parsed.get("evidence", []),
+                severity=rule.get("severity", "critical"),
+                new_in_2024=rule.get("new_in_2024", False),
+                details=parsed.get("reasoning", ""),
+            )
         else:
-            logger.warning("AI response not parseable for rule %s", rule.get("id"))
-            status = "FAIL"
-            confidence = 0.0
-            evidence = []
-            reasoning = f"AI response not parseable: {raw[:100]}"
+            logger.warning("AI vision response not parseable for rule %s", rule.get("id"))
 
     except Exception as e:
-        logger.error("AI verification failed for rule %s: %s", rule.get("id"), e)
-        status = "FAIL"
-        confidence = 0.0
-        evidence = []
-        reasoning = f"AI error: {e}"
+        logger.error("AI vision failed for rule %s: %s", rule.get("id"), e)
 
     return MatchResult(
         rule_id=rule.get("id", "unknown"),
         rule_description=rule.get("description", ""),
         iso_ref=rule.get("iso_ref", ""),
-        status=status,
-        confidence=confidence,
+        status="FAIL",
+        confidence=0.0,
         method="ai_vision",
-        evidence=evidence,
         severity=rule.get("severity", "critical"),
         new_in_2024=rule.get("new_in_2024", False),
-        details=reasoning,
+        details="AI vision analysis failed",
     )
 
 
@@ -349,85 +577,79 @@ def ai_verify_rules_batch(
     rules: list[dict],
     image_path: str | Path,
     ai_provider,
+    batch_size: int = 5,
 ) -> list[MatchResult]:
     """
-    Use a multimodal AI model to verify ALL rules against a label page
-    image in a single prompt (more efficient than one-by-one).
-
-    Args:
-        rules: List of compliance rule dicts.
-        image_path: Path to the rendered page image (PNG).
-        ai_provider: An AIProvider instance.
-
-    Returns:
-        List of MatchResult, one per rule.
+    Use multimodal AI vision model to verify rules in small batches.
+    Splits into groups of `batch_size` to avoid overwhelming the model.
     """
-    # Build compact rules description for the prompt
-    rules_for_prompt = []
-    for r in rules:
-        rules_for_prompt.append({
-            "rule_id": r.get("id", "unknown"),
-            "iso_ref": r.get("iso_ref", ""),
-            "description": r.get("description", ""),
-            "category": r.get("category", ""),
-            "markers": r.get("markers", []),
-        })
+    all_results: list[MatchResult] = []
 
-    prompt = _AI_BATCH_PROMPT.format(
-        rules_json=json.dumps(rules_for_prompt, indent=2),
-    )
+    for batch_start in range(0, len(rules), batch_size):
+        batch = rules[batch_start:batch_start + batch_size]
 
-    results: list[MatchResult] = []
+        rules_desc = "\n".join(
+            f"- {r.get('id', '?')}: {r.get('description', '')} "
+            f"(look for: {', '.join(r.get('markers', [])[:5])})"
+            for r in batch
+        )
 
-    try:
-        raw = ai_provider.analyze_with_image(prompt, str(image_path))
-        parsed = _parse_ai_json(raw)
+        prompt = _AI_VISION_PROMPT.format(rules_list=rules_desc)
 
-        if parsed and isinstance(parsed, list):
-            # Build a lookup from rule_id → AI result
-            ai_map: dict[str, dict] = {}
-            for item in parsed:
-                if isinstance(item, dict) and "rule_id" in item:
-                    ai_map[item["rule_id"]] = item
+        try:
+            raw = ai_provider.analyze_with_image(prompt, str(image_path))
+            parsed = _parse_ai_json(raw)
 
-            for rule in rules:
-                rule_id = rule.get("id", "unknown")
-                ai_result = ai_map.get(rule_id, {})
-                status = ai_result.get("status", "FAIL").upper()
-                if status not in ("PASS", "PARTIAL", "FAIL"):
-                    status = "FAIL"
+            # Handle wrapped format {"results": [...]}
+            if parsed and isinstance(parsed, dict) and "results" in parsed:
+                parsed = parsed["results"]
 
-                results.append(MatchResult(
-                    rule_id=rule_id,
+            if parsed and isinstance(parsed, list):
+                ai_map = {}
+                for item in parsed:
+                    if isinstance(item, dict) and "rule_id" in item:
+                        ai_map[item["rule_id"]] = item
+
+                for rule in batch:
+                    rid = rule.get("id", "unknown")
+                    ai_result = ai_map.get(rid, {})
+                    status = ai_result.get("status", "FAIL").upper()
+                    if status not in ("PASS", "PARTIAL", "FAIL"):
+                        status = "FAIL"
+
+                    all_results.append(MatchResult(
+                        rule_id=rid,
+                        rule_description=rule.get("description", ""),
+                        iso_ref=rule.get("iso_ref", ""),
+                        status=status,
+                        confidence=float(ai_result.get("confidence", 0.0)),
+                        method="ai_vision",
+                        evidence=ai_result.get("evidence", []),
+                        severity=rule.get("severity", "critical"),
+                        new_in_2024=rule.get("new_in_2024", False),
+                        details=ai_result.get("reasoning", ""),
+                    ))
+            else:
+                logger.warning(
+                    "AI vision batch %d-%d parse failed, trying individual",
+                    batch_start, batch_start + len(batch),
+                )
+                for rule in batch:
+                    all_results.append(ai_verify_rule(rule, image_path, ai_provider))
+
+        except Exception as e:
+            logger.error("AI vision batch error: %s", e)
+            for rule in batch:
+                all_results.append(MatchResult(
+                    rule_id=rule.get("id", "unknown"),
                     rule_description=rule.get("description", ""),
                     iso_ref=rule.get("iso_ref", ""),
-                    status=status,
-                    confidence=float(ai_result.get("confidence", 0.0)),
+                    status="FAIL",
+                    confidence=0.0,
                     method="ai_vision",
-                    evidence=ai_result.get("evidence", []),
                     severity=rule.get("severity", "critical"),
                     new_in_2024=rule.get("new_in_2024", False),
-                    details=ai_result.get("reasoning", ""),
+                    details=f"AI vision batch error: {e}",
                 ))
-        else:
-            logger.warning("AI batch response not parseable, falling back to individual")
-            for rule in rules:
-                results.append(ai_verify_rule(rule, image_path, ai_provider))
 
-    except Exception as e:
-        logger.error("AI batch verification failed: %s", e)
-        # Return FAIL for all rules on error
-        for rule in rules:
-            results.append(MatchResult(
-                rule_id=rule.get("id", "unknown"),
-                rule_description=rule.get("description", ""),
-                iso_ref=rule.get("iso_ref", ""),
-                status="FAIL",
-                confidence=0.0,
-                method="ai_vision",
-                severity=rule.get("severity", "critical"),
-                new_in_2024=rule.get("new_in_2024", False),
-                details=f"AI batch error: {e}",
-            ))
-
-    return results
+    return all_results

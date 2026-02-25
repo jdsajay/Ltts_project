@@ -18,6 +18,8 @@ rules:
       symbol_ref: "ISO 7000-3082"
       min_height_mm: 3
       must_be_adjacent_to: "manufacturer name"
+      adjacency_max_mm: 10
+      min_font_size_pt: 6
     markers: ["manufacturer"]
     severity: critical
 
@@ -29,6 +31,8 @@ rules:
     specs:
       symbol_ref: "ISO 7000-3088"
       min_height_mm: 3
+      must_be_adjacent_to: "representative"
+      adjacency_max_mm: 10
     markers: ["authorized representative", "EC REP", "EU REP"]
     severity: critical
 
@@ -40,6 +44,8 @@ rules:
     specs:
       symbol_ref: "ISO 7000-2497"
       min_height_mm: 3
+      must_be_adjacent_to: "date"
+      adjacency_max_mm: 10
     markers: ["date of manufacture", "MFGDATE"]
     severity: critical
 
@@ -51,6 +57,8 @@ rules:
     specs:
       symbol_ref: "ISO 7000-2607"
       min_height_mm: 3
+      must_be_adjacent_to: "expir"
+      adjacency_max_mm: 10
     markers: ["use by", "use-by", "EXPDATE"]
     severity: critical
 
@@ -62,6 +70,8 @@ rules:
     specs:
       symbol_ref: "ISO 7000-2492"
       min_height_mm: 3
+      must_be_adjacent_to: "LOT"
+      adjacency_max_mm: 10
     markers: ["LOT", "batch"]
     severity: critical
 
@@ -73,6 +83,8 @@ rules:
     specs:
       symbol_ref: "ISO 7000-2498"
       min_height_mm: 3
+      must_be_adjacent_to: "serial"
+      adjacency_max_mm: 10
     markers: ["SN", "serial"]
     severity: critical
 
@@ -84,6 +96,8 @@ rules:
     specs:
       symbol_ref: "ISO 7000-2493"
       min_height_mm: 3
+      must_be_adjacent_to: "REF"
+      adjacency_max_mm: 10
     markers: ["REF", "catalogue"]
     severity: critical
 
@@ -95,6 +109,8 @@ rules:
     specs:
       symbol_ref: "ISO 7000-2501"
       min_height_mm: 3
+      must_be_adjacent_to: "sterile"
+      adjacency_max_mm: 10
     markers: ["STERILE"]
     severity: critical
 

@@ -30,6 +30,9 @@ rules:
     markers: ["sterile", "sealed", "packaging"]
     severity: critical
     new_in_2024: false
+    specs:
+      must_include: ["sterile", "sealed"]
+      min_font_size_pt: 6
 
   - id: ISO14607-9.2
     iso_ref: "9.2"
@@ -39,6 +42,8 @@ rules:
     markers: ["inner", "outer", "double"]
     severity: major
     new_in_2024: false
+    specs:
+      must_include: ["inner OR outer"]
 
   # ── Section 10: Information supplied by manufacturer ─
   - id: ISO14607-10.1
@@ -72,6 +77,9 @@ rules:
     pattern: "\\d+\\s*(?:cc|ml|mL)"
     severity: critical
     new_in_2024: false
+    specs:
+      min_font_size_pt: 8
+      font_style: bold
 
   - id: ISO14607-11.2-type
     iso_ref: "11.2"
@@ -81,6 +89,8 @@ rules:
     markers: ["CPG", "model", "type", "gel", "saline"]
     severity: critical
     new_in_2024: false
+    specs:
+      min_font_size_pt: 8
 
   # 11.3 Labelling — specific requirements
   - id: ISO14607-11.3a-dimensions
@@ -92,6 +102,7 @@ rules:
     pattern: "\\d+\\.?\\d*\\s*(?:cm|mm)"
     specs:
       must_include: ["width OR diameter", "projection"]
+      min_font_size_pt: 6
     severity: critical
     new_in_2024: false
 
@@ -104,6 +115,9 @@ rules:
     pattern: "\\d+\\s*(?:cc|ml)"
     severity: critical
     new_in_2024: false
+    specs:
+      min_font_size_pt: 8
+      font_style: bold
 
   - id: ISO14607-11.3b-shell-desc
     iso_ref: "11.3 b)"
@@ -113,6 +127,9 @@ rules:
     markers: ["shell", "barrier", "layer", "silicone elastomer"]
     severity: major
     new_in_2024: false
+    specs:
+      must_include: ["shell OR barrier OR layer"]
+      min_font_size_pt: 6
 
   - id: ISO14607-11.3c-surface
     iso_ref: "11.3 c)"
@@ -148,6 +165,9 @@ rules:
     markers: ["gel", "saline", "fill", "silicone gel", "cohesive"]
     severity: major
     new_in_2024: false
+    specs:
+      must_include: ["gel OR saline OR fill"]
+      min_font_size_pt: 6
 
   # 11.4 Shelf life
   - id: ISO14607-11.4
@@ -159,6 +179,9 @@ rules:
     pattern: "\\d{4}-\\d{2}-\\d{2}"
     severity: critical
     new_in_2024: false
+    specs:
+      min_font_size_pt: 6
+      min_height_mm: 2
 
   # 11.5 UDI
   - id: ISO14607-11.5-udi
@@ -169,6 +192,9 @@ rules:
     markers: ["UDI", "UDI-DI", "UDI-PI"]
     severity: critical
     new_in_2024: false
+    specs:
+      min_font_size_pt: 6
+      min_height_mm: 2
 
   - id: ISO14607-11.5-udi-carrier
     iso_ref: "11.5"
@@ -192,6 +218,8 @@ rules:
     specs:
       min_height_mm: 3
       symbol_ref: "ISO 7000-3082"
+      must_be_adjacent_to: "manufacturer"
+      adjacency_max_mm: 10
     severity: critical
     new_in_2024: false
 
@@ -204,6 +232,9 @@ rules:
     pattern: "\\d{4}-\\d{2}-\\d{2}"
     specs:
       symbol_ref: "ISO 7000-2497"
+      min_height_mm: 3
+      must_be_adjacent_to: "manufacture"
+      adjacency_max_mm: 10
     severity: critical
     new_in_2024: false
 
@@ -216,6 +247,7 @@ rules:
     pattern: "\\d{4}-\\d{2}-\\d{2}"
     specs:
       symbol_ref: "ISO 7000-2607"
+      min_height_mm: 3
     severity: critical
     new_in_2024: false
 
@@ -227,6 +259,7 @@ rules:
     markers: ["LOT", "LOTNO", "batch", "lot"]
     specs:
       symbol_ref: "ISO 7000-2492"
+      min_height_mm: 3
     severity: critical
     new_in_2024: false
 
@@ -238,6 +271,7 @@ rules:
     markers: ["SN", "SERNO", "serial"]
     specs:
       symbol_ref: "ISO 7000-2498"
+      min_height_mm: 3
     severity: critical
     new_in_2024: false
 
@@ -249,6 +283,7 @@ rules:
     markers: ["REF", "catalogue", "catalog", "reference number"]
     specs:
       symbol_ref: "ISO 7000-2493"
+      min_height_mm: 3
     severity: critical
     new_in_2024: false
 
@@ -274,6 +309,7 @@ rules:
     markers: ["single use", "do not reuse", "single-use", "not re-used"]
     specs:
       symbol_ref: "ISO 7000-1051"
+      min_height_mm: 5
     severity: major
     new_in_2024: false
 
@@ -299,6 +335,7 @@ rules:
     markers: ["Zernikedreef", "Leiden", "Netherlands", "Irving", "Texas", "address"]
     specs:
       must_include: ["street", "city", "country"]
+      min_font_size_pt: 6
     severity: critical
     new_in_2024: false
 

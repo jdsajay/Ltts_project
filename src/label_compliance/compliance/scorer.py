@@ -37,6 +37,8 @@ class ComplianceScore:
     results: list[MatchResult] = field(default_factory=list)
     critical_gaps: list[MatchResult] = field(default_factory=list)
     new_2024_gaps: list[MatchResult] = field(default_factory=list)
+    spec_violation_count: int = 0
+    rules_with_spec_failures: int = 0
 
     @property
     def gap_count(self) -> int:
@@ -71,6 +73,8 @@ def compute_score(
     failed = 0
     critical_gaps = []
     new_2024_gaps = []
+    spec_violation_count = 0
+    rules_with_spec_failures = 0
 
     for result in match_results:
         weight = SEVERITY_WEIGHTS.get(result.severity, 1.0)
@@ -91,11 +95,26 @@ def compute_score(
         if result.status in ("FAIL", "PARTIAL") and result.new_in_2024:
             new_2024_gaps.append(result)
 
+        # Track spec violations
+        if result.spec_violations:
+            spec_violation_count += len(result.spec_violations)
+            rules_with_spec_failures += 1
+            # Apply additional penalty for spec violations
+            # Each spec violation reduces earned weight for this rule
+            spec_penalty = min(
+                len(result.spec_violations) * 0.1 * weight,
+                weight * 0.3,  # cap penalty at 30% of rule weight
+            )
+            earned_weight = max(0, earned_weight - spec_penalty)
+
     score_pct = (earned_weight / max(total_weight, 1)) * 100
     weighted = earned_weight / max(total_weight, 1)
 
-    if weighted >= compliant_threshold and not critical_gaps:
+    # Spec failures can prevent COMPLIANT status even if text matches are good
+    if weighted >= compliant_threshold and not critical_gaps and rules_with_spec_failures == 0:
         status = "COMPLIANT"
+    elif weighted >= compliant_threshold and not critical_gaps:
+        status = "PARTIAL"  # text passes but specs have issues
     elif weighted >= partial_threshold:
         status = "PARTIAL"
     else:
@@ -113,10 +132,14 @@ def compute_score(
         results=match_results,
         critical_gaps=critical_gaps,
         new_2024_gaps=new_2024_gaps,
+        spec_violation_count=spec_violation_count,
+        rules_with_spec_failures=rules_with_spec_failures,
     )
 
     logger.info(
-        "Score: %s → %s (%.1f%%) — %d PASS, %d PARTIAL, %d FAIL, %d critical gaps",
-        label_name, status, score_pct, passed, partial, failed, len(critical_gaps),
+        "Score: %s → %s (%.1f%%) — %d PASS, %d PARTIAL, %d FAIL, "
+        "%d critical gaps, %d spec violations across %d rules",
+        label_name, status, score_pct, passed, partial, failed,
+        len(critical_gaps), spec_violation_count, rules_with_spec_failures,
     )
     return score

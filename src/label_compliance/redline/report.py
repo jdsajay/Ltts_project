@@ -75,6 +75,8 @@ def _render_markdown(result: LabelResult) -> str:
         lines.append(f"| ❌ Failed | {score.failed} |")
         lines.append(f"| Critical gaps | {score.critical_count} |")
         lines.append(f"| New 2024 gaps | {len(score.new_2024_gaps)} |")
+        lines.append(f"| 📏 Spec violations | {score.spec_violation_count} |")
+        lines.append(f"| Rules with spec failures | {score.rules_with_spec_failures} |")
         lines.append("")
 
     # Detailed results table
@@ -108,8 +110,36 @@ def _render_markdown(result: LabelResult) -> str:
             lines.append(f"- **Status:** {m.status}")
             if m.evidence:
                 lines.append(f"- **Partial evidence:** {', '.join(m.evidence)}")
+            if m.spec_violations:
+                lines.append(f"- **Spec violations:** {len(m.spec_violations)}")
+                for sv in m.spec_violations:
+                    lines.append(f"  - ⚠️ **{sv['spec_field']}**: Required: {sv['requirement']} → Actual: {sv['actual']}")
+                    if sv.get('location'):
+                        lines.append(f"    - Location: {sv['location']}")
+            if m.spec_details:
+                passed_details = [d for d in m.spec_details if d.startswith("PASS:")]
+                if passed_details:
+                    lines.append(f"- **Specs passed:** {len(passed_details)}")
             lines.append(f"- **Action:** Review and update label to include this element")
             lines.append("")
+
+    # Spec violations section (all rules including PASS with spec issues)
+    rules_with_specs = [m for m in (result.all_matches or []) if m.spec_violations]
+    if rules_with_specs:
+        lines.append("## 📏 Specification Violations Detail")
+        lines.append("")
+        lines.append("> These violations indicate that while the text content may be present,")
+        lines.append("> the physical attributes (size, font, position, adjacency) do not meet ISO requirements.")
+        lines.append("")
+        lines.append("| Rule | Spec Field | Required | Actual | Severity | Page |")
+        lines.append("|------|-----------|----------|--------|----------|------|")
+        for m in rules_with_specs:
+            for sv in m.spec_violations:
+                lines.append(
+                    f"| {m.rule_id} | {sv['spec_field']} | {sv['requirement']} | "
+                    f"{sv['actual'][:50]} | {sv['severity']} | {sv.get('page', '—')} |"
+                )
+        lines.append("")
 
     # Font analysis
     if result.font_violations:
@@ -122,6 +152,72 @@ def _render_markdown(result: LabelResult) -> str:
                 f"| {fv['font']} | {fv['size']}pt | {fv['min_required']}pt | {fv['text_preview'][:40]} | {fv['page']} |"
             )
         lines.append("")
+
+    # Symbol Library Comparison
+    sym_report = result.symbol_comparison
+    if sym_report and sym_report.total_required > 0:
+        lines.append("## 🏷️ Symbol Library Comparison")
+        lines.append("")
+        lines.append(f"> Compared label content against the Symbol Library database "
+                      f"({sym_report.total_required} required symbols checked).")
+        lines.append("")
+        lines.append("| Metric | Value |")
+        lines.append("|--------|-------|")
+        lines.append(f"| Symbols checked | {sym_report.total_required} |")
+        lines.append(f"| ✅ Found | {sym_report.total_found} |")
+        lines.append(f"| ⚠️ Partial | {sym_report.total_partial} |")
+        lines.append(f"| ❌ Missing | {sym_report.total_missing} |")
+        lines.append(f"| Score | {sym_report.score:.0%} |")
+        lines.append("")
+
+        # Found symbols
+        found_syms = [r for r in sym_report.results if r.status == "FOUND"]
+        if found_syms:
+            lines.append("### ✅ Found Symbols")
+            lines.append("")
+            lines.append("| Symbol Name | Classification | Expected Text | Match Method | Score |")
+            lines.append("|-------------|---------------|----------------|-------------|-------|")
+            for r in found_syms:
+                method = []
+                if r.found_by_text:
+                    method.append("Text")
+                if r.found_by_visual:
+                    method.append("Visual")
+                lines.append(
+                    f"| {r.symbol.name[:50]} | {r.symbol.classification} | "
+                    f"{r.expected_text[:40]} | {', '.join(method)} | "
+                    f"{max(r.text_score, r.visual_score):.0%} |"
+                )
+            lines.append("")
+
+        # Partial symbols
+        partial_syms = [r for r in sym_report.results if r.status == "PARTIAL"]
+        if partial_syms:
+            lines.append("### ⚠️ Partially Matched Symbols")
+            lines.append("")
+            lines.append("| Symbol Name | Expected Text | Actual Match | Details |")
+            lines.append("|-------------|---------------|-------------|---------|")
+            for r in partial_syms:
+                lines.append(
+                    f"| {r.symbol.name[:50]} | {r.expected_text[:40]} | "
+                    f"{r.actual_text[:40]} | {r.details[:60]} |"
+                )
+            lines.append("")
+
+        # Missing symbols
+        missing_syms = [r for r in sym_report.results if r.status == "MISSING"]
+        if missing_syms:
+            lines.append("### ❌ Missing Symbols")
+            lines.append("")
+            lines.append("| Symbol Name | Classification | Expected Text | Regulation | Action |")
+            lines.append("|-------------|---------------|----------------|-----------|--------|")
+            for r in missing_syms:
+                regs = r.symbol.regulations[:60] if r.symbol.regulations else "—"
+                lines.append(
+                    f"| {r.symbol.name[:50]} | {r.symbol.classification} | "
+                    f"{r.expected_text[:40]} | {regs} | Add to label |"
+                )
+            lines.append("")
 
     # Page details
     lines.append("## Page-by-Page OCR Details")
@@ -159,6 +255,8 @@ def _render_json(result: LabelResult) -> dict:
             "failed": score.failed if score else 0,
             "critical_gaps": score.critical_count if score else 0,
             "new_2024_gaps": len(score.new_2024_gaps) if score else 0,
+            "spec_violation_count": score.spec_violation_count if score else 0,
+            "rules_with_spec_failures": score.rules_with_spec_failures if score else 0,
         },
         "results": [
             {
@@ -171,6 +269,9 @@ def _render_json(result: LabelResult) -> dict:
                 "new_in_2024": m.new_in_2024,
                 "evidence": m.evidence,
                 "method": m.method,
+                "specs_passed": m.specs_passed,
+                "spec_violations": m.spec_violations,
+                "spec_details": m.spec_details,
             }
             for m in (result.all_matches or [])
         ],
@@ -184,6 +285,39 @@ def _render_json(result: LabelResult) -> dict:
             for p in result.pages
         ],
         "font_violations": result.font_violations,
+        "symbol_library_comparison": _render_symbol_comparison_json(result),
+    }
+
+
+def _render_symbol_comparison_json(result: LabelResult) -> dict | None:
+    """Render symbol library comparison as JSON."""
+    sym_report = result.symbol_comparison
+    if sym_report is None or sym_report.total_required == 0:
+        return None
+
+    return {
+        "total_required": sym_report.total_required,
+        "total_found": sym_report.total_found,
+        "total_partial": sym_report.total_partial,
+        "total_missing": sym_report.total_missing,
+        "score": round(sym_report.score, 4),
+        "results": [
+            {
+                "symbol_name": r.symbol.name,
+                "classification": r.symbol.classification,
+                "status": r.status,
+                "expected_text": r.expected_text,
+                "actual_text": r.actual_text,
+                "text_score": round(r.text_score, 4),
+                "visual_score": round(r.visual_score, 4),
+                "found_by_text": r.found_by_text,
+                "found_by_visual": r.found_by_visual,
+                "text_discrepancy": r.text_discrepancy,
+                "details": r.details,
+                "regulation": r.symbol.regulations[:200],
+            }
+            for r in sym_report.results
+        ],
     }
 
 

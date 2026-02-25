@@ -1,16 +1,18 @@
 {
   "label_name": "DRWG107503_C",
   "pdf_file": "DRWG107503_C.pdf",
-  "generated_at": "2026-02-15T23:38:50.712694",
+  "generated_at": "2026-02-20T19:27:43.263439",
   "summary": {
     "status": "NON-COMPLIANT",
-    "score_pct": 36.5,
+    "score_pct": 38.8,
     "total_rules": 28,
     "passed": 5,
-    "partial": 10,
-    "failed": 13,
-    "critical_gaps": 18,
-    "new_2024_gaps": 2
+    "partial": 21,
+    "failed": 2,
+    "critical_gaps": 17,
+    "new_2024_gaps": 2,
+    "spec_violation_count": 81,
+    "rules_with_spec_failures": 19
   },
   "results": [
     {
@@ -24,99 +26,407 @@
       "evidence": [
         "sterile"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "must_include",
+          "requirement": "Must include: sealed",
+          "actual": "'sealed' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "must_include",
+          "requirement": "Must include: sealed",
+          "actual": "'sealed' not found in text",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": [
+        "PASS: Found required element: 'sterile'"
+      ]
     },
     {
       "rule_id": "ISO14607-9.2",
       "description": "Double packaging system — inner and outer pack",
       "iso_ref": "9.2",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PARTIAL",
+      "confidence": 0.8,
       "severity": "major",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "Outer: TK01",
+        "Inner: TK04",
+        "Double: Both"
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-9.2",
+          "spec_field": "must_include",
+          "requirement": "Must include one of: inner OR outer",
+          "actual": "None of [inner, outer] found in text",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-9.2",
+          "spec_field": "must_include",
+          "requirement": "Must include one of: inner OR outer",
+          "actual": "None of [inner, outer] found in text",
+          "severity": "major",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "ISO14607-10.1",
       "description": "Instructions for use shall accompany the implant",
       "iso_ref": "10.1",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PARTIAL",
+      "confidence": 0.8,
       "severity": "critical",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "The label includes a section titled 'Instructions for Use' but it is not clear if it is complete and/or if it is in a format that is easy to understand and follow."
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: No specs defined — text matching only"
+      ]
     },
     {
       "rule_id": "ISO14607-11.1",
       "description": "Labels shall comply with ISO 14630 and ISO 15223-1",
       "iso_ref": "11.1",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PASS",
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "Made in USA",
+        "MENTOR",
+        "SERNOS",
+        "The label includes the required ISO 14630-1 and 15223-1 symbols, but the text 'MENORO' is not found on the label"
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: No specs defined — text matching only"
+      ]
     },
     {
       "rule_id": "ISO14607-11.2-volume",
       "description": "Nominal volume stated on the unit container label",
       "iso_ref": "11.2",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PARTIAL",
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "Volume: 165cc"
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 8pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Font style: bold",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 8pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Font style: bold",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "ISO14607-11.2-type",
       "description": "Implant type/model stated on the unit container",
       "iso_ref": "11.2",
       "status": "PARTIAL",
-      "confidence": 0.2,
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
       "evidence": [
-        "gel"
+        "Memoshapes",
+        "Breast Implant",
+        "gel",
+        "MENTOR",
+        "CPT:  ... "
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.2-type",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 8pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.2-type",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 8pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "ISO14607-11.3a-dimensions",
       "description": "Implant dimensions: width, height/diameter, projection",
       "iso_ref": "11.3 a)",
       "status": "PARTIAL",
-      "confidence": 0.14285714285714285,
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
       "evidence": [
-        "height"
+        "TK11",
+        "TK06",
+        "TK10",
+        "TK12",
+        "TK07",
+        "height",
+        "5.5mm",
+        "TK09",
+        "TK08",
+        "TK04",
+        "TK05",
+        "1.5mm",
+        "TK01"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.3a-dimensions",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3a-dimensions",
+          "spec_field": "must_include",
+          "requirement": "Must include one of: width OR diameter",
+          "actual": "None of [width, diameter] found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3a-dimensions",
+          "spec_field": "must_include",
+          "requirement": "Must include: projection",
+          "actual": "'projection' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3a-dimensions",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3a-dimensions",
+          "spec_field": "must_include",
+          "requirement": "Must include one of: width OR diameter",
+          "actual": "None of [width, diameter] found in text",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3a-dimensions",
+          "spec_field": "must_include",
+          "requirement": "Must include: projection",
+          "actual": "'projection' not found in text",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "ISO14607-11.3a-volume-label",
       "description": "Volume also stated on the implant label (not just container)",
       "iso_ref": "11.3 a)",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PARTIAL",
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "Volume: 5.5cm",
+        "Volume:  1.5 cc"
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 8pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Font style: bold",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 8pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Font style: bold",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "ISO14607-11.3b-shell-desc",
       "description": "Description of the implant shell(s)",
       "iso_ref": "11.3 b)",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PARTIAL",
+      "confidence": 1.0,
       "severity": "major",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "MENTOR® Memory/Shape® Breast Implant"
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.3b-shell-desc",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3b-shell-desc",
+          "spec_field": "must_include",
+          "requirement": "Must include one of: shell OR barrier OR layer",
+          "actual": "None of [shell, barrier, layer] found in text",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3b-shell-desc",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "major",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3b-shell-desc",
+          "spec_field": "must_include",
+          "requirement": "Must include one of: shell OR barrier OR layer",
+          "actual": "None of [shell, barrier, layer] found in text",
+          "severity": "major",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "ISO14607-11.3c-surface",
@@ -127,63 +437,210 @@
       "severity": "critical",
       "new_in_2024": true,
       "evidence": [],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "valid_classifications",
+          "requirement": "Must contain one of: ['NTX', 'SLC', 'SLO', 'CRC', 'CRO']",
+          "actual": "No valid classification code found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "table_ref",
+          "requirement": "Content from Table G.2 must be present",
+          "actual": "Neither 'Table G.2' nor its content codes found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "valid_classifications",
+          "requirement": "Must contain one of: ['NTX', 'SLC', 'SLO', 'CRC', 'CRO']",
+          "actual": "No valid classification code found in text",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "table_ref",
+          "requirement": "Content from Table G.2 must be present",
+          "actual": "Neither 'Table G.2' nor its content codes found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "ISO14607-11.3d-fill",
       "description": "Description of the implant fill material",
       "iso_ref": "11.3 d)",
-      "status": "PASS",
-      "confidence": 0.6,
+      "status": "PARTIAL",
+      "confidence": 1.0,
       "severity": "major",
       "new_in_2024": false,
       "evidence": [
+        "MENTOR® Memory/Shape® Breast Implant",
+        "The label mentions 'Silicone Gel-Filled' but does not explicitly state 'Cohesive' or 'Saline'",
         "fill",
-        "silicone gel",
-        "gel"
+        "gel",
+        "silicone gel"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.3d-fill",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3d-fill",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "major",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": [
+        "PASS: Found 'gel' (from: gel OR saline OR fill)"
+      ]
     },
     {
       "rule_id": "ISO14607-11.4",
       "description": "Shelf life / use-by date on packaging",
       "iso_ref": "11.4",
       "status": "PARTIAL",
-      "confidence": 0.16666666666666666,
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
       "evidence": [
-        "EXPDATE"
+        "TK04",
+        "EXPDATE: 2025-03-15",
+        "EXPDATE",
+        "TK01"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.4",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.4",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": [
+        "PASS: Height 5.16mm ≥ 2mm (text: 'BEXPDATE', 61px at 300dpi)",
+        "PASS: Height 3.30mm ≥ 2mm (text: 'EXPDATE', 39px at 300dpi)",
+        "PASS: Height 3.22mm ≥ 2mm (text: 'EXPDATE', 38px at 300dpi)"
+      ]
     },
     {
       "rule_id": "ISO14607-11.5-udi",
       "description": "Unique Device Identifier (UDI) on label",
       "iso_ref": "11.5",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PARTIAL",
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "The UDI-PI (U-PI) code is present on the label:  [...]"
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.5-udi",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 2mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.5-udi",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.5-udi",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 2mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.5-udi",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "ISO14607-11.5-udi-carrier",
       "description": "UDI carrier (barcode or 2D DataMatrix)",
       "iso_ref": "11.5",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PASS",
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "Data-M: 00081317005215",
+        "GTIN: 00081317005215",
+        "GS1: 00081317005215"
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Barcode format(s) found: ['GS1-128'] (from: ['CODE128', 'CODE128', 'CODE128', 'CODE128', 'CODE128'])",
+        "PASS: Barcode format(s) found: ['GS1-128'] (from: ['CODE128', 'CODE128', 'CODE128', 'CODE128'])"
+      ]
     },
     {
       "rule_id": "SYM-manufacturer",
       "description": "Manufacturer symbol (factory icon)",
       "iso_ref": "ISO 15223-1:2021, 5.1.1",
-      "status": "PASS",
+      "status": "PARTIAL",
       "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
@@ -191,7 +648,236 @@
         "manufacturer",
         "Mentor"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "MENTOR®",
+            "x": 5485,
+            "y": 2858,
+            "w": 146,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "1.95mm (23px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "MENTOR®",
+            "x": 4582,
+            "y": 3445,
+            "w": 123,
+            "h": 23
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "1.86mm (22px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "MENTOR®",
+            "x": 4581,
+            "y": 3558,
+            "w": 123,
+            "h": 22
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "MENTOR®",
+            "x": 5486,
+            "y": 3450,
+            "w": 121,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "1.95mm (23px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "MENTOR®",
+            "x": 5488,
+            "y": 3567,
+            "w": 121,
+            "h": 23
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.96mm (35px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "Manufacturer",
+            "x": 2625,
+            "y": 3781,
+            "w": 214,
+            "h": 35
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.96mm (35px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "MENTOR®",
+            "x": 4524,
+            "y": 2736,
+            "w": 156,
+            "h": 35
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.96mm (35px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "MENTOR:",
+            "x": 5928,
+            "y": 2538,
+            "w": 206,
+            "h": 35
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "1.95mm (23px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "MENTOR®",
+            "x": 4513,
+            "y": 3343,
+            "w": 124,
+            "h": 23
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.46mm (29px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "MENTOR®",
+            "x": 4511,
+            "y": 3455,
+            "w": 124,
+            "h": 29
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.03mm (24px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "MENTOR®",
+            "x": 5416,
+            "y": 3366,
+            "w": 100,
+            "h": 24
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.88mm (34px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "Mentor-Texas",
+            "x": 4401,
+            "y": 4881,
+            "w": 220,
+            "h": 34
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.03mm (24px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "MENTOR®",
+            "x": 5412,
+            "y": 3479,
+            "w": 123,
+            "h": 24
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.54mm (30px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "MENTOR-TEXAS",
+            "x": 5867,
+            "y": 5194,
+            "w": 205,
+            "h": 30
+          }
+        }
+      ],
+      "spec_details": [
+        "PASS: Height 3.05mm ≥ 3mm (text: 'MENTOR®', 36px at 300dpi)",
+        "PASS: Height 4.57mm ≥ 3mm (text: '‘MENTOR®', 54px at 300dpi)",
+        "PASS: 'Manufacturer' is 0.0mm from 'Manufacturer' (max: 10mm)",
+        "PASS: Height 3.98mm ≥ 3mm (text: '‘www.mentorwwilc.com/patentmarking', 47px at 300dpi)",
+        "PASS: Height 8.64mm ≥ 3mm (text: '“MENTOR®', 102px at 300dpi)",
+        "PASS: Height 4.57mm ≥ 3mm (text: 'MENTOR®', 54px at 300dpi)",
+        "PASS: Height 5.00mm ≥ 3mm (text: 'MENTOR®', 59px at 300dpi)",
+        "PASS: Height 9.23mm ≥ 3mm (text: 'MENTOR:', 109px at 300dpi)",
+        "PASS: Height 3.89mm ≥ 3mm (text: 'Manufacturer', 46px at 300dpi)",
+        "PASS: Height 3.47mm ≥ 3mm (text: 'MENTOR®', 41px at 300dpi)",
+        "PASS: Height 4.49mm ≥ 3mm (text: 'MENTOR®', 53px at 300dpi)",
+        "PASS: Height 3.73mm ≥ 3mm (text: '++MENTOR®', 44px at 300dpi)",
+        "PASS: Height 4.23mm ≥ 3mm (text: 'MENTOR-TEXAS', 50px at 300dpi)",
+        "PASS: Height 4.32mm ≥ 3mm (text: '-MENTOR®', 51px at 300dpi)"
+      ]
     },
     {
       "rule_id": "SYM-date-manufacture",
@@ -204,150 +890,642 @@
       "evidence": [
         "MFGDATE"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-date-manufacture",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacture'",
+          "actual": "Distance: 24.8mm (exceeds 10mm limit)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "marker_text": "MFGDATE",
+            "marker_pos": {
+              "x": 4084,
+              "y": 3216
+            },
+            "adjacent_text": "Manufacturer",
+            "adjacent_pos": {
+              "x": 3997,
+              "y": 3496
+            }
+          }
+        },
+        {
+          "rule_id": "SYM-date-manufacture",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacture'",
+          "actual": "Distance: 22.8mm (exceeds 10mm limit)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "marker_text": "MFGDATE",
+            "marker_pos": {
+              "x": 2703,
+              "y": 3520
+            },
+            "adjacent_text": "Manufacturer",
+            "adjacent_pos": {
+              "x": 2625,
+              "y": 3781
+            }
+          }
+        }
+      ],
+      "spec_details": [
+        "PASS: Height 3.56mm ≥ 3mm (text: 'MFGDATE', 42px at 300dpi)",
+        "PASS: Height 3.22mm ≥ 3mm (text: 'MFGDATE', 38px at 300dpi)",
+        "PASS: Height 5.08mm ≥ 3mm (text: 'MFGDATE', 60px at 300dpi)",
+        "PASS: Height 3.47mm ≥ 3mm (text: 'MFGDATE', 41px at 300dpi)",
+        "PASS: Height 3.30mm ≥ 3mm (text: 'MFGDATE', 39px at 300dpi)"
+      ]
     },
     {
       "rule_id": "SYM-use-by",
       "description": "Use-by date / expiration symbol",
       "iso_ref": "ISO 15223-1:2021, 5.1.4",
-      "status": "PARTIAL",
-      "confidence": 0.25,
+      "status": "PASS",
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
       "evidence": [
+        "expir",
+        "use by",
         "EXPDATE"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Height 3.30mm ≥ 3mm (text: 'EXPDATE', 39px at 300dpi)",
+        "PASS: Height 3.22mm ≥ 3mm (text: 'EXPDATE', 38px at 300dpi)",
+        "PASS: Height 5.16mm ≥ 3mm (text: 'BEXPDATE', 61px at 300dpi)"
+      ]
     },
     {
       "rule_id": "SYM-batch-code",
       "description": "Batch code / LOT number symbol",
       "iso_ref": "ISO 15223-1:2021, 5.1.5",
       "status": "PASS",
-      "confidence": 0.75,
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
       "evidence": [
+        "TK04",
         "LOTNO",
+        "TK01",
         "LOT",
         "lot"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Height 4.23mm ≥ 3mm (text: '[LOT]LOTNO', 50px at 300dpi)",
+        "PASS: Height 4.15mm ≥ 3mm (text: '[LoT]LOTNO', 49px at 300dpi)",
+        "PASS: Height 5.08mm ≥ 3mm (text: 'LOTNO', 60px at 300dpi)",
+        "PASS: Height 5.59mm ≥ 3mm (text: 'LOTNO', 66px at 300dpi)",
+        "PASS: Height 4.32mm ≥ 3mm (text: '[LoT]LOTNO', 51px at 300dpi)",
+        "PASS: Height 7.54mm ≥ 3mm (text: '[LOT]', 89px at 300dpi)",
+        "PASS: Height 4.83mm ≥ 3mm (text: 'LOTNO', 57px at 300dpi)",
+        "PASS: Height 3.39mm ≥ 3mm (text: 'LOTNO', 40px at 300dpi)",
+        "PASS: Height 5.08mm ≥ 3mm (text: '[LOT]LOTNO', 60px at 300dpi)",
+        "PASS: Height 4.91mm ≥ 3mm (text: '{LOT]LOTNO', 58px at 300dpi)",
+        "PASS: Height 3.56mm ≥ 3mm (text: 'LOTNO', 42px at 300dpi)"
+      ]
     },
     {
       "rule_id": "SYM-serial-number",
       "description": "Serial number symbol",
       "iso_ref": "ISO 15223-1:2021, 5.1.6",
-      "status": "PASS",
-      "confidence": 0.6666666666666666,
+      "status": "PARTIAL",
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
       "evidence": [
         "SERNO",
-        "SN"
+        "SN",
+        "S/N"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-serial-number",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.46mm (29px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "SERNO",
+            "x": 4952,
+            "y": 3505,
+            "w": 98,
+            "h": 29
+          }
+        },
+        {
+          "rule_id": "SYM-serial-number",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.29mm (27px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "SERNO",
+            "x": 4957,
+            "y": 3620,
+            "w": 92,
+            "h": 27
+          }
+        },
+        {
+          "rule_id": "SYM-serial-number",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.12mm (25px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "SERNO",
+            "x": 5864,
+            "y": 3510,
+            "w": 89,
+            "h": 25
+          }
+        },
+        {
+          "rule_id": "SYM-serial-number",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.96mm (35px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "[SN]",
+            "x": 4803,
+            "y": 3400,
+            "w": 57,
+            "h": 35
+          }
+        },
+        {
+          "rule_id": "SYM-serial-number",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.79mm (33px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "SN]",
+            "x": 5718,
+            "y": 3422,
+            "w": 40,
+            "h": 33
+          }
+        },
+        {
+          "rule_id": "SYM-serial-number",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.88mm (34px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "[SN]",
+            "x": 5701,
+            "y": 3539,
+            "w": 72,
+            "h": 34
+          }
+        },
+        {
+          "rule_id": "SYM-serial-number",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.54mm (30px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "SERNO",
+            "x": 4888,
+            "y": 3408,
+            "w": 101,
+            "h": 30
+          }
+        },
+        {
+          "rule_id": "SYM-serial-number",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.12mm (25px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "SERNO",
+            "x": 5785,
+            "y": 3430,
+            "w": 98,
+            "h": 25
+          }
+        },
+        {
+          "rule_id": "SYM-serial-number",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.12mm (25px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "SERNO",
+            "x": 5784,
+            "y": 3544,
+            "w": 98,
+            "h": 25
+          }
+        }
+      ],
+      "spec_details": [
+        "PASS: Height 5.00mm ≥ 3mm (text: 'SN', 59px at 300dpi)",
+        "PASS: Height 7.45mm ≥ 3mm (text: ']SERNO', 88px at 300dpi)",
+        "PASS: Height 5.93mm ≥ 3mm (text: '[SN]SERNO', 70px at 300dpi)",
+        "PASS: Height 5.67mm ≥ 3mm (text: '[SN', 67px at 300dpi)",
+        "PASS: Height 4.32mm ≥ 3mm (text: '[SNJSERNO:', 51px at 300dpi)",
+        "PASS: Height 4.32mm ≥ 3mm (text: '[SN]SERNO', 51px at 300dpi)",
+        "PASS: Height 4.15mm ≥ 3mm (text: '[SN1.SERNO', 49px at 300dpi)",
+        "PASS: Height 4.91mm ≥ 3mm (text: '_[SN]SERNO', 58px at 300dpi)",
+        "PASS: Height 7.11mm ≥ 3mm (text: 'SERNO', 84px at 300dpi)",
+        "PASS: Height 7.45mm ≥ 3mm (text: '[sn', 88px at 300dpi)",
+        "PASS: Height 3.39mm ≥ 3mm (text: 'SN]', 40px at 300dpi)",
+        "PASS: Height 4.40mm ≥ 3mm (text: '[SN]SERNO', 52px at 300dpi)",
+        "PASS: Height 5.67mm ≥ 3mm (text: ']SERNO', 67px at 300dpi)",
+        "PASS: Height 3.98mm ≥ 3mm (text: '[SN]', 47px at 300dpi)",
+        "PASS: Height 5.25mm ≥ 3mm (text: '[SN]', 62px at 300dpi)",
+        "PASS: Height 5.42mm ≥ 3mm (text: 'SERNO', 64px at 300dpi)"
+      ]
     },
     {
       "rule_id": "SYM-catalogue",
       "description": "Catalogue / reference number symbol",
       "iso_ref": "ISO 15223-1:2021, 5.1.7",
       "status": "PARTIAL",
-      "confidence": 0.25,
+      "confidence": 0.8,
       "severity": "critical",
       "new_in_2024": false,
       "evidence": [
-        "REF"
+        "REF",
+        "REF TK04"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.29mm (27px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "[REF]",
+            "x": 4583,
+            "y": 3611,
+            "w": 64,
+            "h": 27
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "[REF]",
+            "x": 4512,
+            "y": 3508,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.88mm (34px at 300dpi)",
+          "severity": "critical",
+          "page": 2,
+          "location": {
+            "text": "[REF]",
+            "x": 5403,
+            "y": 3535,
+            "w": 76,
+            "h": 34
+          }
+        }
+      ],
+      "spec_details": [
+        "PASS: Height 8.64mm ≥ 3mm (text: '[REF]', 102px at 300dpi)",
+        "PASS: Height 5.59mm ≥ 3mm (text: '(REF]TK04', 66px at 300dpi)",
+        "PASS: Height 4.40mm ≥ 3mm (text: '[REF]TKO4', 52px at 300dpi)",
+        "PASS: Height 5.42mm ≥ 3mm (text: '[REF]TK04', 64px at 300dpi)",
+        "PASS: Height 3.98mm ≥ 3mm (text: '[REF]', 47px at 300dpi)",
+        "PASS: Height 7.37mm ≥ 3mm (text: '[REF]TK04', 87px at 300dpi)",
+        "PASS: Height 6.60mm ≥ 3mm (text: '[REFITKO4', 78px at 300dpi)",
+        "PASS: Height 4.32mm ≥ 3mm (text: 'TREFITK04', 51px at 300dpi)",
+        "PASS: Height 6.10mm ≥ 3mm (text: '[REF]TK04', 72px at 300dpi)",
+        "PASS: Height 4.23mm ≥ 3mm (text: '[REF]TK04', 50px at 300dpi)",
+        "PASS: Height 7.37mm ≥ 3mm (text: '[REF]', 87px at 300dpi)"
+      ]
     },
     {
       "rule_id": "SYM-sterilization",
       "description": "Sterilization method symbol",
       "iso_ref": "ISO 15223-1:2021, 5.2.1–5.2.8",
-      "status": "PARTIAL",
-      "confidence": 0.2,
+      "status": "PASS",
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
       "evidence": [
-        "sterile"
+        "Steriliz",
+        "Steril",
+        "STERILIZ",
+        "sterile",
+        "E. O. (Eth. O.)"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Sterilization method indicated: ['5.2.1: Sterile — general', '5.2.4: Sterile — irradiation', '5.2.5: Sterile — ethylene oxide']"
+      ]
     },
     {
       "rule_id": "SYM-single-use",
       "description": "Do not reuse / single use symbol",
       "iso_ref": "ISO 15223-1:2021, 5.4.2",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PARTIAL",
+      "confidence": 1.0,
       "severity": "major",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "The text 'Single Use' is present on the label.",
+        "The text 'Single Use' is clearly printed on the label."
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-single-use",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-single-use",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "major",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "SYM-ce-mark",
       "description": "CE marking with notified body number",
       "iso_ref": "EU MDR 2017/745, Art. 20",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PARTIAL",
+      "confidence": 1.0,
       "severity": "critical",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "CE",
+        "0086"
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "must_include_nb_number",
+          "requirement": "Notified body number with CE mark (e.g., CE 0086)",
+          "actual": "CE mark and/or notified body number not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "must_include_nb_number",
+          "requirement": "Notified body number with CE mark (e.g., CE 0086)",
+          "actual": "CE mark and/or notified body number not found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "MDR-address",
       "description": "Manufacturer name and full registered address",
       "iso_ref": "ISO 14630 / EU MDR Art. 10(11)",
-      "status": "PASS",
-      "confidence": 0.5,
+      "status": "PARTIAL",
+      "confidence": 0.8,
       "severity": "critical",
       "new_in_2024": false,
       "evidence": [
         "address",
         "Texas",
-        "Irving"
+        "ZEN-TRI-SC-02",
+        "Irving",
+        "ZEN-TRI-SC-01"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: street",
+          "actual": "'street' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: city",
+          "actual": "'city' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: country",
+          "actual": "'country' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "min_font_size_pt",
+          "requirement": "≥ 6pt font size",
+          "actual": "No matching font spans found",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: street",
+          "actual": "'street' not found in text",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: city",
+          "actual": "'city' not found in text",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: country",
+          "actual": "'country' not found in text",
+          "severity": "critical",
+          "page": 2,
+          "location": {}
+        }
+      ],
+      "spec_details": []
     },
     {
       "rule_id": "MDR-multilingual",
       "description": "Product name in official EU member state languages",
       "iso_ref": "EU MDR Art. 10(11)",
       "status": "PARTIAL",
-      "confidence": 0.125,
+      "confidence": 0.8,
       "severity": "major",
       "new_in_2024": false,
       "evidence": [
-        "es:"
+        "DE: MENTOR MemoryShape-Brustimplant",
+        "es:",
+        "EN: MENTOR MemoryShape Breast Implant"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "MDR-multilingual",
+          "spec_field": "min_languages",
+          "requirement": "≥ 3 languages",
+          "actual": "Found 0 languages: []",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        }
+      ],
+      "spec_details": [
+        "PASS: Found 3 languages: ['TX', 'af', 'be'] (required: ≥ 3)"
+      ]
     },
     {
       "rule_id": "MDR-gtin",
       "description": "GTIN barcode (GS1-128 or 2D DataMatrix)",
       "iso_ref": "EU MDR / UDI Regulation",
-      "status": "FAIL",
-      "confidence": 0.0,
+      "status": "PARTIAL",
+      "confidence": 0.8,
       "severity": "critical",
       "new_in_2024": false,
-      "evidence": [],
-      "method": "text_match"
+      "evidence": [
+        "GTIN: 00813170052530",
+        "DataMatrix: 00000000000001",
+        "GS1: 00000000000001",
+        "GTIN: 00000000000001",
+        "GS1: 00813170052530",
+        "DataMatrix: 00813170052530"
+      ],
+      "method": "ai_vision+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Barcode format(s) found: ['GS1-128'] (from: ['CODE128', 'CODE128', 'CODE128', 'CODE128', 'CODE128'])",
+        "PASS: Barcode format(s) found: ['GS1-128'] (from: ['CODE128', 'CODE128', 'CODE128', 'CODE128'])"
+      ]
     },
     {
       "rule_id": "ISO14607-G.2",
       "description": "Surface classification category code on label",
       "iso_ref": "ISO 14607:2024, Annex G, Table G.2",
       "status": "PARTIAL",
-      "confidence": 0.16666666666666666,
+      "confidence": 0.8,
       "severity": "critical",
       "new_in_2024": true,
       "evidence": [
+        "MAI",
+        "PUI",
+        "PUL",
+        "GDD",
         "OTH",
-        "MAI"
+        "OML",
+        "NTX",
+        "SLO",
+        "CRO"
       ],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: No specs defined — text matching only"
+      ]
     },
     {
       "rule_id": "ISO14607-H",
@@ -358,7 +1536,12 @@
       "severity": "major",
       "new_in_2024": false,
       "evidence": [],
-      "method": "text_match"
+      "method": "ai_vision+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: No specs defined — text matching only"
+      ]
     }
   ],
   "pages": [

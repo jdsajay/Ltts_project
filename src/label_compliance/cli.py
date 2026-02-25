@@ -118,7 +118,8 @@ def ingest(standards_dir: Path | None, rebuild: bool):
     help="Directory of label PDFs to check (alternative to passing file paths).",
 )
 @click.option("--semantic/--no-semantic", default=False, help="Enable semantic KB matching.")
-@click.option("--ai/--no-ai", default=False, help="Enable AI multimodal verification (highest accuracy).")
+@click.option("--ai/--no-ai", default=True, help="Enable AI text analysis (default: on).")
+@click.option("--ai-vision/--no-ai-vision", default=False, help="Enable AI vision analysis (slow on CPU).")
 @click.option("--redline/--no-redline", default=True, help="Generate redlined output.")
 @click.option(
     "--format", "-f",
@@ -132,6 +133,7 @@ def check(
     labels_dir: Path | None,
     semantic: bool,
     ai: bool,
+    ai_vision: bool,
     redline: bool,
     format: str,
     workers: int | None,
@@ -201,7 +203,7 @@ def check(
         for pdf in pdf_files:
             progress.update(task, description=f"Checking {pdf.name}…")
             try:
-                result = check_label(pdf, semantic=semantic, use_ai=ai)
+                result = check_label(pdf, semantic=semantic, use_ai=ai, ai_vision=ai_vision)
                 results.append(result)
 
                 # Generate outputs
@@ -222,8 +224,9 @@ def check(
     _print_results_table(results)
 
     ai_note = " [bold magenta](with AI verification)[/bold magenta]" if ai else ""
+    vision_note = " + [bold magenta]vision[/bold magenta]" if ai_vision else ""
     console.print(
-        f"\n[bold green]Done.{ai_note}[/bold green] "
+        f"\n[bold green]Done.{ai_note}{vision_note}[/bold green] "
         f"Checked {len(results)}/{len(pdf_files)} label(s). "
         f"See [blue]{settings.paths.output_dir}/[/blue].\n"
     )
@@ -304,14 +307,15 @@ def report(output_dir: Path | None):
 @main.command()
 @click.option("--rebuild", is_flag=True, help="Rebuild the knowledge base from scratch.")
 @click.option("--semantic/--no-semantic", default=False, help="Enable semantic matching.")
-@click.option("--ai/--no-ai", default=False, help="Enable AI multimodal verification (highest accuracy).")
+@click.option("--ai/--no-ai", default=True, help="Enable AI text analysis (default: on).")
+@click.option("--ai-vision/--no-ai-vision", default=False, help="Enable AI vision analysis (slow on CPU).")
 @click.option(
     "--format", "-f",
     type=click.Choice(["pdf", "png", "both"], case_sensitive=False),
     default="both",
     help="Redline output format.",
 )
-def run(rebuild: bool, semantic: bool, ai: bool, format: str):
+def run(rebuild: bool, semantic: bool, ai: bool, ai_vision: bool, format: str):
     """Run the full pipeline: ingest → check → report."""
     settings = get_settings()
     settings.ensure_dirs()
@@ -372,7 +376,7 @@ def run(rebuild: bool, semantic: bool, ai: bool, format: str):
         for pdf in pdf_files:
             progress.update(task, description=f"Checking {pdf.name}…")
             try:
-                result = check_label(pdf, semantic=semantic, use_ai=ai)
+                result = check_label(pdf, semantic=semantic, use_ai=ai, ai_vision=ai_vision)
                 results.append(result)
                 if format in ("png", "both"):
                     annotate_label(result)

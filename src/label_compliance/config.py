@@ -71,10 +71,15 @@ class RedlineSettings:
 @dataclass
 class AISettings:
     provider: str = "local"  # "local", "openai", "anthropic", "none"
-    local_model: str = "llama3.2"
+    local_model: str = "llama3.2-vision"  # Vision model for image analysis
+    text_model: str = "llama3.2"  # Fast text model for OCR analysis
     temperature: float = 0.1
     max_tokens: int = 2000
     enable_reasoning: bool = True
+    # AI mode: "smart" only AI-verifies ambiguous/failed rules, "full" verifies all
+    ai_mode: str = "smart"
+    # Max rules per batch for AI (smaller = better accuracy for small models)
+    batch_size: int = 5
 
 
 @dataclass
