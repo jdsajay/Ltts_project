@@ -61,6 +61,116 @@ def _render_markdown(result: LabelResult) -> str:
     lines.append(f"**Pages:** {len(result.pages)}")
     lines.append("")
 
+    # ── Drawing Metadata ──────────────────────────────
+    seg = result.segmentation
+    if seg and seg.drawing_metadata:
+        dm = seg.drawing_metadata
+        lines.append("## Drawing Information")
+        lines.append("")
+        lines.append("| Field | Value |")
+        lines.append("|-------|-------|")
+        if dm.drawing_number:
+            lines.append(f"| Drawing Number | {dm.drawing_number} |")
+        if dm.revision:
+            lines.append(f"| Revision | {dm.revision} |")
+        if dm.title:
+            lines.append(f"| Title | {dm.title} |")
+        if dm.scale:
+            lines.append(f"| Scale | {dm.scale} |")
+        if dm.drawn_by:
+            lines.append(f"| Drawn By | {dm.drawn_by} |")
+        if dm.approved_by:
+            lines.append(f"| Approved By | {dm.approved_by} |")
+        if dm.print_date:
+            lines.append(f"| Print Date | {dm.print_date} |")
+        if dm.tolerance_standard:
+            lines.append(f"| Tolerance Standard | {dm.tolerance_standard} |")
+        if dm.material and dm.material != "N/A":
+            lines.append(f"| Material | {dm.material} |")
+        if dm.sheet_info:
+            lines.append(f"| Sheet | {dm.sheet_info} |")
+        if dm.plm_reference:
+            lines.append(f"| PLM Reference | {dm.plm_reference} |")
+        lines.append("")
+
+        # Tolerances
+        if dm.tolerances:
+            lines.append("**Tolerances:**")
+            lines.append("")
+            for k, v in dm.tolerances.items():
+                lines.append(f"- {k} = {v}")
+            lines.append("")
+
+    # ── Variable Definitions ──────────────────────────
+    if seg and seg.variable_definitions:
+        lines.append("## Variable Field Definitions")
+        lines.append("")
+        lines.append("> All variable text is displayed as its field name in the artwork.")
+        lines.append("")
+        lines.append("| Variable | Description |")
+        lines.append("|----------|-------------|")
+        for var, desc in seg.variable_definitions.items():
+            lines.append(f"| {var} | {desc} |")
+        lines.append("")
+
+    # ── Character Limits ──────────────────────────────
+    if seg and seg.character_limits:
+        lines.append("## Character Limits")
+        lines.append("")
+        lines.append("| Position | Max Characters |")
+        lines.append("|----------|----------------|")
+        for cl in seg.character_limits:
+            lines.append(f"| {cl['position']} | {cl['max_chars']} |")
+        lines.append("")
+
+    # ── Configuration Matrix ──────────────────────────
+    if seg and seg.configuration_matrix:
+        lines.append("## Product Configuration Matrix")
+        lines.append("")
+        lines.append(f"> {len(seg.configuration_matrix)} product variants defined.")
+        lines.append("")
+        lines.append("| Item Number | Shelf Life | Volume | Diameter | Height/Proj | GTIN |")
+        lines.append("|-------------|------------|--------|----------|-------------|------|")
+        for cr in seg.configuration_matrix:
+            ht = cr.height or cr.projection or "—"
+            lines.append(
+                f"| {cr.item_number} | {cr.shelf_life_days or '—'}d | "
+                f"{cr.nom_volume or '—'} | {cr.diameter or '—'} | {ht} | "
+                f"{cr.gtin or '—'} |"
+            )
+        lines.append("")
+
+    # ── Revision History ──────────────────────────────
+    if seg and seg.revision_history:
+        lines.append("## Revision History")
+        lines.append("")
+        lines.append("| Rev | C.O. | Description | Drawn | Date |")
+        lines.append("|-----|------|-------------|-------|------|")
+        for r in seg.revision_history:
+            lines.append(
+                f"| {r.rev} | {r.change_order} | {r.description} | "
+                f"{r.drawn_by} | {r.date} |"
+            )
+        lines.append("")
+
+    # ── Manufacturing Notes ───────────────────────────
+    if seg and seg.manufacturing_notes:
+        lines.append("## Manufacturing / Inspection Notes")
+        lines.append("")
+        for note in seg.manufacturing_notes:
+            lines.append(f"- {note}")
+        lines.append("")
+
+    # ── Barcode Content Specs ─────────────────────────
+    if seg and seg.barcode_content_specs:
+        lines.append("## Barcode Content Specifications")
+        lines.append("")
+        lines.append("> 2D barcode data element structure:")
+        lines.append("")
+        for spec in seg.barcode_content_specs:
+            lines.append(f"- `{spec}`")
+        lines.append("")
+
     # Summary table
     if score:
         lines.append("## Summary")
@@ -79,8 +189,113 @@ def _render_markdown(result: LabelResult) -> str:
         lines.append(f"| Rules with spec failures | {score.rules_with_spec_failures} |")
         lines.append("")
 
+    # ── Per-Section Results ──────────────────────────
+    if result.sections:
+        lines.append("## Section-by-Section Results")
+        lines.append("")
+        if result.segmentation:
+            lines.append(
+                f"> PDF segmented into **{result.segmentation.section_count}** label sections."
+            )
+            lines.append("")
+        lines.append("| # | Section | Type | Page | Score | Pass | Partial | Fail |")
+        lines.append("|---|---------|------|------|-------|------|---------|------|")
+        for si, sec in enumerate(result.sections, 1):
+            s = sec.score
+            stat = s.status if s else "—"
+            pct = f"{s.score_pct}%" if s else "—"
+            ps = s.passed if s else 0
+            pt = s.partial if s else 0
+            fl = s.failed if s else 0
+            lines.append(
+                f"| {si} | {sec.section_name} | {sec.section_type} | {sec.page_number} | "
+                f"{stat} ({pct}) | {ps} | {pt} | {fl} |"
+            )
+        lines.append("")
+
+        # Detail per section
+        for sec in result.sections:
+            s = sec.score
+            lines.append(f"### 📄 {sec.section_name}")
+            if sec.eart_number:
+                lines.append(f"- **EART/Part:** {sec.eart_number}")
+            lines.append(f"- **Type:** {sec.section_type}")
+            lines.append(f"- **Page:** {sec.page_number}")
+            if s:
+                lines.append(f"- **Score:** {s.status} ({s.score_pct}%)")
+            lines.append("")
+
+            # Variable fields on this section
+            if hasattr(sec, "section_text") and sec.section_text:
+                # Extract variable fields from section text
+                import re as _re
+                vars_found = []
+                for var in ["LOTNO", "SERNO", "MFGDATE", "EXPDATE", "LPNBR",
+                            "REF", "LOT", "SN", "TK01", "TK02", "TK03", "TK04",
+                            "TK05", "TK06", "TK07", "TK08", "TK09", "TK10",
+                            "TK11", "TK20"]:
+                    if _re.search(r"\b" + _re.escape(var) + r"\b", sec.section_text, _re.IGNORECASE):
+                        vars_found.append(var)
+                if vars_found:
+                    lines.append(f"**Variable fields:** {', '.join(vars_found)}")
+                    lines.append("")
+
+            # Regulatory symbols detected
+            if seg and seg.sections:
+                # Find matching segmenter section for regulatory_symbols
+                for sseg in seg.sections:
+                    if sseg.name == sec.section_name and sseg.page_number == sec.page_number:
+                        if sseg.regulatory_symbols:
+                            lines.append(f"**Regulatory symbols detected:** {', '.join(sseg.regulatory_symbols)}")
+                            lines.append("")
+                        if sseg.barcode_specs:
+                            lines.append(f"**Barcode content:** `{', '.join(sseg.barcode_specs)}`")
+                            lines.append("")
+                        if sseg.manufacturing_notes:
+                            lines.append(f"**Notes:** {'; '.join(sseg.manufacturing_notes)}")
+                            lines.append("")
+                        break
+
+            # Section matches table
+            if sec.matches:
+                lines.append("| Status | Rule | Severity | Evidence |")
+                lines.append("|--------|------|----------|----------|")
+                for m in sec.matches:
+                    icon = "✅" if m.status == "PASS" else "⚠️" if m.status == "PARTIAL" else "❌"
+                    ev = ", ".join(m.evidence[:2]) if m.evidence else "—"
+                    # strip section prefix from details for cleaner display
+                    lines.append(
+                        f"| {icon} | {m.rule_description[:60]} | {m.severity} | {ev[:60]} |"
+                    )
+                lines.append("")
+
+            # Section spec violations
+            sec_spec_violations = [
+                m for m in sec.matches if m.spec_violations
+            ]
+            if sec_spec_violations:
+                lines.append(f"**Spec violations in {sec.section_name}:**")
+                lines.append("")
+                for m in sec_spec_violations:
+                    for sv in m.spec_violations:
+                        lines.append(
+                            f"- ⚠️ **{sv['spec_field']}** ({m.rule_id}): "
+                            f"Required: {sv['requirement']} → Actual: {sv['actual']}"
+                        )
+                lines.append("")
+
+            # Section symbol comparison
+            sym = sec.symbol_comparison
+            if sym and sym.total_required > 0:
+                lines.append(
+                    f"**Symbols:** {sym.total_found}/{sym.total_required} found, "
+                    f"{sym.total_partial} partial, {sym.total_missing} missing "
+                    f"({sym.score:.0%})"
+                )
+                lines.append("")
+
     # Detailed results table
-    lines.append("## Rule-by-Rule Results")
+    lines.append("## Rule-by-Rule Results (Overall)")
     lines.append("")
     lines.append("| # | Status | Rule | ISO Ref | Severity | Evidence |")
     lines.append("|---|--------|------|---------|----------|----------|")
@@ -285,6 +500,57 @@ def _render_json(result: LabelResult) -> dict:
             for p in result.pages
         ],
         "font_violations": result.font_violations,
+        "segmentation": {
+            "section_count": result.segmentation.section_count if result.segmentation else 0,
+            "section_names": result.segmentation.section_names if result.segmentation else [],
+            "drawing_metadata": _render_drawing_metadata_json(result.segmentation) if result.segmentation else None,
+            "variable_definitions": result.segmentation.variable_definitions if result.segmentation else {},
+            "character_limits": result.segmentation.character_limits if result.segmentation else [],
+            "revision_history": [
+                {"rev": r.rev, "change_order": r.change_order, "description": r.description}
+                for r in (result.segmentation.revision_history if result.segmentation else [])
+            ],
+            "manufacturing_notes": result.segmentation.manufacturing_notes if result.segmentation else [],
+            "barcode_content_specs": result.segmentation.barcode_content_specs if result.segmentation else [],
+            "configuration_matrix": [
+                {
+                    "item_number": cr.item_number,
+                    "shelf_life_days": cr.shelf_life_days,
+                    "nom_volume": cr.nom_volume,
+                    "diameter": cr.diameter,
+                    "height": cr.height,
+                    "projection": cr.projection,
+                    "gtin": cr.gtin,
+                }
+                for cr in (result.segmentation.configuration_matrix if result.segmentation else [])
+            ],
+        } if result.segmentation else None,
+        "sections": [
+            {
+                "section_name": sec.section_name,
+                "section_type": sec.section_type,
+                "page_number": sec.page_number,
+                "eart_number": sec.eart_number,
+                "score": {
+                    "status": sec.score.status,
+                    "score_pct": sec.score.score_pct,
+                    "passed": sec.score.passed,
+                    "partial": sec.score.partial,
+                    "failed": sec.score.failed,
+                } if sec.score else None,
+                "match_count": len(sec.matches),
+                "spec_violations": sum(
+                    len(m.spec_violations) for m in sec.matches if m.spec_violations
+                ),
+                "symbol_comparison": {
+                    "total_required": sec.symbol_comparison.total_required,
+                    "total_found": sec.symbol_comparison.total_found,
+                    "total_missing": sec.symbol_comparison.total_missing,
+                    "score": round(sec.symbol_comparison.score, 4),
+                } if sec.symbol_comparison and sec.symbol_comparison.total_required > 0 else None,
+            }
+            for sec in (result.sections or [])
+        ],
         "symbol_library_comparison": _render_symbol_comparison_json(result),
     }
 
@@ -318,6 +584,28 @@ def _render_symbol_comparison_json(result: LabelResult) -> dict | None:
             }
             for r in sym_report.results
         ],
+    }
+
+
+def _render_drawing_metadata_json(seg) -> dict | None:
+    """Render drawing metadata as JSON."""
+    dm = seg.drawing_metadata
+    if dm is None:
+        return None
+    return {
+        "drawing_number": dm.drawing_number,
+        "revision": dm.revision,
+        "title": dm.title,
+        "scale": dm.scale,
+        "material": dm.material,
+        "finish": dm.finish,
+        "drawn_by": dm.drawn_by,
+        "approved_by": dm.approved_by,
+        "print_date": dm.print_date,
+        "tolerance_standard": dm.tolerance_standard,
+        "tolerances": dm.tolerances,
+        "sheet_info": dm.sheet_info,
+        "plm_reference": dm.plm_reference,
     }
 
 

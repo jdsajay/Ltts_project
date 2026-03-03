@@ -133,6 +133,39 @@ rules:
     markers: ["GMDN"]
     severity: minor
 
+  - id: SYM15223-5.2.10
+    iso_ref: "ISO 15223-1:2021, 5.2.10"
+    description: "Double sterile barrier system"
+    category: symbol
+    check_type: visual
+    specs:
+      symbol_ref: "ISO 15223-1:2021, 5.2.10"
+      min_height_mm: 3
+    markers: ["double sterile", "double barrier"]
+    severity: critical
+
+  - id: SYM15223-5.4.6
+    iso_ref: "ISO 15223-1:2021, 5.4.6"
+    description: "Quantity / Contains — number of items in packaging"
+    category: symbol
+    check_type: visual
+    specs:
+      symbol_ref: "ISO 15223-1:2021, 5.4.6"
+      min_height_mm: 3
+    markers: ["quantity", "contains"]
+    severity: critical
+
+  - id: SYM15223-UDI-carrier
+    iso_ref: "EU MDR Art. 27 / 21 CFR 830"
+    description: "UDI carrier (2D DataMatrix) + HRI on each packaging level"
+    category: visual
+    check_type: barcode
+    specs:
+      formats: ["DataMatrix"]
+      requires_hri: true
+    markers: ["UDI", "DataMatrix", "HRI", "AIDC"]
+    severity: critical
+
   - id: SYM15223-5.7.7
     iso_ref: "ISO 15223-1:2021, 5.7.7"
     description: "Unique Device Identifier"

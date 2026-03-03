@@ -24,7 +24,9 @@ SETTINGS_FILE = CONFIG_DIR / "settings.yaml"
 @dataclass
 class PathSettings:
     standards_dir: Path = field(default_factory=lambda: ROOT / "data" / "standards")
-    labels_dir: Path = field(default_factory=lambda: ROOT / "data" / "labels")
+    labels_dir: Path = field(default_factory=lambda: ROOT / "data" / "labels" / "clean")
+
+    redlines_dir: Path = field(default_factory=lambda: ROOT / "data" / "labels" / "redlines")
     knowledge_base_dir: Path = field(default_factory=lambda: ROOT / "data" / "knowledge_base")
     symbol_library_dir: Path = field(default_factory=lambda: ROOT / "data" / "symbol_library")
     output_dir: Path = field(default_factory=lambda: ROOT / "outputs")
@@ -71,8 +73,23 @@ class RedlineSettings:
 @dataclass
 class AISettings:
     provider: str = "local"  # "local", "openai", "anthropic", "none"
+    # ── API provider config (works with any OpenAI-compatible API) ──
+    # Base URL for the API.  Leave empty/None for OpenAI default.
+    # Examples:
+    #   OpenAI:  https://api.openai.com/v1  (default, can omit)
+    #   xAI/Grok: https://api.x.ai/v1
+    #   NVIDIA NIM: https://integrate.api.nvidia.com/v1
+    #   Together: https://api.together.xyz/v1
+    #   Groq: https://api.groq.com/openai/v1
+    #   Azure: https://<resource>.openai.azure.com/openai/deployments/<deploy>/
+    api_base_url: str = ""  # empty = OpenAI default
+    # Name of the environment variable holding the API key
+    api_key_env_var: str = "OPENAI_API_KEY"  # change to XAI_API_KEY, NVIDIA_API_KEY, etc.
+    # ── Model names ──
     local_model: str = "llama3.2-vision"  # Vision model for image analysis
     text_model: str = "llama3.2"  # Fast text model for OCR analysis
+    # Model used for ingestion (standards + symbols)
+    ingestion_model: str = "gpt-4o"
     temperature: float = 0.1
     max_tokens: int = 2000
     enable_reasoning: bool = True
@@ -80,6 +97,37 @@ class AISettings:
     ai_mode: str = "smart"
     # Max rules per batch for AI (smaller = better accuracy for small models)
     batch_size: int = 5
+    # Redline (o3 vision) settings
+    redline_model: str = "o3"
+    redline_pass0_reasoning_effort: str = "low"
+    redline_pass1_reasoning_effort: str = "medium"
+    redline_pass2_reasoning_effort: str = "medium"
+    redline_pass0_max_completion_tokens: int = 16000
+    redline_pass1_max_completion_tokens: int = 16000
+    redline_pass2_max_completion_tokens: int = 8000
+    # Panel filtering controls for redline pipeline
+    redline_skip_panel_types: list[str] = field(
+        default_factory=lambda: [
+            "data_table",
+            "title_block",
+            "revision_table",
+            "notes_block",
+            "drawing_info",
+        ]
+    )
+    redline_skip_name_keywords: list[str] = field(
+        default_factory=lambda: [
+            "title block",
+            "drawing information",
+            "revision",
+            "change history",
+            "bom",
+            "general notes",
+            "drawing notes",
+            "data table",
+            "specification table",
+        ]
+    )
 
 
 @dataclass
@@ -182,10 +230,41 @@ def get_settings() -> Settings:
     ai_raw = raw.get("ai", {})
     ai = AISettings(
         provider=os.getenv("AI_PROVIDER", ai_raw.get("provider", "local")),
+        api_base_url=os.getenv("AI_API_BASE_URL", ai_raw.get("api_base_url", "")),
+        api_key_env_var=ai_raw.get("api_key_env_var", "OPENAI_API_KEY"),
         local_model=os.getenv("OLLAMA_MODEL", ai_raw.get("local_model", "llama3.2")),
+        text_model=ai_raw.get("text_model", "llama3.2"),
+        ingestion_model=ai_raw.get("ingestion_model", "gpt-4o"),
         temperature=ai_raw.get("temperature", 0.1),
         max_tokens=ai_raw.get("max_tokens", 2000),
         enable_reasoning=ai_raw.get("enable_reasoning", True),
+        ai_mode=ai_raw.get("ai_mode", "smart"),
+        batch_size=ai_raw.get("batch_size", 5),
+        redline_model=ai_raw.get("redline_model", "o3"),
+        redline_pass0_reasoning_effort=ai_raw.get("redline_pass0_reasoning_effort", "low"),
+        redline_pass1_reasoning_effort=ai_raw.get("redline_pass1_reasoning_effort", "medium"),
+        redline_pass2_reasoning_effort=ai_raw.get("redline_pass2_reasoning_effort", "medium"),
+        redline_pass0_max_completion_tokens=ai_raw.get("redline_pass0_max_completion_tokens", 16000),
+        redline_pass1_max_completion_tokens=ai_raw.get("redline_pass1_max_completion_tokens", 16000),
+        redline_pass2_max_completion_tokens=ai_raw.get("redline_pass2_max_completion_tokens", 8000),
+        redline_skip_panel_types=ai_raw.get(
+            "redline_skip_panel_types",
+            ["data_table", "title_block", "revision_table", "notes_block", "drawing_info"],
+        ),
+        redline_skip_name_keywords=ai_raw.get(
+            "redline_skip_name_keywords",
+            [
+                "title block",
+                "drawing information",
+                "revision",
+                "change history",
+                "bom",
+                "general notes",
+                "drawing notes",
+                "data table",
+                "specification table",
+            ],
+        ),
     )
 
     proc_raw = raw.get("processing", {})
@@ -209,6 +288,43 @@ def get_settings() -> Settings:
     )
 
     return _settings
+
+
+def get_ai_client():
+    """Get an authenticated OpenAI-compatible API client.
+
+    Works with ANY provider that exposes an OpenAI-compatible API:
+      - OpenAI (default)
+      - xAI / Grok  (base_url=https://api.x.ai/v1)
+      - NVIDIA NIM   (base_url=https://integrate.api.nvidia.com/v1)
+      - Together AI   (base_url=https://api.together.xyz/v1)
+      - Groq          (base_url=https://api.groq.com/openai/v1)
+      - Azure OpenAI  (base_url=https://<resource>.openai.azure.com/...)
+      - Any other OpenAI-compatible endpoint
+
+    Configuration is driven by settings.yaml → ai section:
+      api_base_url:    API endpoint (empty = OpenAI default)
+      api_key_env_var: Name of env var holding the API key
+    """
+    settings = get_settings()
+    ai = settings.ai
+
+    # Resolve API key from the configured env var name
+    env_var = ai.api_key_env_var or "OPENAI_API_KEY"
+    api_key = os.getenv(env_var)
+    if not api_key:
+        raise ValueError(
+            f"API key not set.  Expected env var: {env_var}\n"
+            f"Set it in .env or export it: export {env_var}=<your-key>"
+        )
+
+    from openai import OpenAI
+
+    kwargs: dict = {"api_key": api_key}
+    if ai.api_base_url:
+        kwargs["base_url"] = ai.api_base_url
+
+    return OpenAI(**kwargs)
 
 
 def get_root() -> Path:

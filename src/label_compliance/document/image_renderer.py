@@ -76,3 +76,42 @@ def render_single_page(
     img = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
     doc.close()
     return img
+
+
+def crop_section_image(
+    full_page_image: Path,
+    bbox: tuple[float, float, float, float],
+    output_path: Path,
+    dpi: int = 300,
+    padding: int = 20,
+) -> Path:
+    """Crop a label section from a full-page image using its PDF bbox.
+
+    Args:
+        full_page_image: Path to the rendered full-page PNG.
+        bbox: Section bounding box (x0, y0, x1, y1) in PDF points.
+        output_path: Path to save the cropped image.
+        dpi: DPI used when rendering the full page.
+        padding: Extra pixels of padding around the crop.
+
+    Returns:
+        Path to the saved cropped image.
+    """
+    scale = dpi / 72.0
+    img = Image.open(full_page_image)
+    w, h = img.size
+
+    x0, y0, x1, y1 = bbox
+    px0 = max(0, int(x0 * scale) - padding)
+    py0 = max(0, int(y0 * scale) - padding)
+    px1 = min(w, int(x1 * scale) + padding)
+    py1 = min(h, int(y1 * scale) + padding)
+
+    crop = img.crop((px0, py0, px1, py1))
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    crop.save(str(output_path))
+    logger.debug(
+        "Cropped section %dx%d from (%d,%d)-(%d,%d) → %s",
+        crop.size[0], crop.size[1], px0, py0, px1, py1, output_path.name,
+    )
+    return output_path

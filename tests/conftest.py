@@ -22,7 +22,7 @@ def project_root():
 @pytest.fixture
 def sample_pdfs(project_root):
     """Return list of sample label PDFs (if present)."""
-    labels_dir = project_root / "data" / "labels"
+    labels_dir = project_root / "data" / "labels" / "clean"
     if labels_dir.exists():
         return sorted(labels_dir.glob("*.pdf"))
     return []

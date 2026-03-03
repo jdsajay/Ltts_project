@@ -4,13 +4,12 @@ Compliance Checker — Main Engine
 Orchestrates the full compliance check for a single label PDF:
 
 1. Read PDF → extract text, tables, fonts, metadata
-2. Render pages as images
-3. OCR each page
-4. Detect layout zones
-5. Detect symbols (OCR + visual + barcode)
-6. Match all rules (text + semantic + visual)
-7. Score compliance
-8. Return structured results
+2. **Segment** the PDF into individual label sections
+   (COMBO LABEL, OUTER LID, THERMOFORM, Patient label, etc.)
+3. Render pages as images
+4. For each section: OCR → layout → symbols → barcodes → rules → specs → AI → symbols
+5. Score compliance per section and overall
+6. Return structured results
 
 This is the primary entry point for checking a label.
 """
@@ -37,7 +36,17 @@ from label_compliance.compliance.specs_validator import (
 from label_compliance.config import get_settings
 from label_compliance.document.barcode_reader import read_barcodes, BarcodeResult
 from label_compliance.document.font_analyzer import extract_fonts, FontInfo, validate_font_size
-from label_compliance.document.image_renderer import render_pages
+from label_compliance.document.image_extractor import (
+    classify_pdf_pages,
+    extract_embedded_images,
+    PDFImageAnalysis,
+)
+from label_compliance.document.image_renderer import render_pages, crop_section_image
+from label_compliance.document.label_segmenter import (
+    segment_pdf,
+    LabelSection,
+    SegmentationResult,
+)
 from label_compliance.document.layout import analyze_layout, Zone
 from label_compliance.document.ocr import run_ocr, OCRResult
 from label_compliance.document.pdf_reader import read_pdf, PDFData
@@ -68,6 +77,27 @@ class PageResult:
 
 
 @dataclass
+class SectionResult:
+    """Compliance results for a single label section (e.g. COMBO LABEL, OUTER LID)."""
+
+    section_name: str  # e.g. "COMBO LABEL"
+    section_type: str  # e.g. "combo_label"
+    page_number: int
+    eart_number: str = ""
+    section_text: str = ""  # text extracted from this section
+    ocr_text: str = ""  # OCR text from the rendered image region
+    matches: list[MatchResult] = field(default_factory=list)
+    spec_results: list[SpecsResult] = field(default_factory=list)
+    symbol_comparison: SymbolComparisonReport | None = None
+    score: ComplianceScore | None = None
+    fonts: list[dict] = field(default_factory=list)
+
+    @property
+    def id(self) -> str:
+        return f"P{self.page_number}-{self.section_type}"
+
+
+@dataclass
 class LabelResult:
     """Full compliance analysis results for one label PDF."""
 
@@ -75,6 +105,8 @@ class LabelResult:
     pdf_path: Path
     profile: str = "default"
     pdf_data: PDFData | None = None
+    segmentation: SegmentationResult | None = None
+    sections: list[SectionResult] = field(default_factory=list)
     pages: list[PageResult] = field(default_factory=list)
     fonts: list[FontInfo] = field(default_factory=list)
     font_violations: list[dict] = field(default_factory=list)
@@ -95,18 +127,19 @@ def check_label(
     """
     Run the full compliance check on a label PDF.
 
-    AI text analysis runs by default. Vision analysis is optional (slow on CPU).
+    The PDF is first segmented into individual label sections
+    (COMBO LABEL, OUTER LID LABEL, THERMOFORM, Patient label, etc.),
+    then each section is checked independently against ISO standards.
 
     Args:
         pdf_path: Path to the label PDF to check.
         rules: Optional rule list. Defaults to profile-matched rules.
         semantic: Whether to also run semantic matching (requires KB).
         use_ai: Whether to run AI text-based verification (default: True).
-        ai_vision: Whether to also run AI vision verification on page images
-                   (slow on CPU — requires Ollama llama3.2-vision).
+        ai_vision: Whether to also run AI vision verification on page images.
 
     Returns:
-        LabelResult with full analysis and score.
+        LabelResult with per-section and overall analysis and score.
     """
     from label_compliance.compliance.rules import resolve_rules_for_label
 
@@ -135,10 +168,6 @@ def check_label(
                 ai_provider = None
             else:
                 logger.info("AI enabled: %s", ai_provider.name)
-                if ai_vision:
-                    logger.info("AI vision mode: ON (will analyze page images)")
-                else:
-                    logger.info("AI text mode: ON (fast OCR text analysis)")
         except Exception as e:
             logger.error("Failed to initialize AI provider: %s — proceeding without AI", e)
             ai_provider = None
@@ -150,69 +179,215 @@ def check_label(
     pdf_data = read_pdf(pdf_path)
     result.pdf_data = pdf_data
 
-    # ── Step 2: Extract fonts ─────────────────────────
-    logger.info("Step 2: Analyzing fonts...")
+    # ── Step 1b: Classify PDF pages (IMAGE_ONLY / MIXED / TEXT_ONLY) ──
+    logger.info("Step 1b: Classifying PDF pages...")
+    pdf_analysis = classify_pdf_pages(pdf_path)
+    has_image_pages = pdf_analysis.has_image_only_pages
+    if has_image_pages:
+        logger.info(
+            "  ⚠️  IMAGE-ONLY pages detected: %s — will use embedded image extraction + OCR",
+            pdf_analysis.image_only_pages,
+        )
+    mixed_pages = pdf_analysis.mixed_pages
+    if mixed_pages:
+        logger.info(
+            "  MIXED pages (text + images): %s — will augment with embedded image OCR",
+            mixed_pages,
+        )
+
+    # ── Step 2: Segment into label sections ───────────
+    # (segmenter now handles image-only pages automatically)
+    logger.info("Step 2: Segmenting into label sections...")
+    seg = segment_pdf(pdf_path)
+    result.segmentation = seg
+    logger.info(
+        "  Found %d sections: %s",
+        seg.section_count, ", ".join(seg.section_names),
+    )
+
+    # ── Step 3: Extract fonts ─────────────────────────
+    logger.info("Step 3: Analyzing fonts...")
     fonts = extract_fonts(pdf_path)
     result.fonts = fonts
     result.font_violations = validate_font_size(fonts)
     if result.font_violations:
         logger.warning("  %d font size violations found", len(result.font_violations))
 
-    # ── Step 3: Render pages ──────────────────────────
-    logger.info("Step 3: Rendering pages as images...")
+    # ── Step 4: Render pages + extract embedded images ──
+    logger.info("Step 4: Rendering pages as images...")
     image_dir = settings.paths.knowledge_base_dir.parent / "images" / safe_name
     image_paths = render_pages(pdf_path, output_dir=image_dir)
     result.image_dir = image_dir
 
-    # ── Step 4: Process each page ─────────────────────
-    aggregated_matches: dict[str, list[MatchResult]] = {}
+    # Also extract embedded images for image-only and mixed pages
+    embedded_image_map: dict[int, list[Path]] = {}
+    pages_needing_extraction = pdf_analysis.image_only_pages + pdf_analysis.mixed_pages
+    if pages_needing_extraction:
+        logger.info("  Extracting embedded images from pages %s...", pages_needing_extraction)
+        embed_dir = image_dir / "embedded"
+        embedded_images = extract_embedded_images(
+            pdf_path, embed_dir, pages=pages_needing_extraction,
+        )
+        for emb in embedded_images:
+            if emb.saved_path and emb.is_label_image:
+                embedded_image_map.setdefault(emb.page_number, []).append(emb.saved_path)
+        logger.info(
+            "  Extracted %d embedded label images",
+            sum(len(v) for v in embedded_image_map.values()),
+        )
+
+    # Build page_num → image_path map
+    page_image_map: dict[int, Path] = {}
+    for idx, img_path in enumerate(image_paths):
+        page_image_map[idx + 1] = img_path
+
+    # ── Step 5: Process each page (OCR, layout, symbols, barcodes) ──
+    page_ocr_map: dict[int, OCRResult] = {}
+    page_zones_map: dict[int, list[Zone]] = {}
+    page_symbols_map: dict[int, list[SymbolMatch]] = {}
+    page_barcodes_map: dict[int, list[BarcodeResult]] = {}
 
     for i, img_path in enumerate(image_paths, 1):
-        logger.info("Step 4: Processing page %d/%d...", i, len(image_paths))
+        logger.info("Step 5: Processing page %d/%d...", i, len(image_paths))
+        page_class = pdf_analysis.page_classifications[i - 1]
         page_result = PageResult(page_number=i, image_path=img_path)
 
-        # OCR
+        # OCR on the rendered page
         ocr_result = run_ocr(img_path)
+
+        # For pages with embedded images, also OCR those and merge results
+        if i in embedded_image_map:
+            embedded_texts = []
+            embedded_words = []
+            for emb_path in embedded_image_map[i]:
+                emb_ocr = run_ocr(emb_path)
+                if emb_ocr.full_text.strip():
+                    embedded_texts.append(emb_ocr.full_text)
+                    embedded_words.extend(emb_ocr.words)
+
+            if embedded_texts:
+                # Merge: combine rendered page OCR + embedded image OCR
+                combined_text = ocr_result.full_text
+                if combined_text.strip():
+                    combined_text += "\n"
+                combined_text += "\n".join(embedded_texts)
+
+                # Use whichever has more words (better OCR result)
+                if len(embedded_words) > len(ocr_result.words):
+                    ocr_result = OCRResult(
+                        image_path=str(img_path),
+                        image_size=ocr_result.image_size,
+                        full_text=combined_text,
+                        words=embedded_words,
+                        text_blocks=ocr_result.text_blocks,
+                    )
+                else:
+                    # Keep rendered page words but augment text
+                    ocr_result = OCRResult(
+                        image_path=str(img_path),
+                        image_size=ocr_result.image_size,
+                        full_text=combined_text,
+                        words=ocr_result.words,
+                        text_blocks=ocr_result.text_blocks,
+                    )
+
+                logger.info(
+                    "  Merged OCR (rendered + %d embedded images): %d words, %d chars",
+                    len(embedded_image_map[i]),
+                    ocr_result.word_count,
+                    len(ocr_result.full_text),
+                )
+
         page_result.ocr = ocr_result
+        page_ocr_map[i] = ocr_result
         logger.info("  OCR: %d words, %d chars", ocr_result.word_count, len(ocr_result.full_text))
 
         # Layout analysis
         zones = analyze_layout(img_path)
         page_result.zones = zones
-        logger.debug("  Layout: %d zones", len(zones))
+        page_zones_map[i] = zones
 
         # Symbol detection (OCR-based)
         symbols = detect_symbols_from_ocr(ocr_result, rules)
         page_result.symbols = symbols
+        page_symbols_map[i] = symbols
 
-        # Barcode reading
+        # Barcode reading — also check embedded images
         barcodes = read_barcodes(img_path)
+        if i in embedded_image_map:
+            for emb_path in embedded_image_map[i]:
+                emb_barcodes = read_barcodes(emb_path)
+                barcodes.extend(emb_barcodes)
         page_result.barcodes = barcodes
+        page_barcodes_map[i] = barcodes
         if barcodes:
             logger.info("  Barcodes: %d found", len(barcodes))
 
-        # Rule matching + specs validation for this page
+        result.pages.append(page_result)
+
+    # ── Step 6: Check each section independently ──────
+    logger.info("Step 6: Checking each section against ISO rules...")
+    overall_aggregated: dict[str, list[MatchResult]] = {}
+
+    for section in seg.sections:
+        sec_name = section.name
+        sec_page = section.page_number
+        logger.info("─" * 40)
+        logger.info("Section: %s (page %d)", sec_name, sec_page)
+        logger.info("─" * 40)
+
+        sec_result = SectionResult(
+            section_name=sec_name,
+            section_type=section.section_type,
+            page_number=sec_page,
+            eart_number=section.eart_number,
+            section_text=section.text,
+            fonts=section.fonts,
+        )
+
+        # Get OCR text for this section
+        # Use the section's own extracted text + OCR from the page
+        ocr_result = page_ocr_map.get(sec_page)
+        if ocr_result:
+            sec_result.ocr_text = ocr_result.full_text
+
+        # Combine section text (from PyMuPDF) + OCR text for matching
+        # Section text is more accurate for vector PDFs; OCR covers scanned PDFs
+        combined_text = section.text
+        if ocr_result and ocr_result.full_text:
+            combined_text = section.text + "\n" + ocr_result.full_text
+
+        zones = page_zones_map.get(sec_page, [])
+        symbols = page_symbols_map.get(sec_page, [])
+        barcodes = page_barcodes_map.get(sec_page, [])
+        img_path = page_image_map.get(sec_page)
+
         render_dpi = settings.document.render_dpi
         img_size = ocr_result.image_size if ocr_result else (0, 0)
 
-        for rule in rules:
-            match = match_rule_text(rule, ocr_result)
+        sec_aggregated: dict[str, list[MatchResult]] = {}
 
-            # ── Specs validation (font, size, position, etc.) ──
+        # ── Rule matching for this section ──
+        for rule in rules:
+            # Create a synthetic OCR result with section text for matching
+            section_ocr = _make_section_ocr(combined_text, ocr_result)
+            match = match_rule_text(rule, section_ocr)
+
+            # Specs validation
             spec_result = validate_rule_specs(
                 rule=rule,
-                ocr_result=ocr_result,
+                ocr_result=section_ocr,
                 fonts=fonts,
                 zones=zones,
                 symbols=symbols,
                 barcodes=barcodes,
-                page_number=i,
+                page_number=sec_page,
                 dpi=render_dpi,
                 image_size=img_size,
             )
-            page_result.spec_results.append(spec_result)
+            sec_result.spec_results.append(spec_result)
 
-            # Merge spec violations into match result
+            # Merge spec violations
             if not spec_result.all_passed:
                 match.specs_passed = False
                 match.spec_violations = [
@@ -228,7 +403,6 @@ def check_label(
                     for v in spec_result.violations
                 ]
                 match.spec_details = spec_result.details
-                # Downgrade PASS → PARTIAL if specs fail
                 if match.status == "PASS":
                     match.status = "PARTIAL"
                     match.details += " | DOWNGRADED: spec violations detected"
@@ -239,146 +413,190 @@ def check_label(
             else:
                 match.spec_details = spec_result.details
 
-            page_result.matches.append(match)
+            # Tag match with section info
+            match.details = f"[{sec_name}] {match.details}"
+            sec_result.matches.append(match)
 
-            # Aggregate: keep best match across pages
             rule_id = rule.get("id", "unknown")
-            if rule_id not in aggregated_matches:
-                aggregated_matches[rule_id] = []
-            aggregated_matches[rule_id].append(match)
+            sec_aggregated.setdefault(rule_id, []).append(match)
+            overall_aggregated.setdefault(rule_id, []).append(match)
 
-        logger.info(
-            "  Specs: %d rules checked, %d with violations",
-            len(page_result.spec_results),
-            sum(1 for sr in page_result.spec_results if not sr.all_passed),
-        )
-
-        # ── AI Text Verification ──────────────────────
-        #  Send OCR text + rules to AI text model for fast verification.
-        #  In "smart" mode, only re-check FAIL/PARTIAL rules.
-        if ai_provider and ocr_result:
+        # ── AI Text Verification for this section ──
+        if ai_provider and combined_text.strip():
             ai_mode = getattr(settings.ai, "ai_mode", "smart")
             ai_batch_size = getattr(settings.ai, "batch_size", 5)
 
             if ai_mode == "smart":
-                # Only AI-verify rules that text matching found FAIL or PARTIAL
                 rules_to_verify = [
                     r for r in rules
                     if any(
                         m.rule_id == r.get("id") and m.status in ("FAIL", "PARTIAL")
-                        for m in page_result.matches
+                        for m in sec_result.matches
                     )
                 ]
-                if rules_to_verify:
-                    logger.info(
-                        "  AI text (smart): Re-checking %d FAIL/PARTIAL rules…",
-                        len(rules_to_verify),
-                    )
-                else:
-                    logger.info("  AI text (smart): All rules PASS — skipping AI")
             else:
                 rules_to_verify = rules
-                logger.info("  AI text (full): Checking all %d rules…", len(rules_to_verify))
 
             if rules_to_verify:
+                logger.info(
+                    "  AI text (%s): Checking %d rules for [%s]…",
+                    ai_mode, len(rules_to_verify), sec_name,
+                )
                 try:
                     ai_text_results = ai_verify_rules_text_batch(
                         rules_to_verify,
-                        ocr_result.full_text,
+                        combined_text,
                         ai_provider,
                         batch_size=ai_batch_size,
                     )
                     for ai_match in ai_text_results:
+                        ai_match.details = f"[{sec_name}] {ai_match.details}"
                         rid = ai_match.rule_id
-                        if rid not in aggregated_matches:
-                            aggregated_matches[rid] = []
-                        aggregated_matches[rid].append(ai_match)
+                        sec_aggregated.setdefault(rid, []).append(ai_match)
+                        overall_aggregated.setdefault(rid, []).append(ai_match)
                     logger.info("  AI text: Done — %d results", len(ai_text_results))
                 except Exception as e:
-                    logger.error("  AI text verification error: %s", e)
+                    logger.error("  AI text error for [%s]: %s", sec_name, e)
 
-        # ── AI Vision Verification (optional, slow) ───
-        #  Send the page image + rules to the AI vision model.
-        if ai_provider and ai_vision and img_path:
+        # ── AI Vision for this section ──
+        # Auto-enable vision for image-only pages (critical for accuracy)
+        page_class = pdf_analysis.page_classifications[sec_page - 1] if sec_page <= len(pdf_analysis.page_classifications) else None
+        should_use_vision = ai_vision or (page_class and page_class.is_image_only)
+        
+        if ai_provider and should_use_vision and img_path:
             ai_batch_size = getattr(settings.ai, "batch_size", 5)
-            logger.info("  AI vision: Verifying %d rules with %s…", len(rules), ai_provider.name)
+
+            # For image-only pages, prefer embedded images (higher quality)
+            # over rendered page images
+            section_img = img_path  # fallback to rendered page
+            
+            # Try embedded image first (higher quality for image-only PDFs)
+            if sec_page in embedded_image_map and embedded_image_map[sec_page]:
+                # Use the largest embedded image (most likely the full label)
+                best_emb = max(embedded_image_map[sec_page], key=lambda p: p.stat().st_size)
+                section_img = best_emb
+                logger.info(
+                    "  Using embedded image for AI vision: %s",
+                    best_emb.name,
+                )
+            elif section.bbox:
+                # Crop individual section image if bbox is available
+                crop_dir = img_path.parent / "sections"
+                crop_dir.mkdir(parents=True, exist_ok=True)
+                section_safe = safe_filename(sec_name)
+                crop_path = crop_dir / f"{section_safe}.png"
+                try:
+                    section_img = crop_section_image(
+                        full_page_image=img_path,
+                        bbox=section.bbox,
+                        output_path=crop_path,
+                        dpi=render_dpi,
+                    )
+                    logger.info(
+                        "  Cropped section image: %s → %s",
+                        sec_name, crop_path.name,
+                    )
+                except Exception as e:
+                    logger.warning("  Could not crop section image: %s", e)
+                    section_img = img_path
+
+            vision_note = " (auto-enabled for image-only page)" if not ai_vision else ""
+            logger.info("  AI vision%s: [%s] → %d rules…", vision_note, sec_name, len(rules))
             try:
                 ai_results = ai_verify_rules_batch(
-                    rules, img_path, ai_provider, batch_size=ai_batch_size,
+                    rules, section_img, ai_provider, batch_size=ai_batch_size,
                 )
                 for ai_match in ai_results:
+                    ai_match.details = f"[{sec_name}] {ai_match.details}"
                     rid = ai_match.rule_id
-                    if rid not in aggregated_matches:
-                        aggregated_matches[rid] = []
-                    aggregated_matches[rid].append(ai_match)
+                    sec_aggregated.setdefault(rid, []).append(ai_match)
+                    overall_aggregated.setdefault(rid, []).append(ai_match)
                 logger.info("  AI vision: Done — %d results", len(ai_results))
             except Exception as e:
-                logger.error("  AI vision error: %s", e)
+                logger.error("  AI vision error for [%s]: %s", sec_name, e)
 
-        # ── Symbol Library Comparison ─────────────────
+        # ── Symbol Library Comparison for this section ──
         try:
+            section_ocr_for_sym = _make_section_ocr(combined_text, ocr_result)
+            # Use embedded image (higher quality) or cropped section image
+            section_img_for_sym = None
+            if sec_page in embedded_image_map and embedded_image_map[sec_page]:
+                # Use the largest embedded image for symbol detection
+                section_img_for_sym = max(
+                    embedded_image_map[sec_page], key=lambda p: p.stat().st_size
+                )
+            elif section.bbox and img_path:
+                crop_dir = img_path.parent / "sections"
+                section_safe = safe_filename(sec_name)
+                crop_path = crop_dir / f"{section_safe}.png"
+                if crop_path.exists():
+                    section_img_for_sym = crop_path
             sym_report = compare_symbols_combined(
-                ocr_result=ocr_result,
-                image_path=None,  # text-only for speed; use image_path for visual
+                ocr_result=section_ocr_for_sym,
+                image_path=section_img_for_sym,
+                ai_provider=ai_provider,
+                skip_visual=(page_class and page_class.is_image_only) if page_class else False,
             )
-            page_result.symbol_comparison = sym_report
-            logger.info(
-                "  Symbols: %s",
-                sym_report.summary,
-            )
+            sec_result.symbol_comparison = sym_report
+            logger.info("  Symbols [%s]: %s", sec_name, sym_report.summary)
         except Exception as e:
-            logger.error("  Symbol comparison error: %s", e)
+            logger.error("  Symbol comparison error for [%s]: %s", sec_name, e)
 
-        result.pages.append(page_result)
+        # ── Score this section ──
+        sec_matches = []
+        for rid, matches in sec_aggregated.items():
+            sec_matches.append(combine_match_results(matches))
 
-    # ── Step 5: Combine results across pages ──────────
-    logger.info("Step 5: Aggregating results...")
+        sec_result.score = compute_score(
+            label_name=f"{label_name}/{sec_name}",
+            match_results=sec_matches,
+            compliant_threshold=settings.compliance.score_compliant,
+            partial_threshold=settings.compliance.score_partial,
+        )
+
+        p = sum(1 for m in sec_matches if m.status == "PASS")
+        f_ = sum(1 for m in sec_matches if m.status == "FAIL")
+        pt = sum(1 for m in sec_matches if m.status == "PARTIAL")
+        logger.info(
+            "  [%s] → %s (%.1f%%) | ✅ %d PASS | ⚠️ %d PARTIAL | ❌ %d FAIL",
+            sec_name, sec_result.score.status, sec_result.score.score_pct, p, pt, f_,
+        )
+
+        result.sections.append(sec_result)
+
+    # ── Step 7: Overall aggregation ───────────────────
+    logger.info("Step 7: Aggregating overall results...")
     combined_matches = []
-    for rule_id, matches in aggregated_matches.items():
+    for rule_id, matches in overall_aggregated.items():
         best = combine_match_results(matches)
         combined_matches.append(best)
 
     result.all_matches = combined_matches
 
-    # ── Step 5b: Aggregate spec results ───────────────
+    # Aggregate spec results
     all_spec_results: list[SpecsResult] = []
-    for page in result.pages:
-        all_spec_results.extend(page.spec_results)
+    for sec in result.sections:
+        all_spec_results.extend(sec.spec_results)
     result.all_spec_results = all_spec_results
 
-    total_spec_violations = sum(
-        len(sr.violations) for sr in all_spec_results
-    )
-    rules_with_violations = sum(
-        1 for sr in all_spec_results if not sr.all_passed
-    )
+    total_spec_violations = sum(len(sr.violations) for sr in all_spec_results)
+    rules_with_violations = sum(1 for sr in all_spec_results if not sr.all_passed)
     if total_spec_violations > 0:
         logger.warning(
             "  Specs: %d total violations across %d rules",
             total_spec_violations, rules_with_violations,
         )
-    else:
-        logger.info("  Specs: All passed ✓")
 
-    # ── Step 5c: Aggregate symbol comparison ──────────
+    # Aggregate symbol comparison (best across sections)
     best_sym_comparison: SymbolComparisonReport | None = None
-    for page in result.pages:
-        if page.symbol_comparison is not None:
-            if best_sym_comparison is None or page.symbol_comparison.score > best_sym_comparison.score:
-                best_sym_comparison = page.symbol_comparison
+    for sec in result.sections:
+        if sec.symbol_comparison is not None:
+            if best_sym_comparison is None or sec.symbol_comparison.score > best_sym_comparison.score:
+                best_sym_comparison = sec.symbol_comparison
     result.symbol_comparison = best_sym_comparison
-    if best_sym_comparison and best_sym_comparison.total_required > 0:
-        logger.info(
-            "  Symbol Library: %d/%d found, %d partial, %d missing (%.0f%%)",
-            best_sym_comparison.total_found,
-            best_sym_comparison.total_required,
-            best_sym_comparison.total_partial,
-            best_sym_comparison.total_missing,
-            best_sym_comparison.score * 100,
-        )
 
-    # ── Step 6: Score ─────────────────────────────────
-    logger.info("Step 6: Computing compliance score...")
+    # ── Step 8: Overall Score ─────────────────────────
+    logger.info("Step 8: Computing overall compliance score...")
     score = compute_score(
         label_name=label_name,
         match_results=combined_matches,
@@ -413,6 +631,44 @@ def check_label(
             best_sym_comparison.total_partial,
             best_sym_comparison.total_missing,
         )
+    logger.info("  📋 Sections analyzed:")
+    for sec in result.sections:
+        if sec.score:
+            logger.info(
+                "     • %s → %s (%.1f%%)",
+                sec.section_name, sec.score.status, sec.score.score_pct,
+            )
     logger.info("═" * 60)
 
     return result
+
+
+def _make_section_ocr(
+    section_text: str, page_ocr: OCRResult | None
+) -> OCRResult:
+    """
+    Create a synthetic OCRResult by combining section text with
+    the page-level OCR word boxes (for position-based checks).
+
+    For scanned PDFs (0 extracted text), falls back to full OCR.
+    For vector PDFs, uses the extracted text (more accurate).
+    """
+    if page_ocr is None:
+        return OCRResult(
+            full_text=section_text,
+            words=[],
+            image_path="",
+            image_size=(0, 0),
+        )
+
+    # If section text is empty (scanned PDF), use full OCR
+    if not section_text.strip():
+        return page_ocr
+
+    # Use section text but keep word-level bounding boxes from OCR
+    return OCRResult(
+        full_text=section_text,
+        words=page_ocr.words,
+        image_path=page_ocr.image_path,
+        image_size=page_ocr.image_size,
+    )

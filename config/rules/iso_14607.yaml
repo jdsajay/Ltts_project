@@ -361,6 +361,90 @@ rules:
     severity: critical
     new_in_2024: false
 
+  # ── UDI Data Carrier Requirements ───────────────────
+  - id: ISO14607-11.5-datamatrix
+    iso_ref: "11.5 / EU MDR Art. 27"
+    description: "2D DataMatrix code on each packaging level (encoding UDI-DI + UDI-PI)"
+    category: visual
+    check_type: barcode
+    markers: ["DataMatrix", "2D", "matrix", "UDI"]
+    specs:
+      per_packaging_level: true
+      formats: ["DataMatrix"]
+    severity: critical
+    new_in_2024: false
+
+  - id: ISO14607-11.5-hri
+    iso_ref: "11.5 / EU MDR Art. 27(4)"
+    description: "Human Readable Interpretation (HRI) text adjacent to UDI barcode/DataMatrix — must include GTIN, serial number, LOT, expiry in plain text"
+    category: text
+    check_type: text_match
+    markers: ["HRI", "serial", "GTIN", "human readable", "SERNO"]
+    specs:
+      must_include: ["serial number translation", "LOT", "expiry"]
+      per_packaging_level: true
+    severity: critical
+    new_in_2024: false
+
+  # ── Symbol Version / Design Requirements ────────────
+  - id: ISO14607-SYM-version
+    iso_ref: "ISO 15223-1:2021, Clause 4"
+    description: "All symbols must match current ISO/Symbol Library version — outdated symbol designs must be replaced"
+    category: symbol
+    check_type: visual
+    markers: ["symbol", "version", "current", "updated"]
+    specs:
+      must_match: "current Symbol Library version"
+    severity: critical
+    new_in_2024: false
+
+  - id: ISO14607-SYM-quantity
+    iso_ref: "ISO 15223-1:2021, 5.4.6"
+    description: "Quantity / Contains symbol must be present and match current library version"
+    category: symbol
+    check_type: visual
+    markers: ["quantity", "contains", "packaging unit"]
+    specs:
+      symbol_ref: "ISO 15223-1:2021, 5.4.6"
+      min_height_mm: 3
+    severity: critical
+    new_in_2024: false
+
+  - id: ISO14607-SYM-double-sterile
+    iso_ref: "ISO 15223-1:2021, 5.2.10"
+    description: "Double sterile barrier system symbol required if device uses double packaging"
+    category: symbol
+    check_type: visual
+    markers: ["double sterile", "double barrier", "double packaging"]
+    specs:
+      symbol_ref: "ISO 15223-1:2021, 5.2.10"
+      min_height_mm: 3
+    severity: critical
+    new_in_2024: false
+
+  # ── Text / Typography Requirements ──────────────────
+  - id: ISO14607-text-redundancy
+    iso_ref: "ISO 15223-1:2021, Clause 1"
+    description: "Text that duplicates what a symbol already conveys is redundant — symbols replace text per ISO 15223-1"
+    category: text
+    check_type: text_match
+    markers: ["quantity", "sterile", "single use"]
+    specs:
+      check_for: "redundant text when symbol is present"
+    severity: major
+    new_in_2024: false
+
+  - id: ISO14607-font-consistency
+    iso_ref: "ISO 14607:2024, 11.1"
+    description: "Font style must be consistent across each label panel — no unintended italic/bold mixing"
+    category: text
+    check_type: visual
+    markers: ["font", "italic", "bold", "style"]
+    specs:
+      check_for: "font style consistency within each panel"
+    severity: major
+    new_in_2024: false
+
   # ── Annex G (Surface Classification — NEW 2024) ────
   - id: ISO14607-G.2
     iso_ref: "ISO 14607:2024, Annex G, Table G.2"

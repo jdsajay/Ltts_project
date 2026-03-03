@@ -1,0 +1,5437 @@
+{
+  "label_name": "DRWG107602_Rev D",
+  "pdf_file": "DRWG107602_Rev D.pdf",
+  "generated_at": "2026-02-26T06:31:46.878221",
+  "summary": {
+    "status": "PARTIAL",
+    "score_pct": 57.3,
+    "total_rules": 28,
+    "passed": 14,
+    "partial": 11,
+    "failed": 3,
+    "critical_gaps": 11,
+    "new_2024_gaps": 2,
+    "spec_violation_count": 180,
+    "rules_with_spec_failures": 11
+  },
+  "results": [
+    {
+      "rule_id": "ISO14607-9.1",
+      "description": "Implant shall be supplied in sealed sterile packaging",
+      "iso_ref": "9.1",
+      "status": "PARTIAL",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "sterile",
+        "packaging",
+        "sealed"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "must_include",
+          "requirement": "Must include: sealed",
+          "actual": "'sealed' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "must_include",
+          "requirement": "Must include: sealed",
+          "actual": "'sealed' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "must_include",
+          "requirement": "Must include: sealed",
+          "actual": "'sealed' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "must_include",
+          "requirement": "Must include: sealed",
+          "actual": "'sealed' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "must_include",
+          "requirement": "Must include: sealed",
+          "actual": "'sealed' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-9.1",
+          "spec_field": "must_include",
+          "requirement": "Must include: sealed",
+          "actual": "'sealed' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        }
+      ],
+      "spec_details": [
+        "PASS: Font size 12.0pt ≥ 6pt (font: Helvetica, text: 'Sterile Barrier Symbol')",
+        "PASS: Found required element: 'sterile'",
+        "PASS: Font size 12.0pt ≥ 6pt (font: Helvetica, text: 'updated Quantity, Sterile')"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-9.2",
+      "description": "Double packaging system — inner and outer pack",
+      "iso_ref": "9.2",
+      "status": "PASS",
+      "confidence": 0.6666666666666666,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [
+        "outer",
+        "double"
+      ],
+      "method": "text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Found 'outer' (from: inner OR outer)"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-10.1",
+      "description": "Instructions for use shall accompany the implant",
+      "iso_ref": "10.1",
+      "status": "PASS",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "instructions for use",
+        "IFU",
+        "instructions"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: No specs defined — text matching only"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.1",
+      "description": "Labels shall comply with ISO 14630 and ISO 15223-1",
+      "iso_ref": "11.1",
+      "status": "PASS",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "ISO 15223-1",
+        "ISO 14630"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: No specs defined — text matching only"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.2-volume",
+      "description": "Nominal volume stated on the unit container label",
+      "iso_ref": "11.2",
+      "status": "PARTIAL",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "volume",
+        "cc",
+        "volume stated on the unit container label",
+        "ml",
+        "pattern:850cc"
+      ],
+      "method": "ai_text+ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '350cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9042205810547,
+              92.76905059814453,
+              226.05418395996094,
+              109.87100219726562
+            ],
+            "text": "350cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '455cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9159393310547,
+              107.09326934814453,
+              226.06590270996094,
+              124.19522094726562
+            ],
+            "text": "455cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '535cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9276580810547,
+              121.41748809814453,
+              226.07762145996094,
+              138.51943969726562
+            ],
+            "text": "535cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '650cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9393768310547,
+              135.8946533203125,
+              226.08934020996094,
+              152.99661254882812
+            ],
+            "text": "650cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '700cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9513397216797,
+              150.371337890625,
+              226.10130310058594,
+              167.47329711914062
+            ],
+            "text": "700cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '850cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9630584716797,
+              164.8485107421875,
+              226.11302185058594,
+              181.95046997070312
+            ],
+            "text": "850cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '350cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9042205810547,
+              92.76905059814453,
+              226.05418395996094,
+              109.87100219726562
+            ],
+            "text": "350cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '455cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9159393310547,
+              107.09326934814453,
+              226.06590270996094,
+              124.19522094726562
+            ],
+            "text": "455cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '535cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9276580810547,
+              121.41748809814453,
+              226.07762145996094,
+              138.51943969726562
+            ],
+            "text": "535cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '650cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9393768310547,
+              135.8946533203125,
+              226.08934020996094,
+              152.99661254882812
+            ],
+            "text": "650cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '700cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9513397216797,
+              150.371337890625,
+              226.10130310058594,
+              167.47329711914062
+            ],
+            "text": "700cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '850cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9630584716797,
+              164.8485107421875,
+              226.11302185058594,
+              181.95046997070312
+            ],
+            "text": "850cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '350cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9042205810547,
+              92.76905059814453,
+              226.05418395996094,
+              109.87100219726562
+            ],
+            "text": "350cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '455cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9159393310547,
+              107.09326934814453,
+              226.06590270996094,
+              124.19522094726562
+            ],
+            "text": "455cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '535cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9276580810547,
+              121.41748809814453,
+              226.07762145996094,
+              138.51943969726562
+            ],
+            "text": "535cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '650cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9393768310547,
+              135.8946533203125,
+              226.08934020996094,
+              152.99661254882812
+            ],
+            "text": "650cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '700cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9513397216797,
+              150.371337890625,
+              226.10130310058594,
+              167.47329711914062
+            ],
+            "text": "700cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '850cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9630584716797,
+              164.8485107421875,
+              226.11302185058594,
+              181.95046997070312
+            ],
+            "text": "850cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '350cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9042205810547,
+              92.76905059814453,
+              226.05418395996094,
+              109.87100219726562
+            ],
+            "text": "350cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '455cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9159393310547,
+              107.09326934814453,
+              226.06590270996094,
+              124.19522094726562
+            ],
+            "text": "455cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '535cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9276580810547,
+              121.41748809814453,
+              226.07762145996094,
+              138.51943969726562
+            ],
+            "text": "535cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '650cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9393768310547,
+              135.8946533203125,
+              226.08934020996094,
+              152.99661254882812
+            ],
+            "text": "650cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '700cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9513397216797,
+              150.371337890625,
+              226.10130310058594,
+              167.47329711914062
+            ],
+            "text": "700cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.2-volume",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '850cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9630584716797,
+              164.8485107421875,
+              226.11302185058594,
+              181.95046997070312
+            ],
+            "text": "850cc"
+          }
+        }
+      ],
+      "spec_details": [
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '850cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '535cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '350cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '650cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '455cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma,Bold, text: 'Volume')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '700cc')",
+        "PASS: Font style 'bold' matches required 'bold' (text: 'Volume')"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.2-type",
+      "description": "Implant type/model stated on the unit container",
+      "iso_ref": "11.2",
+      "status": "PASS",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "type",
+        "gel",
+        "model",
+        "Implant type/model stated on the unit container",
+        "saline"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma,Bold, text: 'Gel')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma,Bold, text: 'Saline Vol')"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.3a-dimensions",
+      "description": "Implant dimensions: width, height/diameter, projection",
+      "iso_ref": "11.3 a)",
+      "status": "PASS",
+      "confidence": 0.7142857142857143,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "pattern:10.0cm",
+        "mm",
+        "cm",
+        "projection",
+        "diameter"
+      ],
+      "method": "text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Found required element: 'projection'",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '8.9cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '11.0cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma,Bold, text: 'Diameter')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '7.6cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '8.3cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '8.2cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '13.5cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '12.0cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma,Bold, text: 'Height')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '14.0cm')",
+        "PASS: Font size 6.9pt ≥ 6pt (font: Tahoma, text: 'PROJECTION')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '13.0cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '7.0cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '8.0cm')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: '10.0cm')",
+        "PASS: Found 'diameter' (from: width OR diameter)",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma,Bold, text: 'Width')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma,Bold, text: 'Projection')"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.3a-volume-label",
+      "description": "Volume also stated on the implant label (not just container)",
+      "iso_ref": "11.3 a)",
+      "status": "PARTIAL",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "volume stated on the implant label",
+        "cc",
+        "pattern:850cc"
+      ],
+      "method": "ai_text+ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '350cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9042205810547,
+              92.76905059814453,
+              226.05418395996094,
+              109.87100219726562
+            ],
+            "text": "350cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '455cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9159393310547,
+              107.09326934814453,
+              226.06590270996094,
+              124.19522094726562
+            ],
+            "text": "455cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '535cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9276580810547,
+              121.41748809814453,
+              226.07762145996094,
+              138.51943969726562
+            ],
+            "text": "535cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '650cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9393768310547,
+              135.8946533203125,
+              226.08934020996094,
+              152.99661254882812
+            ],
+            "text": "650cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '700cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9513397216797,
+              150.371337890625,
+              226.10130310058594,
+              167.47329711914062
+            ],
+            "text": "700cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '850cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9630584716797,
+              164.8485107421875,
+              226.11302185058594,
+              181.95046997070312
+            ],
+            "text": "850cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '350cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9042205810547,
+              92.76905059814453,
+              226.05418395996094,
+              109.87100219726562
+            ],
+            "text": "350cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '455cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9159393310547,
+              107.09326934814453,
+              226.06590270996094,
+              124.19522094726562
+            ],
+            "text": "455cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '535cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9276580810547,
+              121.41748809814453,
+              226.07762145996094,
+              138.51943969726562
+            ],
+            "text": "535cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '650cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9393768310547,
+              135.8946533203125,
+              226.08934020996094,
+              152.99661254882812
+            ],
+            "text": "650cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '700cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9513397216797,
+              150.371337890625,
+              226.10130310058594,
+              167.47329711914062
+            ],
+            "text": "700cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '850cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9630584716797,
+              164.8485107421875,
+              226.11302185058594,
+              181.95046997070312
+            ],
+            "text": "850cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '350cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9042205810547,
+              92.76905059814453,
+              226.05418395996094,
+              109.87100219726562
+            ],
+            "text": "350cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '455cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9159393310547,
+              107.09326934814453,
+              226.06590270996094,
+              124.19522094726562
+            ],
+            "text": "455cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '535cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9276580810547,
+              121.41748809814453,
+              226.07762145996094,
+              138.51943969726562
+            ],
+            "text": "535cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '650cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9393768310547,
+              135.8946533203125,
+              226.08934020996094,
+              152.99661254882812
+            ],
+            "text": "650cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '700cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9513397216797,
+              150.371337890625,
+              226.10130310058594,
+              167.47329711914062
+            ],
+            "text": "700cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '850cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9630584716797,
+              164.8485107421875,
+              226.11302185058594,
+              181.95046997070312
+            ],
+            "text": "850cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '350cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9042205810547,
+              92.76905059814453,
+              226.05418395996094,
+              109.87100219726562
+            ],
+            "text": "350cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '455cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9159393310547,
+              107.09326934814453,
+              226.06590270996094,
+              124.19522094726562
+            ],
+            "text": "455cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '535cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9276580810547,
+              121.41748809814453,
+              226.07762145996094,
+              138.51943969726562
+            ],
+            "text": "535cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '650cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9393768310547,
+              135.8946533203125,
+              226.08934020996094,
+              152.99661254882812
+            ],
+            "text": "650cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '700cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9513397216797,
+              150.371337890625,
+              226.10130310058594,
+              167.47329711914062
+            ],
+            "text": "700cc"
+          }
+        },
+        {
+          "rule_id": "ISO14607-11.3a-volume-label",
+          "spec_field": "font_style",
+          "requirement": "Required: bold",
+          "actual": "Found: regular (font: Tahoma, text: '850cc')",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              195.9630584716797,
+              164.8485107421875,
+              226.11302185058594,
+              181.95046997070312
+            ],
+            "text": "850cc"
+          }
+        }
+      ],
+      "spec_details": [
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '535cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '350cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '650cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '455cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma,Bold, text: 'Volume')",
+        "PASS: Font style 'bold' matches required 'bold' (text: 'Volume')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '700cc')",
+        "PASS: Font size 11.8pt ≥ 8pt (font: Tahoma, text: '850cc')"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.3b-shell-desc",
+      "description": "Description of the implant shell(s)",
+      "iso_ref": "11.3 b)",
+      "status": "PARTIAL",
+      "confidence": 0.5,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [
+        "barrier",
+        "shell mentioned but no detailed description"
+      ],
+      "method": "ai_text+ai_text+text_match+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Font size 12.0pt ≥ 6pt (font: Helvetica, text: 'Sterile Barrier Symbol')",
+        "PASS: Found 'barrier' (from: shell OR barrier OR layer)"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.3c-surface",
+      "description": "Surface classification per normative Annex G, Table G.2",
+      "iso_ref": "11.3 c)",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "severity": "critical",
+      "new_in_2024": true,
+      "evidence": [
+        "surface classification not present"
+      ],
+      "method": "ai_text+ai_text+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "valid_classifications",
+          "requirement": "Must contain one of: ['NTX', 'SLC', 'SLO', 'CRC', 'CRO']",
+          "actual": "No valid classification code found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "table_ref",
+          "requirement": "Content from Table G.2 must be present",
+          "actual": "Neither 'Table G.2' nor its content codes found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "valid_classifications",
+          "requirement": "Must contain one of: ['NTX', 'SLC', 'SLO', 'CRC', 'CRO']",
+          "actual": "No valid classification code found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "table_ref",
+          "requirement": "Content from Table G.2 must be present",
+          "actual": "Neither 'Table G.2' nor its content codes found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "valid_classifications",
+          "requirement": "Must contain one of: ['NTX', 'SLC', 'SLO', 'CRC', 'CRO']",
+          "actual": "No valid classification code found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "ISO14607-11.3c-surface",
+          "spec_field": "table_ref",
+          "requirement": "Content from Table G.2 must be present",
+          "actual": "Neither 'Table G.2' nor its content codes found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        }
+      ],
+      "spec_details": []
+    },
+    {
+      "rule_id": "ISO14607-11.3d-fill",
+      "description": "Description of the implant fill material",
+      "iso_ref": "11.3 d)",
+      "status": "PASS",
+      "confidence": 1.0,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [
+        "fill material mentioned",
+        "gel",
+        "fill material mentioned but no detailed description"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Found 'gel' (from: gel OR saline OR fill)",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma,Bold, text: 'Gel')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma,Bold, text: 'Saline Vol')"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.4",
+      "description": "Shelf life / use-by date on packaging",
+      "iso_ref": "11.4",
+      "status": "PASS",
+      "confidence": 0.5,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "EXPDATE",
+        "shelf life",
+        "expir"
+      ],
+      "method": "text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma,Bold, text: 'Shelf Life')",
+        "PASS: Font size 12.0pt ≥ 6pt (font: MinionPro-Regular, text: '5. 2D barcode contains : 01(TK')",
+        "PASS: Font size 11.8pt ≥ 6pt (font: Tahoma, text: 'EXPDATE = EXPIRATION DATE')",
+        "PASS: Height 4.16mm ≥ 2mm (font Tahoma @ 11.8pt, text: 'EXPDATE = EXPIRATION DATE')",
+        "PASS: Height 3.18mm ≥ 2mm (font MyriadPro-Regular @ 9.0pt, text: '01(TK20)+17(EXPDATE)')",
+        "PASS: Height 4.16mm ≥ 2mm (font Tahoma,Bold @ 11.8pt, text: 'Shelf Life')",
+        "PASS: Height 4.23mm ≥ 2mm (font MinionPro-Regular @ 12.0pt, text: '5. 2D barcode contains : 01(TK')",
+        "PASS: Font size 9.0pt ≥ 6pt (font: MyriadPro-Regular, text: '01(TK20)+17(EXPDATE)')"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.5-udi",
+      "description": "Unique Device Identifier (UDI) on label",
+      "iso_ref": "11.5",
+      "status": "PASS",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "UDI present on label",
+        "UDI-DI",
+        "UDI-PI",
+        "UDI"
+      ],
+      "method": "ai_text+ai_text+text_match+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Font size 9.0pt ≥ 6pt (font: Helvetica, text: 'Replace with below label infor')",
+        "PASS: Height 3.18mm ≥ 2mm (font Helvetica @ 9.0pt, text: 'Replace with below label infor')"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-11.5-udi-carrier",
+      "description": "UDI carrier (barcode or 2D DataMatrix)",
+      "iso_ref": "11.5",
+      "status": "PASS",
+      "confidence": 0.6,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "GTIN",
+        "barcode",
+        "(01)"
+      ],
+      "method": "text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Barcode format(s) found: ['GS1-128'] (from: ['CODE128', 'CODE128', 'CODE128'])"
+      ]
+    },
+    {
+      "rule_id": "SYM-manufacturer",
+      "description": "Manufacturer symbol (factory icon)",
+      "iso_ref": "ISO 15223-1:2021, 5.1.1",
+      "status": "PARTIAL",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "MENTOR(TM)",
+        "Mentor",
+        "MENTOR-TEXAS CORP."
+      ],
+      "method": "ai_text+ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1055.60986328125,
+              1175.5142822265625,
+              1491.0391845703125,
+              1185.685302734375
+            ],
+            "text": "PROPRIETARY AND CONFIDENTIAL - THE INFORMATION CON"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1070.596923828125,
+              1182.5142822265625,
+              1476.05224609375,
+              1192.685302734375
+            ],
+            "text": "ANY REPRODUCTION IN PART OR AS A WHOLE WITHOUT THE"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.47mm (font Tahoma @ 7.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1008.7007446289062,
+              1113.3040771484375,
+              1133.591796875,
+              1123.47509765625
+            ],
+            "text": "submitted to Mentor-Texas. for approval"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacturer'",
+          "actual": "Adjacent element 'manufacturer' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1055.60986328125,
+              1175.5142822265625,
+              1491.0391845703125,
+              1185.685302734375
+            ],
+            "text": "PROPRIETARY AND CONFIDENTIAL - THE INFORMATION CON"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1070.596923828125,
+              1182.5142822265625,
+              1476.05224609375,
+              1192.685302734375
+            ],
+            "text": "ANY REPRODUCTION IN PART OR AS A WHOLE WITHOUT THE"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.47mm (font Tahoma @ 7.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1008.7007446289062,
+              1113.3040771484375,
+              1133.591796875,
+              1123.47509765625
+            ],
+            "text": "submitted to Mentor-Texas. for approval"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacturer'",
+          "actual": "Adjacent element 'manufacturer' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1055.60986328125,
+              1175.5142822265625,
+              1491.0391845703125,
+              1185.685302734375
+            ],
+            "text": "PROPRIETARY AND CONFIDENTIAL - THE INFORMATION CON"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1070.596923828125,
+              1182.5142822265625,
+              1476.05224609375,
+              1192.685302734375
+            ],
+            "text": "ANY REPRODUCTION IN PART OR AS A WHOLE WITHOUT THE"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.47mm (font Tahoma @ 7.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1008.7007446289062,
+              1113.3040771484375,
+              1133.591796875,
+              1123.47509765625
+            ],
+            "text": "submitted to Mentor-Texas. for approval"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacturer'",
+          "actual": "Adjacent element 'manufacturer' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1055.60986328125,
+              1175.5142822265625,
+              1491.0391845703125,
+              1185.685302734375
+            ],
+            "text": "PROPRIETARY AND CONFIDENTIAL - THE INFORMATION CON"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1070.596923828125,
+              1182.5142822265625,
+              1476.05224609375,
+              1192.685302734375
+            ],
+            "text": "ANY REPRODUCTION IN PART OR AS A WHOLE WITHOUT THE"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.47mm (font Tahoma @ 7.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1008.7007446289062,
+              1113.3040771484375,
+              1133.591796875,
+              1123.47509765625
+            ],
+            "text": "submitted to Mentor-Texas. for approval"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacturer'",
+          "actual": "Adjacent element 'manufacturer' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1055.60986328125,
+              1175.5142822265625,
+              1491.0391845703125,
+              1185.685302734375
+            ],
+            "text": "PROPRIETARY AND CONFIDENTIAL - THE INFORMATION CON"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1070.596923828125,
+              1182.5142822265625,
+              1476.05224609375,
+              1192.685302734375
+            ],
+            "text": "ANY REPRODUCTION IN PART OR AS A WHOLE WITHOUT THE"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.47mm (font Tahoma @ 7.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1008.7007446289062,
+              1113.3040771484375,
+              1133.591796875,
+              1123.47509765625
+            ],
+            "text": "submitted to Mentor-Texas. for approval"
+          }
+        },
+        {
+          "rule_id": "SYM-manufacturer",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacturer'",
+          "actual": "Adjacent element 'manufacturer' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        }
+      ],
+      "spec_details": [
+        "PASS: Height 6.35mm ≥ 3mm (font Helvetica @ 18.0pt, text: 'MENTOR (R) to')",
+        "PASS: Height 6.35mm ≥ 3mm (font Helvetica @ 18.0pt, text: 'MENTOR(TM)')"
+      ]
+    },
+    {
+      "rule_id": "SYM-date-manufacture",
+      "description": "Date of manufacture symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.3",
+      "status": "PARTIAL",
+      "confidence": 0.5,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "MFGDATE, manufactured, 4/4/2022",
+        "MFGDATE",
+        "Printed on 4/4/2022"
+      ],
+      "method": "ai_text+ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-date-manufacture",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacture'",
+          "actual": "Adjacent element 'manufacture' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-date-manufacture",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacture'",
+          "actual": "Adjacent element 'manufacture' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-date-manufacture",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacture'",
+          "actual": "Adjacent element 'manufacture' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-date-manufacture",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacture'",
+          "actual": "Adjacent element 'manufacture' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-date-manufacture",
+          "spec_field": "must_be_adjacent_to",
+          "requirement": "Must be within 10mm of 'manufacture'",
+          "actual": "Adjacent element 'manufacture' not found",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        }
+      ],
+      "spec_details": [
+        "PASS: Height 4.23mm ≥ 3mm (font MinionPro-Regular @ 12.0pt, text: '5. 2D barcode contains : 01(TK')",
+        "PASS: Height 4.16mm ≥ 3mm (font Tahoma @ 11.8pt, text: 'MFGDATE = MANUFACTURING DATE')",
+        "PASS: Height 3.18mm ≥ 3mm (font MyriadPro-Regular @ 9.0pt, text: '+11(MFGDATE)')"
+      ]
+    },
+    {
+      "rule_id": "SYM-use-by",
+      "description": "Use-by date / expiration symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.4",
+      "status": "PASS",
+      "confidence": 0.5,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "EXPDATE",
+        "expir"
+      ],
+      "method": "text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Height 4.23mm ≥ 3mm (font MinionPro-Regular @ 12.0pt, text: '5. 2D barcode contains : 01(TK')",
+        "PASS: Height 4.16mm ≥ 3mm (font Tahoma @ 11.8pt, text: 'EXPDATE = EXPIRATION DATE')",
+        "PASS: Height 3.18mm ≥ 3mm (font MyriadPro-Regular @ 9.0pt, text: '01(TK20)+17(EXPDATE)')"
+      ]
+    },
+    {
+      "rule_id": "SYM-batch-code",
+      "description": "Batch code / LOT number symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.5",
+      "status": "PASS",
+      "confidence": 0.75,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "LOT",
+        "lot",
+        "LOTNO"
+      ],
+      "method": "text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Height 4.23mm ≥ 3mm (font MinionPro-Regular @ 12.0pt, text: '5. 2D barcode contains : 01(TK')",
+        "PASS: Height 4.23mm ≥ 3mm (font Helvetica @ 12.0pt, text: '8- Digit LOT transition')",
+        "PASS: Height 4.16mm ≥ 3mm (font Tahoma @ 11.8pt, text: 'LOTNO = LOT NUMBER')",
+        "PASS: Height 3.18mm ≥ 3mm (font MyriadPro-Regular @ 9.0pt, text: '+10(LOTNO)+ 21(SERNO)')"
+      ]
+    },
+    {
+      "rule_id": "SYM-serial-number",
+      "description": "Serial number symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.6",
+      "status": "PASS",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "serial",
+        "SERNO",
+        "SN"
+      ],
+      "method": "text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Height 4.23mm ≥ 3mm (font MinionPro-Regular @ 12.0pt, text: '5. 2D barcode contains : 01(TK')",
+        "PASS: Height 4.23mm ≥ 3mm (font Helvetica @ 12.0pt, text: '12- Digit Serial')",
+        "PASS: Height 4.16mm ≥ 3mm (font Tahoma @ 11.8pt, text: 'SERNO = SERIAL NUMBER')",
+        "PASS: Height 3.18mm ≥ 3mm (font MyriadPro-Regular @ 9.0pt, text: '+10(LOTNO)+ 21(SERNO)')"
+      ]
+    },
+    {
+      "rule_id": "SYM-catalogue",
+      "description": "Catalogue / reference number symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.1.7",
+      "status": "PARTIAL",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "REF, catalogue, catalog, reference number",
+        "107602",
+        "107602-004",
+        "REF"
+      ],
+      "method": "ai_text+ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 4514,
+            "y": 2235,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.29mm (27px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 5444,
+            "y": 2236,
+            "w": 66,
+            "h": 27
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF",
+            "x": 4514,
+            "y": 3379,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 4514,
+            "y": 2235,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.29mm (27px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 5444,
+            "y": 2236,
+            "w": 66,
+            "h": 27
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF",
+            "x": 4514,
+            "y": 3379,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 4514,
+            "y": 2235,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.29mm (27px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 5444,
+            "y": 2236,
+            "w": 66,
+            "h": 27
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF",
+            "x": 4514,
+            "y": 3379,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 4514,
+            "y": 2235,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.29mm (27px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 5444,
+            "y": 2236,
+            "w": 66,
+            "h": 27
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF",
+            "x": 4514,
+            "y": 3379,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 4514,
+            "y": 2235,
+            "w": 66,
+            "h": 28
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.29mm (27px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF|",
+            "x": 5444,
+            "y": 2236,
+            "w": 66,
+            "h": 27
+          }
+        },
+        {
+          "rule_id": "SYM-catalogue",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 3mm height",
+          "actual": "2.37mm (28px at 300dpi)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "text": "REF",
+            "x": 4514,
+            "y": 3379,
+            "w": 66,
+            "h": 28
+          }
+        }
+      ],
+      "spec_details": [
+        "PASS: Height 7.20mm ≥ 3mm (text: '[REF]', 85px at 300dpi)",
+        "PASS: Height 9.57mm ≥ 3mm (text: '[REF]', 113px at 300dpi)",
+        "PASS: Height 7.37mm ≥ 3mm (text: 'REF', 87px at 300dpi)",
+        "PASS: Height 6.60mm ≥ 3mm (text: '[REF]', 78px at 300dpi)"
+      ]
+    },
+    {
+      "rule_id": "SYM-sterilization",
+      "description": "Sterilization method symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.2.1–5.2.8",
+      "status": "PARTIAL",
+      "confidence": 0.2,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "sterile"
+      ],
+      "method": "ai_text+ai_text+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Sterilization method indicated: ['5.2.1: Sterile — general', '5.2.4: Sterile — irradiation', '5.2.5: Sterile — ethylene oxide']"
+      ]
+    },
+    {
+      "rule_id": "SYM-single-use",
+      "description": "Do not reuse / single use symbol",
+      "iso_ref": "ISO 15223-1:2021, 5.4.2",
+      "status": "PARTIAL",
+      "confidence": 1.0,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [
+        "found",
+        "single use",
+        "DO NOT SCALE DRAWING",
+        "single use, do not reuse"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-single-use",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-single-use",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-single-use",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-single-use",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-single-use",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-single-use",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "Element not found — cannot measure height",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        }
+      ],
+      "spec_details": []
+    },
+    {
+      "rule_id": "SYM-ce-mark",
+      "description": "CE marking with notified body number",
+      "iso_ref": "EU MDR 2017/745, Art. 20",
+      "status": "PARTIAL",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "CE, 0086",
+        "CE, 0086 found in label text",
+        "CE",
+        "CE, 0086 found"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              323.52459716796875,
+              1027.2801513671875,
+              545.9368896484375,
+              1044.382080078125
+            ],
+            "text": "NO. OF MAXIMUM SPACES (CHARACTERS)"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma,Bold @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              653.1255493164062,
+              72.5596923828125,
+              711.0254516601562,
+              90.02651977539062
+            ],
+            "text": "Tolerance"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1027.420166015625,
+              1037.4332275390625,
+              1070.8092041015625,
+              1047.604248046875
+            ],
+            "text": "TOLERANCES:"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.88mm (font Tahoma,Bold @ 11.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1375.7049560546875,
+              1089.9727783203125,
+              1419.6171875,
+              1106.2967529296875
+            ],
+            "text": "NON-CE"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              287.0249938964844,
+              489.5039978027344,
+              439.09197998046875,
+              505.99200439453125
+            ],
+            "text": "Replace these symbols with"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              459.37298583984375,
+              490.9850158691406,
+              539.4219970703125,
+              507.4730224609375
+            ],
+            "text": "Replace these"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1275.1920166015625,
+              865.3579711914062,
+              1521.800048828125,
+              877.7239379882812
+            ],
+            "text": "Replace with below label information and Add MD, M"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1346.136962890625,
+              217.39097595214844,
+              1559.2469482421875,
+              229.75697326660156
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              783.2269897460938,
+              979.9380493164062,
+              996.3370361328125,
+              992.3040161132812
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "must_include_nb_number",
+          "requirement": "Notified body number directly adjacent to CE mark",
+          "actual": "CE mark found but NB number not adjacent. Standalone numbers nearby: ['1460', '1460', '3041', '3540', '3540']",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              323.52459716796875,
+              1027.2801513671875,
+              545.9368896484375,
+              1044.382080078125
+            ],
+            "text": "NO. OF MAXIMUM SPACES (CHARACTERS)"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma,Bold @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              653.1255493164062,
+              72.5596923828125,
+              711.0254516601562,
+              90.02651977539062
+            ],
+            "text": "Tolerance"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1027.420166015625,
+              1037.4332275390625,
+              1070.8092041015625,
+              1047.604248046875
+            ],
+            "text": "TOLERANCES:"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.88mm (font Tahoma,Bold @ 11.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1375.7049560546875,
+              1089.9727783203125,
+              1419.6171875,
+              1106.2967529296875
+            ],
+            "text": "NON-CE"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              287.0249938964844,
+              489.5039978027344,
+              439.09197998046875,
+              505.99200439453125
+            ],
+            "text": "Replace these symbols with"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              459.37298583984375,
+              490.9850158691406,
+              539.4219970703125,
+              507.4730224609375
+            ],
+            "text": "Replace these"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1275.1920166015625,
+              865.3579711914062,
+              1521.800048828125,
+              877.7239379882812
+            ],
+            "text": "Replace with below label information and Add MD, M"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1346.136962890625,
+              217.39097595214844,
+              1559.2469482421875,
+              229.75697326660156
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              783.2269897460938,
+              979.9380493164062,
+              996.3370361328125,
+              992.3040161132812
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "must_include_nb_number",
+          "requirement": "Notified body number directly adjacent to CE mark",
+          "actual": "CE mark found but NB number not adjacent. Standalone numbers nearby: ['1460', '1460', '3041', '3540', '3540']",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              323.52459716796875,
+              1027.2801513671875,
+              545.9368896484375,
+              1044.382080078125
+            ],
+            "text": "NO. OF MAXIMUM SPACES (CHARACTERS)"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma,Bold @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              653.1255493164062,
+              72.5596923828125,
+              711.0254516601562,
+              90.02651977539062
+            ],
+            "text": "Tolerance"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1027.420166015625,
+              1037.4332275390625,
+              1070.8092041015625,
+              1047.604248046875
+            ],
+            "text": "TOLERANCES:"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.88mm (font Tahoma,Bold @ 11.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1375.7049560546875,
+              1089.9727783203125,
+              1419.6171875,
+              1106.2967529296875
+            ],
+            "text": "NON-CE"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              287.0249938964844,
+              489.5039978027344,
+              439.09197998046875,
+              505.99200439453125
+            ],
+            "text": "Replace these symbols with"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              459.37298583984375,
+              490.9850158691406,
+              539.4219970703125,
+              507.4730224609375
+            ],
+            "text": "Replace these"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1275.1920166015625,
+              865.3579711914062,
+              1521.800048828125,
+              877.7239379882812
+            ],
+            "text": "Replace with below label information and Add MD, M"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1346.136962890625,
+              217.39097595214844,
+              1559.2469482421875,
+              229.75697326660156
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              783.2269897460938,
+              979.9380493164062,
+              996.3370361328125,
+              992.3040161132812
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              323.52459716796875,
+              1027.2801513671875,
+              545.9368896484375,
+              1044.382080078125
+            ],
+            "text": "NO. OF MAXIMUM SPACES (CHARACTERS)"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma,Bold @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              653.1255493164062,
+              72.5596923828125,
+              711.0254516601562,
+              90.02651977539062
+            ],
+            "text": "Tolerance"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1027.420166015625,
+              1037.4332275390625,
+              1070.8092041015625,
+              1047.604248046875
+            ],
+            "text": "TOLERANCES:"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.88mm (font Tahoma,Bold @ 11.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1375.7049560546875,
+              1089.9727783203125,
+              1419.6171875,
+              1106.2967529296875
+            ],
+            "text": "NON-CE"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              287.0249938964844,
+              489.5039978027344,
+              439.09197998046875,
+              505.99200439453125
+            ],
+            "text": "Replace these symbols with"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              459.37298583984375,
+              490.9850158691406,
+              539.4219970703125,
+              507.4730224609375
+            ],
+            "text": "Replace these"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1275.1920166015625,
+              865.3579711914062,
+              1521.800048828125,
+              877.7239379882812
+            ],
+            "text": "Replace with below label information and Add MD, M"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1346.136962890625,
+              217.39097595214844,
+              1559.2469482421875,
+              229.75697326660156
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              783.2269897460938,
+              979.9380493164062,
+              996.3370361328125,
+              992.3040161132812
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              323.52459716796875,
+              1027.2801513671875,
+              545.9368896484375,
+              1044.382080078125
+            ],
+            "text": "NO. OF MAXIMUM SPACES (CHARACTERS)"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma,Bold @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              653.1255493164062,
+              72.5596923828125,
+              711.0254516601562,
+              90.02651977539062
+            ],
+            "text": "Tolerance"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1027.420166015625,
+              1037.4332275390625,
+              1070.8092041015625,
+              1047.604248046875
+            ],
+            "text": "TOLERANCES:"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.88mm (font Tahoma,Bold @ 11.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1375.7049560546875,
+              1089.9727783203125,
+              1419.6171875,
+              1106.2967529296875
+            ],
+            "text": "NON-CE"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              287.0249938964844,
+              489.5039978027344,
+              439.09197998046875,
+              505.99200439453125
+            ],
+            "text": "Replace these symbols with"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              459.37298583984375,
+              490.9850158691406,
+              539.4219970703125,
+              507.4730224609375
+            ],
+            "text": "Replace these"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1275.1920166015625,
+              865.3579711914062,
+              1521.800048828125,
+              877.7239379882812
+            ],
+            "text": "Replace with below label information and Add MD, M"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1346.136962890625,
+              217.39097595214844,
+              1559.2469482421875,
+              229.75697326660156
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              783.2269897460938,
+              979.9380493164062,
+              996.3370361328125,
+              992.3040161132812
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              323.52459716796875,
+              1027.2801513671875,
+              545.9368896484375,
+              1044.382080078125
+            ],
+            "text": "NO. OF MAXIMUM SPACES (CHARACTERS)"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.16mm (font Tahoma,Bold @ 11.8pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              653.1255493164062,
+              72.5596923828125,
+              711.0254516601562,
+              90.02651977539062
+            ],
+            "text": "Tolerance"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "2.43mm (font Tahoma @ 6.9pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1027.420166015625,
+              1037.4332275390625,
+              1070.8092041015625,
+              1047.604248046875
+            ],
+            "text": "TOLERANCES:"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.88mm (font Tahoma,Bold @ 11.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1375.7049560546875,
+              1089.9727783203125,
+              1419.6171875,
+              1106.2967529296875
+            ],
+            "text": "NON-CE"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              287.0249938964844,
+              489.5039978027344,
+              439.09197998046875,
+              505.99200439453125
+            ],
+            "text": "Replace these symbols with"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "4.23mm (font Helvetica @ 12.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              459.37298583984375,
+              490.9850158691406,
+              539.4219970703125,
+              507.4730224609375
+            ],
+            "text": "Replace these"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1275.1920166015625,
+              865.3579711914062,
+              1521.800048828125,
+              877.7239379882812
+            ],
+            "text": "Replace with below label information and Add MD, M"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              1346.136962890625,
+              217.39097595214844,
+              1559.2469482421875,
+              229.75697326660156
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        },
+        {
+          "rule_id": "SYM-ce-mark",
+          "spec_field": "min_height_mm",
+          "requirement": "≥ 5mm height",
+          "actual": "3.18mm (font Helvetica @ 9.0pt)",
+          "severity": "critical",
+          "page": 1,
+          "location": {
+            "bbox": [
+              783.2269897460938,
+              979.9380493164062,
+              996.3370361328125,
+              992.3040161132812
+            ],
+            "text": "Replace these 2 sections of label with these symbo"
+          }
+        }
+      ],
+      "spec_details": [
+        "PASS: Notified body number found: 1076 with CE mark",
+        "PASS: Height 6.35mm ≥ 5mm (font Helvetica @ 18.0pt, text: 'Through out replace')"
+      ]
+    },
+    {
+      "rule_id": "MDR-address",
+      "description": "Manufacturer name and full registered address",
+      "iso_ref": "ISO 14630 / EU MDR Art. 10(11)",
+      "status": "FAIL",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "Manufacturer name and full registered address not found",
+        "Texas",
+        "address",
+        "Irving"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: street",
+          "actual": "'street' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: city",
+          "actual": "'city' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: street",
+          "actual": "'street' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: city",
+          "actual": "'city' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: street",
+          "actual": "'street' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: city",
+          "actual": "'city' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: street",
+          "actual": "'street' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: city",
+          "actual": "'city' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: street",
+          "actual": "'street' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: city",
+          "actual": "'city' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: street",
+          "actual": "'street' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-address",
+          "spec_field": "must_include",
+          "requirement": "Must include: city",
+          "actual": "'city' not found in text",
+          "severity": "critical",
+          "page": 1,
+          "location": {}
+        }
+      ],
+      "spec_details": [
+        "PASS: Found required element: 'country'",
+        "PASS: Font size 6.9pt ≥ 6pt (font: Tahoma, text: 'ANY REPRODUCTION IN PART OR AS')",
+        "PASS: Font size 6.9pt ≥ 6pt (font: Tahoma, text: 'PROPRIETARY AND CONFIDENTIAL -')",
+        "PASS: Font size 7.0pt ≥ 6pt (font: Tahoma, text: 'submitted to Mentor-Texas. for')"
+      ]
+    },
+    {
+      "rule_id": "MDR-multilingual",
+      "description": "Product name in official EU member state languages",
+      "iso_ref": "EU MDR Art. 10(11)",
+      "status": "PARTIAL",
+      "confidence": 1.0,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [
+        "MENTOR(TM)",
+        "en:, de:, fr:, es:, it: found in label text",
+        "Product name in official EU member state languages (en:) present",
+        "es:"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": false,
+      "spec_violations": [
+        {
+          "rule_id": "MDR-multilingual",
+          "spec_field": "min_languages",
+          "requirement": "≥ 3 languages",
+          "actual": "Found 1 languages: ['NO']",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-multilingual",
+          "spec_field": "min_languages",
+          "requirement": "≥ 3 languages",
+          "actual": "Found 1 languages: ['NO']",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-multilingual",
+          "spec_field": "min_languages",
+          "requirement": "≥ 3 languages",
+          "actual": "Found 2 languages: ['BY', 'NO']",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-multilingual",
+          "spec_field": "min_languages",
+          "requirement": "≥ 3 languages",
+          "actual": "Found 2 languages: ['BY', 'NO']",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-multilingual",
+          "spec_field": "min_languages",
+          "requirement": "≥ 3 languages",
+          "actual": "Found 2 languages: ['BY', 'NO']",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        },
+        {
+          "rule_id": "MDR-multilingual",
+          "spec_field": "min_languages",
+          "requirement": "≥ 3 languages",
+          "actual": "Found 2 languages: ['BY', 'NO']",
+          "severity": "major",
+          "page": 1,
+          "location": {}
+        }
+      ],
+      "spec_details": []
+    },
+    {
+      "rule_id": "MDR-gtin",
+      "description": "GTIN barcode (GS1-128 or 2D DataMatrix)",
+      "iso_ref": "EU MDR / UDI Regulation",
+      "status": "PASS",
+      "confidence": 0.5,
+      "severity": "critical",
+      "new_in_2024": false,
+      "evidence": [
+        "GTIN",
+        "(01)"
+      ],
+      "method": "text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: Barcode format(s) found: ['GS1-128'] (from: ['CODE128', 'CODE128', 'CODE128'])"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-G.2",
+      "description": "Surface classification category code on label",
+      "iso_ref": "ISO 14607:2024, Annex G, Table G.2",
+      "status": "FAIL",
+      "confidence": 1.0,
+      "severity": "critical",
+      "new_in_2024": true,
+      "evidence": [
+        "Surface classification category code not found",
+        "OTH"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: No specs defined — text matching only"
+      ]
+    },
+    {
+      "rule_id": "ISO14607-H",
+      "description": "Patient implant card included with product",
+      "iso_ref": "ISO 14607:2024, Annex H",
+      "status": "PASS",
+      "confidence": 1.0,
+      "severity": "major",
+      "new_in_2024": false,
+      "evidence": [
+        "Patient implant card included with product not explicitly stated but ' implant card' mentioned in text",
+        "patient card, patient identification found in label text",
+        "patient implant card included with product"
+      ],
+      "method": "ai_text+text_match+text_match",
+      "specs_passed": true,
+      "spec_violations": [],
+      "spec_details": [
+        "PASS: No specs defined — text matching only"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "word_count": 726,
+      "barcode_count": 3,
+      "zone_count": 16
+    }
+  ],
+  "font_violations": [
+    {
+      "font": "Arial",
+      "size": 5.9,
+      "min_required": 6.0,
+      "text_preview": "Printed on 4/4/2022",
+      "page": 1
+    },
+    {
+      "font": "Tahoma",
+      "size": 5.0,
+      "min_required": 6.0,
+      "text_preview": "LAST SAVED BY: wpaz ON Monday, April 4, 2022 10:56:45 AM",
+      "page": 1
+    }
+  ],
+  "segmentation": {
+    "section_count": 3,
+    "section_names": [
+      "OUTER LID LABEL",
+      "COMBO LABEL",
+      "THERMOFORM LABEL"
+    ],
+    "drawing_metadata": {
+      "drawing_number": "107602",
+      "revision": "D",
+      "title": "LABELS, ARTOURA, ULTRA HIGH PROFILE, NON-CE",
+      "scale": "1:1",
+      "material": "N/A",
+      "finish": "N/A",
+      "drawn_by": "WPAZ",
+      "approved_by": "SEE PLM SYSTEM",
+      "print_date": "4/4/2022",
+      "tolerance_standard": "ASME Y14.5",
+      "tolerances": {
+        ".XX": ".01",
+        ".XXX": ".005",
+        ".XXXX": ".0010",
+        "ANGULAR": "1.0 DEGREES",
+        "FRACTIONAL": "1/32"
+      },
+      "sheet_info": "SHEET 1 OF 1",
+      "plm_reference": "SEE PLM SYSTEM"
+    },
+    "variable_definitions": {
+      "LOTNO": "LOT NUMBER",
+      "SERNO": "SERIAL NUMBER",
+      "MFGDATE": "MANUFACTURING DATE",
+      "EXPDATE": "EXPIRATION DATE",
+      "LPNBR": "LABEL PART NUMBER"
+    },
+    "character_limits": [
+      {
+        "position": "1",
+        "max_chars": "07"
+      },
+      {
+        "position": "2",
+        "max_chars": "11"
+      },
+      {
+        "position": "3",
+        "max_chars": "10"
+      },
+      {
+        "position": "4",
+        "max_chars": "10"
+      },
+      {
+        "position": "5",
+        "max_chars": "10"
+      }
+    ],
+    "revision_history": [],
+    "manufacturing_notes": [
+      "FIRST ARTICLE INSPECT PER QCIC000001",
+      "MFG INSPECT PER QCIC00000163",
+      "DO NOT SCALE DRAWING",
+      "ALL OF THE VARIABLE TEXT IS DISPLAYED AS ITS FIELD NAME",
+      "2D barcode contains : 01(TK20)+17(EXPDATE)+11(MFGDATE)+10(LOTNO)+ 21(SERNO) on the flag \nlabel"
+    ],
+    "barcode_content_specs": [
+      "01(TK20)+17(EXPDATE)+11(MFGDATE)+10(LOTNO)+21(SERNO)"
+    ],
+    "configuration_matrix": [
+      {
+        "item_number": "TEXP100RUH",
+        "shelf_life_days": "1460",
+        "nom_volume": "350cc",
+        "diameter": "10.0cm",
+        "height": "",
+        "projection": "7.0cm",
+        "gtin": "00081317009528"
+      },
+      {
+        "item_number": "TEXP110RUH",
+        "shelf_life_days": "1460",
+        "nom_volume": "455cc",
+        "diameter": "11.0cm",
+        "height": "",
+        "projection": "7.6cm",
+        "gtin": "00081317009535"
+      },
+      {
+        "item_number": "TEXP120RUH",
+        "shelf_life_days": "1460",
+        "nom_volume": "535cc",
+        "diameter": "12.0cm",
+        "height": "",
+        "projection": "8.0cm",
+        "gtin": "00081317009542"
+      },
+      {
+        "item_number": "TEXP130RUH",
+        "shelf_life_days": "1460",
+        "nom_volume": "650cc",
+        "diameter": "13.0cm",
+        "height": "",
+        "projection": "8.2cm",
+        "gtin": "00081317009559"
+      },
+      {
+        "item_number": "TEXP135RUH",
+        "shelf_life_days": "1460",
+        "nom_volume": "700cc",
+        "diameter": "13.5cm",
+        "height": "",
+        "projection": "8.3cm",
+        "gtin": "00081317009566"
+      },
+      {
+        "item_number": "TEXP140RUH",
+        "shelf_life_days": "1460",
+        "nom_volume": "850cc",
+        "diameter": "14.0cm",
+        "height": "",
+        "projection": "8.9cm",
+        "gtin": "00081317009573"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "section_name": "OUTER LID LABEL",
+      "section_type": "outer_lid_label",
+      "page_number": 1,
+      "eart_number": "107602-005",
+      "score": {
+        "status": "PARTIAL",
+        "score_pct": 58.7,
+        "passed": 13,
+        "partial": 12,
+        "failed": 3
+      },
+      "match_count": 28,
+      "spec_violations": 41,
+      "symbol_comparison": {
+        "total_required": 137,
+        "total_found": 27,
+        "total_missing": 43,
+        "score": 0.4416
+      }
+    },
+    {
+      "section_name": "COMBO LABEL",
+      "section_type": "combo_label",
+      "page_number": 1,
+      "eart_number": "107602-004",
+      "score": {
+        "status": "PARTIAL",
+        "score_pct": 58.7,
+        "passed": 13,
+        "partial": 12,
+        "failed": 3
+      },
+      "match_count": 28,
+      "spec_violations": 36,
+      "symbol_comparison": {
+        "total_required": 137,
+        "total_found": 29,
+        "total_missing": 41,
+        "score": 0.4562
+      }
+    },
+    {
+      "section_name": "THERMOFORM LABEL",
+      "section_type": "thermoform_label",
+      "page_number": 1,
+      "eart_number": "107602-004",
+      "score": {
+        "status": "PARTIAL",
+        "score_pct": 56.8,
+        "passed": 12,
+        "partial": 13,
+        "failed": 3
+      },
+      "match_count": 28,
+      "spec_violations": 36,
+      "symbol_comparison": {
+        "total_required": 137,
+        "total_found": 29,
+        "total_missing": 42,
+        "score": 0.4526
+      }
+    }
+  ],
+  "symbol_library_comparison": {
+    "total_required": 137,
+    "total_found": 29,
+    "total_partial": 67,
+    "total_missing": 41,
+    "score": 0.4562,
+    "results": [
+      {
+        "symbol_name": "171 - STERILE",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "Sterile",
+        "actual_text": "sterile; sterile; sterile",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Text match (100%): sterile, sterile, sterile",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.1\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "0277 - STERILE Steam or Heat wide",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Sterilized using steam or dry heat",
+        "actual_text": "or",
+        "text_score": 0.1667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Sterilized using steam or dry heat' → Found: 'or'",
+        "details": "Partial text match (17%): or",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 2503\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "Biological risk",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Biological risks",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Biological risks'",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.1\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Non-Pyrogenic_424",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Non-pyrogenic",
+        "actual_text": "non",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Non-pyrogenic' → Found: 'non'",
+        "details": "Partial text match (50%): non",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 2724\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "Keep away from heat",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Keep away from heat",
+        "actual_text": "from",
+        "text_score": 0.25,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Keep away from heat' → Found: 'from'",
+        "details": "Partial text match (25%): from",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 0624\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0062.pdf\nTitle: IEC TR"
+      },
+      {
+        "symbol_name": "Contains biological material of human origin",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Contains biological material of human origin",
+        "actual_text": "contains; material; of",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Contains biological material of human origin' → Found: 'contains'",
+        "details": "Partial text match (50%): contains, material, of",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.9\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "0253 - Sterile Fluid Path_for small point size",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Sterile fluid path",
+        "actual_text": "sterile; fluid",
+        "text_score": 0.6667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Sterile fluid path' → Found: 'sterile'",
+        "details": "Partial text match (67%): sterile, fluid",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.9\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Date of Manufacture",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Date of manufacture",
+        "actual_text": "date; of",
+        "text_score": 0.6667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Date of manufacture' → Found: 'date'",
+        "details": "Partial text match (67%): date, of",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.1.3\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "0029 - SN",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "Serial number",
+        "actual_text": "serial number; serial number; serial; number",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Text match (100%): serial number, serial number, serial",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 2498\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "0018 - Fragile",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Fragile, handle with care",
+        "actual_text": "with",
+        "text_score": 0.25,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Fragile, handle with care' → Found: 'with'",
+        "details": "Partial text match (25%): with",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 0621\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "Model Number",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Model Number",
+        "actual_text": "number",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Model Number' → Found: 'number'",
+        "details": "Partial text match (50%): number",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.1.10\nRef Symbol Name: N"
+      },
+      {
+        "symbol_name": "Health care centre or doctor",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Health care centre or doctor / for implant card: Name and address of the implanting healthcare institution / provider",
+        "actual_text": "or; for; implant; name; and; address; of; the",
+        "text_score": 0.4706,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Health care centre or doctor / for implant card: Name and address of the implanting healthcare institution / provider' → Found: 'or'",
+        "details": "Partial text match (47%): or, for, implant",
+        "regulation": "ID: REG_0085.pdf\nTitle: ISO 7001 — Graphical symbols -- Public information symbols\nSymbol Reference No: PI PF 044\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0088.pdf\nTitle: MDCG 2019-8"
+      },
+      {
+        "symbol_name": "Sterile barrier system-Single barrier",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Single sterile barrier system",
+        "actual_text": "sterile; barrier; system",
+        "text_score": 0.75,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Single sterile barrier system' → Found: 'sterile'",
+        "details": "Partial text match (75%): sterile, barrier, system",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.11\nRef Symbol Name: N"
+      },
+      {
+        "symbol_name": "Single sterile barrier system_protective packaging inside",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Single sterile barrier system with protective packaging inside",
+        "actual_text": "sterile; barrier; system; with",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Single sterile barrier system with protective packaging inside' → Found: 'sterile'",
+        "details": "Partial text match (50%): sterile, barrier, system",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.13\nRef Symbol Name: N"
+      },
+      {
+        "symbol_name": "Use by date",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "Use-by date",
+        "actual_text": "use; by; date",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Text match (100%): use, by, date",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 2607\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "Caution",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Caution",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Caution'",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 0434A\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0062.pdf\nTitle: IEC T"
+      },
+      {
+        "symbol_name": "Single sterile barrier system_protective packaging outside",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Single sterile barrier system with protective packaging outside",
+        "actual_text": "sterile; barrier; system; with",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Single sterile barrier system with protective packaging outside' → Found: 'sterile'",
+        "details": "Partial text match (50%): sterile, barrier, system",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.14\nRef Symbol Name: N"
+      },
+      {
+        "symbol_name": "No latex",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Does not contain or presence of natural rubber latex",
+        "actual_text": "not; contain; or; of; natural; rubber; latex",
+        "text_score": 0.7778,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Does not contain or presence of natural rubber latex' → Found: 'not'",
+        "details": "Partial text match (78%): not, contain, or",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.5 with negation\nRef S"
+      },
+      {
+        "symbol_name": "Date",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Date / for implant card: Date of Implantation",
+        "actual_text": "date; for; implant; of",
+        "text_score": 0.7143,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Date / for implant card: Date of Implantation' → Found: 'date'",
+        "details": "Partial text match (71%): date, for, implant",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.7.6\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Single patient - multiple use",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Single patient multiple use",
+        "actual_text": "patient; use",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Single patient multiple use' → Found: 'patient'",
+        "details": "Partial text match (50%): patient, use",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.12\nRef Symbol Name: N"
+      },
+      {
+        "symbol_name": "Unique Device Identifier",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Unique Device Identifier",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Unique Device Identifier'",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.7.10\nRef Symbol Name: N"
+      },
+      {
+        "symbol_name": "Manufacturer",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Manufacturer",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Manufacturer'",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.1.1\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Temperature Upper Limit",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Upper limit of temperature",
+        "actual_text": "of",
+        "text_score": 0.25,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Upper limit of temperature' → Found: 'of'",
+        "details": "Partial text match (25%): of",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 0533\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0062.pdf\nTitle: IEC TR"
+      },
+      {
+        "symbol_name": "Humidity limitation",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Humidity limitation",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Humidity limitation'",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.3.8\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Medical Device",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Medical Device",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Medical Device'",
+        "regulation": "ID: REG_0088.pdf\nTitle: MDCG 2019-8 Medical Devices: Guidance document\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - "
+      },
+      {
+        "symbol_name": "Latex",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "Contains or presence of natural rubber latex",
+        "actual_text": "contains; or; of; natural; rubber; latex",
+        "text_score": 0.8571,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Text match (86%): contains, or, of",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.5\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Do not re-use",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "Do not re-use",
+        "actual_text": "do; not; re; use",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Text match (100%): do, not, re",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 1051\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0062.pdf\nTitle: IEC TR"
+      },
+      {
+        "symbol_name": "Temperature limit",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Temperature limit",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Temperature limit'",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 0632\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0062.pdf\nTitle: IEC TR"
+      },
+      {
+        "symbol_name": "Non Sterile",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "Non-sterile",
+        "actual_text": "non; sterile",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Text match (100%): non, sterile",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 2609\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "Double sterile barrier system",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "Double Sterile barrier system",
+        "actual_text": "double; sterile; barrier; system",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Text match (100%): double, sterile, barrier",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.12\nRef Symbol Name: N"
+      },
+      {
+        "symbol_name": "Contains blood products",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Contains human blood or plasma derivatives",
+        "actual_text": "contains; or",
+        "text_score": 0.3333,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Contains human blood or plasma derivatives' → Found: 'contains'",
+        "details": "Partial text match (33%): contains, or",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.6\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "EC REP",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Authorized representative in the European Community/European Union",
+        "actual_text": "in; the",
+        "text_score": 0.25,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Authorized representative in the European Community/European Union' → Found: 'in'",
+        "details": "Partial text match (25%): in, the",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.1.2\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "0022 - Keep Dry",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Keep dry",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Keep dry'",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 0626\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "0276 - STERILE R wide",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Sterilized using irradiation",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Sterilized using irradiation'",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 2502\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "STERILE Asceptic wide",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Sterilized using aseptic processing techniques",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Sterilized using aseptic processing techniques'",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.2\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Contains biological material of animal origin",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Contains biological material of animal origin",
+        "actual_text": "contains; material; of",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Contains biological material of animal origin' → Found: 'contains'",
+        "details": "Partial text match (50%): contains, material, of",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.8\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Contains hazardous substances",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Contains hazardous substances",
+        "actual_text": "contains",
+        "text_score": 0.3333,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Contains hazardous substances' → Found: 'contains'",
+        "details": "Partial text match (33%): contains",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.10\nRef Symbol Name: N"
+      },
+      {
+        "symbol_name": "eIFU Indicator Horizontal",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "NA",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.3\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Do Not Resterilize",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Do not resterilize",
+        "actual_text": "do; not",
+        "text_score": 0.6667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Do not resterilize' → Found: 'do'",
+        "details": "Partial text match (67%): do, not",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.6\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Consult instruction for use I book",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Consult instructions for use or consult electronic instructions for use",
+        "actual_text": "for; use; or",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Consult instructions for use or consult electronic instructions for use' → Found: 'for'",
+        "details": "Partial text match (50%): for, use, or",
+        "regulation": "ID: REG_0062.pdf\nTitle: IEC TR 60878 Graphical symbols for electrical equipment in medical practice\nSymbol Reference No: 1641\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0059.pdf\nTitle:"
+      },
+      {
+        "symbol_name": "LOT",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Batch code",
+        "actual_text": "code",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Batch code' → Found: 'code'",
+        "details": "Partial text match (50%): code",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 2492\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "STERILE EO wide",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Sterilized using ethylene oxide",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Sterilized using ethylene oxide'",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.3\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Country of Manufacture",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Country of manufacture",
+        "actual_text": "country; of",
+        "text_score": 0.6667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Country of manufacture' → Found: 'country'",
+        "details": "Partial text match (67%): country, of",
+        "regulation": "ID: REG_0082.pdf\nTitle: ISO 15223-1 Medical devices — Symbols to be used with medical device labels, labelling and information to be supplied — Part 1: General requirements\nSymbol Reference No: 5.1.11"
+      },
+      {
+        "symbol_name": "Packaging damaged",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Do not use if package is damaged and consult instructions for use",
+        "actual_text": "do; not; use; if; is; and; for",
+        "text_score": 0.6667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Do not use if package is damaged and consult instructions for use' → Found: 'do'",
+        "details": "Partial text match (67%): do, not, use",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 2606\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "Contains a medicinal substance",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Contains a medicinal substance",
+        "actual_text": "contains",
+        "text_score": 0.3333,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Contains a medicinal substance' → Found: 'contains'",
+        "details": "Partial text match (33%): contains",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.4.7\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Distributor",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Distributor",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Distributor'",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.1.9\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Importer",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Importer",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Importer'",
+        "regulation": "ID: REG_0082.pdf\nTitle: ISO 15223-1 Medical devices — Symbols to be used with medical device labels, labelling and information to be supplied — Part 1: General requirements\nSymbol Reference No: 5.1.8\n"
+      },
+      {
+        "symbol_name": "Temperature lower limit",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Lower limit of temperature",
+        "actual_text": "of",
+        "text_score": 0.25,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Lower limit of temperature' → Found: 'of'",
+        "details": "Partial text match (25%): of",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 0534\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0062.pdf\nTitle: IEC TR"
+      },
+      {
+        "symbol_name": "Atmospheric pressure limitation",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Atmospheric pressure limitation",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Atmospheric pressure limitation'",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.3.9\nRef Symbol Name: NA"
+      },
+      {
+        "symbol_name": "Patient information website",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Patient information website / for implant card: Information website for patients",
+        "actual_text": "patient; information; for; implant",
+        "text_score": 0.6,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Patient information website / for implant card: Information website for patients' → Found: 'patient'",
+        "details": "Partial text match (60%): patient, information, for",
+        "regulation": "ID: REG_0088.pdf\nTitle: MDCG 2019-8 Medical Devices: Guidance document\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - "
+      },
+      {
+        "symbol_name": "Sterilized using vapor phase hydrogen peroxide",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Sterilized using vaporized hydrogen peroxide",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Sterilized using vaporized hydrogen peroxide'",
+        "regulation": "ID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - Symbols to be used with information to be supplied by the manufacturer-Part 1: General requirements\nSymbol Reference No: 5.2.10\nRef Symbol Name: N"
+      },
+      {
+        "symbol_name": "Cataloge number",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Catalogue number",
+        "actual_text": "number",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Catalogue number' → Found: 'number'",
+        "details": "Partial text match (50%): number",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 2493\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15"
+      },
+      {
+        "symbol_name": "Person Identification",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "Patient Identification / for implant card: Patient Name or Patient ID",
+        "actual_text": "patient; for; implant; name; or; id",
+        "text_score": 0.8,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Text match (80%): patient, for, implant",
+        "regulation": "ID: REG_0088.pdf\nTitle: MDCG 2019-8 Medical Devices: Guidance document\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA\n\nID: REG_0090.pdf\nTitle: ISO 15223-1 Medical devices - "
+      },
+      {
+        "symbol_name": "EU REP",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Authorized representative",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Authorized representative'",
+        "regulation": "ID: REG_0082.pdf\nTitle: ISO 15223-1 Medical devices — Symbols to be used with medical device labels, labelling and information to be supplied — Part 1: General requirements\nSymbol Reference No: 5.1.2\n"
+      },
+      {
+        "symbol_name": "US REP",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Authorized representative",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Authorized representative'",
+        "regulation": "ID: REG_0082.pdf\nTitle: ISO 15223-1 Medical devices — Symbols to be used with medical device labels, labelling and information to be supplied — Part 1: General requirements\nSymbol Reference No: 5.1.2\n"
+      },
+      {
+        "symbol_name": "Field Intentionally Left Blank",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Sterile &amp; Nonpyro",
+        "actual_text": "sterile",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Sterile &amp; Nonpyro' → Found: 'sterile'",
+        "details": "Partial text match (50%): sterile",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Sterile EO or R",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Method of Sterilization: Ethylene Oxide or Irradiation",
+        "actual_text": "of; or",
+        "text_score": 0.2857,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Method of Sterilization: Ethylene Oxide or Irradiation' → Found: 'of'",
+        "details": "Partial text match (29%): of, or",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Rx Only horizontal",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0070.pdf\nTitle: Title 21 Code of Federal Regulations Parts 801.109\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Caution, hot surface",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Caution, hot surface",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Caution, hot surface'",
+        "regulation": "ID: REG_0063.pdf\nTitle: IEC 60417 Graphical Symbols for Use on Equipment\nSymbol Reference No: 5041\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Rx Only Vertical",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0070.pdf\nTitle: Title 21 Code of Federal Regulations Parts 801.109\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "CAUTION, patient weight limit",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "CAUTION, patient weight limit",
+        "actual_text": "patient",
+        "text_score": 0.25,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'CAUTION, patient weight limit' → Found: 'patient'",
+        "details": "Partial text match (25%): patient",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Customer service phone",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "For customer service or to return product, please call (800) 235-5731 in USA; or outside of USA, call (805) 879-6000, or contact your local representative.",
+        "actual_text": "for; or; to; product; in; usa; of",
+        "text_score": 0.3704,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'For customer service or to return product, please call (800) 235-5731 in USA; or outside of USA, call (805) 879-6000, or contact your local representative.' → Found: 'for'",
+        "details": "Partial text match (37%): for, or, to",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "For Removal",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "For removal, turn knob 360° two times",
+        "actual_text": "for; to; release; the; from",
+        "text_score": 0.3103,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'For removal, turn knob 360° two times' → Found: 'for'",
+        "details": "Partial text match (31%): for, to, release",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Field Intentionally Left Blank",
+        "classification": "Proprietary - Ethicon",
+        "status": "FOUND",
+        "expected_text": "",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Test Script 100697719 - ACCLM Adoption Readiness Activities Protocol Rev 1 as Run 1",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "[Product type] from responsible sources",
+        "actual_text": "product; from",
+        "text_score": 0.4,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: '[Product type] from responsible sources' → Found: 'product'",
+        "details": "Partial text match (40%): product, from",
+        "regulation": "ID: REG_0069.pdf\nTitle: FSC Intl Std Req for use of the FSC TM by Cert Holders\nSymbol Reference No: FSC-STD-50-001 section 3.1b\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "China RoHS 10 Orange",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0075.pdf\nTitle: Standard of the Electronics Industry of the People's Republic of China SJ/T 11364 - 2014\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "China RoHS e Green",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0075.pdf\nTitle: Standard of the Electronics Industry of the People's Republic of China SJ/T 11364 - 2014\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "China RoHS 50 Orange",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0075.pdf\nTitle: Standard of the Electronics Industry of the People's Republic of China SJ/T 11364 - 2014\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "China RoHS 5 Orange",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0075.pdf\nTitle: Standard of the Electronics Industry of the People's Republic of China SJ/T 11364 - 2014\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Dyed bidirectional barbed absorbable device",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Dyed – Bidirectional – Barbed – Absorbable – Knotless Tissue Control Device",
+        "actual_text": "tissue",
+        "text_score": 0.125,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Dyed – Bidirectional – Barbed – Absorbable – Knotless Tissue Control Device' → Found: 'tissue'",
+        "details": "Partial text match (12%): tissue",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "PHT DEHP",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0089.pdf\nTitle: BS EN 15986:2011\nSymbol Reference No: 4.2\nRef Symbol Name: NA\nRef Description: Contains or presence of\nphthalates bis(2-ethylhexyl)\nphthalates (DEHP)\nNotes: NA"
+      },
+      {
+        "symbol_name": "Absorbable Mesh Device",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Absorbable Mesh Device",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Absorbable Mesh Device'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "No Stepping on Surface",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "No stepping on surface",
+        "actual_text": "no; on",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'No stepping on surface' → Found: 'no'",
+        "details": "Partial text match (50%): no, on",
+        "regulation": "ID: REG_0066.pdf\nTitle: ISO 7010 — Graphical symbols -- Safety colours and safety signs -- Registered safety signs\nSymbol Reference No: P019\nRef Symbol Name: NA\nRef Description: To prohibit stepping o"
+      },
+      {
+        "symbol_name": "Open Close",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Open/Close",
+        "actual_text": "to; and",
+        "text_score": 0.2143,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Open/Close' → Found: 'to'",
+        "details": "Partial text match (21%): to, and",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Ablation mode",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Denotes a procedure performed only in Ablation Mode.",
+        "actual_text": "only; in",
+        "text_score": 0.2857,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Denotes a procedure performed only in Ablation Mode.' → Found: 'only'",
+        "details": "Partial text match (29%): only, in",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Partially Absorbable Mesh Device",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Partially Absorbable Mesh Device",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Partially Absorbable Mesh Device'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Undyed bidirectional barbed absorbable device",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Undyed – Bidirectional – Barbed – Absorbable – Knotless Tissue Control Device",
+        "actual_text": "tissue",
+        "text_score": 0.125,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Undyed – Bidirectional – Barbed – Absorbable – Knotless Tissue Control Device' → Found: 'tissue'",
+        "details": "Partial text match (12%): tissue",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Ablation and Surgical mode icon",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Denotes a procedure performed using both Ablation and Surgical Mode.",
+        "actual_text": "and",
+        "text_score": 0.1111,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Denotes a procedure performed using both Ablation and Surgical Mode.' → Found: 'and'",
+        "details": "Partial text match (11%): and",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Surgical mode icon",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Denotes a procedure performed only in Surgical Mode.",
+        "actual_text": "only; in",
+        "text_score": 0.2857,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Denotes a procedure performed only in Surgical Mode.' → Found: 'only'",
+        "details": "Partial text match (29%): only, in",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "0279 - Anchored_Undyed_Abs_Mono",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Undyed – Unidirectional – Barbed - Absorbable - Knotless Tissue Control Device",
+        "actual_text": "tissue",
+        "text_score": 0.125,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Undyed – Unidirectional – Barbed - Absorbable - Knotless Tissue Control Device' → Found: 'tissue'",
+        "details": "Partial text match (12%): tissue",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "98 - Center Point Spatula",
+        "classification": "Product Graphic",
+        "status": "PARTIAL",
+        "expected_text": "Center Point Spatula Needle",
+        "actual_text": "needle",
+        "text_score": 0.25,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Center Point Spatula Needle' → Found: 'needle'",
+        "details": "Partial text match (25%): needle",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Partially Absorbable Mesh Device with Absorbable Layer",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Partially Absorbable Mesh Device with Absorbable Layer",
+        "actual_text": "with",
+        "text_score": 0.1429,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Partially Absorbable Mesh Device with Absorbable Layer' → Found: 'with'",
+        "details": "Partial text match (14%): with",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Immediate stop. laser light source",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Immediate stop, laser light source",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Immediate stop, laser light source'",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 6197\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Advanced Hemostasis",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Advanced Hemostasis for HARMONIC™ Devices",
+        "actual_text": "for",
+        "text_score": 0.2,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Advanced Hemostasis for HARMONIC™ Devices' → Found: 'for'",
+        "details": "Partial text match (20%): for",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Permanent Mesh Device with Absorbable Layer",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Permanent Mesh Device with Absorbable Layer",
+        "actual_text": "with",
+        "text_score": 0.1667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Permanent Mesh Device with Absorbable Layer' → Found: 'with'",
+        "details": "Partial text match (17%): with",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Maximum_Energy Button",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Maximum (Energy Button) for HARMONIC™ Devices",
+        "actual_text": "for",
+        "text_score": 0.1667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Maximum (Energy Button) for HARMONIC™ Devices' → Found: 'for'",
+        "details": "Partial text match (17%): for",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "0352 - Permanent Mesh Device_292",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Permanent Mesh Device",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Permanent Mesh Device'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Advanced Settings",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Advanced Settings",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Advanced Settings'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "0204 - Anchored_Dyed_Abs_Mono",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Dyed – Unidirectional – Barbed – Absorbable – Knotless Tissue Control Device",
+        "actual_text": "tissue",
+        "text_score": 0.125,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Dyed – Unidirectional – Barbed – Absorbable – Knotless Tissue Control Device' → Found: 'tissue'",
+        "details": "Partial text match (12%): tissue",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Pierced firm round cornered pledget",
+        "classification": "Product Graphic",
+        "status": "MISSING",
+        "expected_text": "Pierced firm round cornered pledget",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Pierced firm round cornered pledget'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "INTERCEED Absorbable Adhesion Barrier",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Absorbable Adhesion Barrier",
+        "actual_text": "barrier",
+        "text_score": 0.3333,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Absorbable Adhesion Barrier' → Found: 'barrier'",
+        "details": "Partial text match (33%): barrier",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "System Preferences",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "System Preferences",
+        "actual_text": "system",
+        "text_score": 0.5,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'System Preferences' → Found: 'system'",
+        "details": "Partial text match (50%): system",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Generator Footswitch Receptacle",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "This symbol indicates the receptacle to which the generator footswitch should be attached.",
+        "actual_text": "this; symbol; the; to; be",
+        "text_score": 0.4615,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'This symbol indicates the receptacle to which the generator footswitch should be attached.' → Found: 'this'",
+        "details": "Partial text match (46%): this, symbol, the",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Gripping Surface Technology",
+        "classification": "Product Trademark",
+        "status": "MISSING",
+        "expected_text": "Gripping Surface Technology",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Gripping Surface Technology'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "CE 0120",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0084.pdf\nTitle: Medical Device Directive 93/42/EEC as amended by Directive 2007/47/EC\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Dyed Bidirectional Barbs Non-Absorbable",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Dyed &ndash; Bidirectional &ndash; Barbed &ndash; Non-Absorbable &ndash; Knotless Tissue Control Device",
+        "actual_text": "non; tissue",
+        "text_score": 0.1538,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Dyed &ndash; Bidirectional &ndash; Barbed &ndash; Non-Absorbable &ndash; Knotless Tissue Control Device' → Found: 'non'",
+        "details": "Partial text match (15%): non, tissue",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "PHT",
+        "classification": "Standard",
+        "status": "FOUND",
+        "expected_text": "NA",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0089.pdf\nTitle: BS EN 15986:2011\nSymbol Reference No: 4.2\nRef Symbol Name: NA\nRef Description: NA\nNotes: This symbol shall be accompanied by the abbreviated designation of      the particular "
+      },
+      {
+        "symbol_name": "SURGICEL Absorbable Hemostat",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Absorbable Hemostat",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Absorbable Hemostat'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "CE 0123",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0084.pdf\nTitle: Medical Device Directive 93/42/EEC as amended by Directive 2007/47/EC\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Brazil Device Mark",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "NA",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0086.pdf\nTitle: Inmetro Ordinance No. 54/20-16\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Pierced soft round cornered pledget",
+        "classification": "Product Graphic",
+        "status": "MISSING",
+        "expected_text": "Pierced soft round cornered pledget",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Pierced soft round cornered pledget'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "CE 0344",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0084.pdf\nTitle: Medical Device Directive 93/42/EEC as amended by Directive 2007/47/EC\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Pierced firm square cornered pledget",
+        "classification": "Product Graphic",
+        "status": "MISSING",
+        "expected_text": "Pierced firm square cornered pledget",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Pierced firm square cornered pledget'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "For Use with GRAY Hand Piece Only",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "For Use with GRAY Hand Piece ONLY",
+        "actual_text": "for; use; with; only",
+        "text_score": 0.5714,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'For Use with GRAY Hand Piece ONLY' → Found: 'for'",
+        "details": "Partial text match (57%): for, use, with",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Maintenance",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Maintenance",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Maintenance'",
+        "regulation": "ID: REG_0059.pdf\nTitle: ISO 7000 Graphical symbols for use on equipment — Index and synopsis\nSymbol Reference No: 0717\nRef Symbol Name: NA\nRef Description: To indicate that the assistance of a servici"
+      },
+      {
+        "symbol_name": "CE 1639",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0084.pdf\nTitle: Medical Device Directive 93/42/EEC as amended by Directive 2007/47/EC\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Dyed Unidirectional Barbs Non-Absorbable",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Dyed &ndash; Unidirectional &ndash; Barbed &ndash; Non-Absorbable &ndash; Knotless Tissue Control Device",
+        "actual_text": "non; tissue",
+        "text_score": 0.1538,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Dyed &ndash; Unidirectional &ndash; Barbed &ndash; Non-Absorbable &ndash; Knotless Tissue Control Device' → Found: 'non'",
+        "details": "Partial text match (15%): non, tissue",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Selection; affirmative acknowledgement; success; ACK",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Selection; affirmative acknowledgement; success; ACK",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Selection; affirmative acknowledgement; success; ACK'",
+        "regulation": "ID: REG_0063.pdf\nTitle: IEC 60417 Graphical Symbols for Use on Equipment\nSymbol Reference No: 6334A\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "CE Mark",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0084.pdf\nTitle: Medical Device Directive 93/42/EEC as amended by Directive 2007/47/EC\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Minimum_Energy Button",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Minimum (Energy Button) for HARMONIC™ Devices",
+        "actual_text": "for",
+        "text_score": 0.1667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Minimum (Energy Button) for HARMONIC™ Devices' → Found: 'for'",
+        "details": "Partial text match (17%): for",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "CE 0483",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0084.pdf\nTitle: Medical Device Directive 93/42/EEC as amended by Directive 2007/47/EC\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "CE 0543",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0084.pdf\nTitle: Medical Device Directive 93/42/EEC as amended by Directive 2007/47/EC\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "TUV Rheinland of North America certification mark for Canadian and US standards",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0072.pdf\nTitle: TUV Certification\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "CE 2797",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0084.pdf\nTitle: Medical Device Directive 93/42/EEC as amended by Directive 2007/47/EC\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Partially Absorbable Mesh Device Undyed",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Partially Absorbable Mesh Device",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Partially Absorbable Mesh Device'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Pierced soft square cornered pledget",
+        "classification": "Product Graphic",
+        "status": "MISSING",
+        "expected_text": "Pierced soft square cornered pledget",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Pierced soft square cornered pledget'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "CE 0086",
+        "classification": "Safety Mark",
+        "status": "FOUND",
+        "expected_text": "TEXT NOT REQUIRED",
+        "actual_text": "",
+        "text_score": 1.0,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "No text required for this symbol",
+        "regulation": "ID: REG_0084.pdf\nTitle: Medical Device Directive 93/42/EEC as amended by Directive 2007/47/EC\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Regulatory Compliance Mark",
+        "classification": "Safety Mark",
+        "status": "PARTIAL",
+        "expected_text": "Regulatory Compliance Mark",
+        "actual_text": "mark",
+        "text_score": 0.3333,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Regulatory Compliance Mark' → Found: 'mark'",
+        "details": "Partial text match (33%): mark",
+        "regulation": "ID: REG_0096.pdf\nTitle: AS/NZS 4417.1  Regulatory compliance mark for electrical and electronic equipment Part 1: Use of the mark\nSymbol Reference No: NA\nRef Symbol Name: NA\nRef Description: NA\nNotes:"
+      },
+      {
+        "symbol_name": "Serial Interface",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Serial Interface (for service use only)",
+        "actual_text": "serial; for; use; only",
+        "text_score": 0.6667,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Serial Interface (for service use only)' → Found: 'serial'",
+        "details": "Partial text match (67%): serial, for, use",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "For Use with BLUE Hand Piece ONLY",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "For Use with BLUE Hand Piece ONLY",
+        "actual_text": "for; use; with; only",
+        "text_score": 0.5714,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'For Use with BLUE Hand Piece ONLY' → Found: 'for'",
+        "details": "Partial text match (57%): for, use, with",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "No Separate Handpiece Required",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "No Separate Hand Piece Required",
+        "actual_text": "no",
+        "text_score": 0.2,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'No Separate Hand Piece Required' → Found: 'no'",
+        "details": "Partial text match (20%): no",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Cloud connectivity upload successful",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Cloud connectivity upload successful",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Cloud connectivity upload successful'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Bell cancel",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Bell cancel",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Bell cancel'",
+        "regulation": "ID: REG_0063.pdf\nTitle: IEC 60417 Graphical Symbols for Use on Equipment\nSymbol Reference No: 5576\nRef Symbol Name: NA\nRef Description: To identify the control whereby a bell may be switched off or on"
+      },
+      {
+        "symbol_name": "Advanced setting",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Advanced setting",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Advanced setting'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Mini map placement right",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Mini map placement right",
+        "actual_text": "mini",
+        "text_score": 0.25,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Mini map placement right' → Found: 'mini'",
+        "details": "Partial text match (25%): mini",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Mini map placement left",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Mini map placement left",
+        "actual_text": "mini",
+        "text_score": 0.25,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Mini map placement left' → Found: 'mini'",
+        "details": "Partial text match (25%): mini",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Electrostatic sensitive devices",
+        "classification": "Standard",
+        "status": "MISSING",
+        "expected_text": "Electrostatic sensitive devices",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Electrostatic sensitive devices'",
+        "regulation": "ID: REG_0063.pdf\nTitle: IEC 60417 Graphical Symbols for Use on Equipment\nSymbol Reference No: 5134\nRef Symbol Name: NA\nRef Description: To indicate packages containing electrostatic sensitive devices,"
+      },
+      {
+        "symbol_name": "PACS connection actively receiving",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "PACS connection actively receiving",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'PACS connection actively receiving'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Reception = full",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Reception = full",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Reception = full'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Port placement",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Port placement",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Port placement'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Power error indication",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Indicates a reflected power error has occurred.",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Indicates a reflected power error has occurred.'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Refresh",
+        "classification": "Proprietary - Ethicon",
+        "status": "MISSING",
+        "expected_text": "Refresh",
+        "actual_text": "",
+        "text_score": 0.0,
+        "visual_score": 0.0,
+        "found_by_text": false,
+        "found_by_visual": false,
+        "text_discrepancy": "",
+        "details": "Expected text not found: 'Refresh'",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Refer to instruction manual/booklet",
+        "classification": "Standard",
+        "status": "PARTIAL",
+        "expected_text": "Refer to instruction manual/booklet",
+        "actual_text": "to; action",
+        "text_score": 0.2,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Refer to instruction manual/booklet' → Found: 'to'",
+        "details": "Partial text match (20%): to, action",
+        "regulation": "ID: REG_0066.pdf\nTitle: ISO 7010 — Graphical symbols -- Safety colours and safety signs -- Registered safety signs\nSymbol Reference No: M002\nRef Symbol Name: NA\nRef Description: NA\nNotes: NA"
+      },
+      {
+        "symbol_name": "Mentor MplusCO2",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "SILTEX™ Round Moderate Plus Profile Gel Breast Implant Cohesive II",
+        "actual_text": "profile; gel; breast; implant",
+        "text_score": 0.4,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'SILTEX™ Round Moderate Plus Profile Gel Breast Implant Cohesive II' → Found: 'profile'",
+        "details": "Partial text match (40%): profile, gel, breast",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Field Intentionally Left Blank",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "Selection 1: Text required if product doesn’t have an IMPLANT CARD:<br/>Date<br/>Selection 2: Text required if product has an IMPLANT CARD: Date / for<br/>implant card: Date of Implantation<br/>Selection 3: Text required for the ePIL artwork only: Date of Implantation",
+        "actual_text": "text; if; product; an; implant; date; for; of; the; only",
+        "text_score": 0.5789,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'Selection 1: Text required if product doesn’t have an IMPLANT CARD:<br/>Date<br/>Selection 2: Text required if product has an IMPLANT CARD: Date / for<br/>implant card: Date of Implantation<br/>Selection 3: Text required for the ePIL artwork only: Date of Implantation' → Found: 'text'",
+        "details": "Partial text match (58%): text, if, product",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Mentor HPCO2",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "SILTEX™ Round High Profile Gel Breast Implant Cohesive II",
+        "actual_text": "high; profile; gel; breast; implant",
+        "text_score": 0.5556,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'SILTEX™ Round High Profile Gel Breast Implant Cohesive II' → Found: 'high'",
+        "details": "Partial text match (56%): high, profile, gel",
+        "regulation": ""
+      },
+      {
+        "symbol_name": "Mentor MPCO2",
+        "classification": "Proprietary - Ethicon",
+        "status": "PARTIAL",
+        "expected_text": "SILTEX™ Round Moderate Profile Gel Breast Implant Cohesive II",
+        "actual_text": "profile; gel; breast; implant",
+        "text_score": 0.4444,
+        "visual_score": 0.0,
+        "found_by_text": true,
+        "found_by_visual": false,
+        "text_discrepancy": "Expected: 'SILTEX™ Round Moderate Profile Gel Breast Implant Cohesive II' → Found: 'profile'",
+        "details": "Partial text match (44%): profile, gel, breast",
+        "regulation": ""
+      }
+    ]
+  }
+}

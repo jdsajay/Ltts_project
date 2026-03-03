@@ -2,129 +2,190 @@
 #  Label Compliance System — Global Settings
 # ═══════════════════════════════════════════════════════
 
-# Paths (relative to project root)
+
+# ── Paths ─────────────────────────────────────────────
+# All relative to project root.
 paths:
-  standards_dir: data/standards        # ISO / regulation PDFs
-  labels_dir: data/labels              # Label PDFs to check
+  standards_dir:      data/standards
+  labels_dir:         data/labels/clean
+  redlines_dir:       data/labels/redlines
   knowledge_base_dir: data/knowledge_base
   symbol_library_dir: data/symbol_library
-  output_dir: outputs
-  redline_dir: outputs/redlines
-  report_dir: outputs/reports
-  log_dir: outputs/logs
+  output_dir:         outputs
+  redline_dir:        outputs/redlines
+  report_dir:         outputs/reports
+  log_dir:            outputs/logs
+
 
 # ── Knowledge Base ────────────────────────────────────
 knowledge_base:
-  # ChromaDB collection settings
   collection_name: iso_requirements
-  # Chunk size for embedding (characters)
-  chunk_size: 500
-  chunk_overlap: 50
-  # Embedding model (sentence-transformers, runs locally)
-  embedding_model: all-MiniLM-L6-v2
+  chunk_size:      500          # characters per embedding chunk
+  chunk_overlap:   50
+  embedding_model: all-MiniLM-L6-v2   # runs locally, no API cost
+
 
 # ── Document Processing ──────────────────────────────
 document:
-  render_dpi: 300
-  ocr_language: eng
-  # Minimum OCR confidence to accept a word (0-100)
-  ocr_min_confidence: 30
-  # Image preprocessing for OCR
+  render_dpi:         300
+  ocr_language:       eng
+  ocr_min_confidence: 30       # 0-100
   ocr_preprocess:
     - grayscale
     - threshold
     - denoise
 
-# ── Compliance ────────────────────────────────────────
+
+# ── Compliance Rules ─────────────────────────────────
 compliance:
-  # Rule files to load (in config/rules/)
   rule_files:
     - iso_14607.yaml
     - iso_15223.yaml
-  # Similarity threshold for semantic matching (0.0 - 1.0)
-  semantic_threshold: 0.65
-  # Scoring
+  semantic_threshold: 0.65     # cosine similarity cutoff
   score_levels:
-    compliant: 0.85       # >= 85% match → PASS
-    partial: 0.50         # >= 50% match → PARTIAL
-    # below 50% → FAIL
+    compliant: 0.85            # >= 85% → PASS
+    partial:   0.50            # >= 50% → PARTIAL  (below → FAIL)
 
-# ── Label Profiles ────────────────────────────────────
-#  Map label filename patterns to specific rule files.
-#  Each profile has glob patterns to match label filenames
-#  and a list of rule files to check against.
-#  Labels not matching any profile use compliance.rule_files above.
+
+# ── Label Profiles ───────────────────────────────────
+# Map label filename patterns → rule files.
+# Labels not matching any profile use compliance.rule_files.
 profiles:
   breast_implant:
     description: "CPG Gel Breast Implant labels"
-    patterns:
-      - "*ARTW*"
-      - "*CPG*"
-      - "*Gel*Breast*Implant*"
-    rule_files:
-      - iso_14607.yaml
-      - iso_15223.yaml
+    patterns: ["*ARTW*", "*CPG*", "*Gel*Breast*Implant*"]
+    rule_files: [iso_14607.yaml, iso_15223.yaml]
+
   drawings:
     description: "Engineering drawings"
-    patterns:
-      - "*DRWG*"
-    rule_files:
-      - iso_14607.yaml
-  # Example: a future device type
-  # spinal_implant:
-  #   description: "Spinal implant labels"
-  #   patterns:
-  #     - "*SPINE*"
-  #     - "*SPINAL*"
-  #   rule_files:
-  #     - iso_14630.yaml
-  #     - iso_15223.yaml
+    patterns: ["*DRWG*"]
+    rule_files: [iso_14607.yaml]
 
-# ── Redlining ───────────────────────────────────────
+
+# ── Redline Rendering ────────────────────────────────
 redline:
-  # Annotation colors (RGB)
-  color_pass: [0, 180, 0]         # Green
-  color_fail: [220, 20, 20]       # Red
-  color_partial: [255, 165, 0]    # Orange
-  color_info: [0, 100, 200]       # Blue
-  # Annotation font size
-  font_size: 14
-  panel_width: 500
-  # Output format
-  output_format: both              # "pdf", "png", or "both"
+  color_pass:    [0, 180, 0]       # green
+  color_fail:    [220, 20, 20]     # red
+  color_partial: [255, 165, 0]     # orange
+  color_info:    [0, 100, 200]     # blue
+  font_size:     14
+  panel_width:   500
+  output_format: both              # pdf | png | both
 
-# ── AI Provider ──────────────────────────────────────
+
+# ══════════════════════════════════════════════════════
+#  AI Configuration
+#
+#  HOW TO SWITCH PROVIDERS:
+#  1. Comment out the current active provider block
+#  2. Uncomment the provider block you want
+#  3. Set the matching API key:  export <KEY_ENV_VAR>=your-key
+#  That's it — no code changes needed.
+# ══════════════════════════════════════════════════════
 ai:
-  # Provider: "local" (Ollama), "openai", "anthropic", "none"
-  provider: local
-  # Vision model (Ollama) — used for image-based compliance checks
-  local_model: llama3.2-vision
-  # Text model (Ollama) — used for fast text/OCR analysis (much faster, 3B)
-  text_model: llama3.2
-  # Temperature for reasoning (low = more deterministic)
-  temperature: 0.1
-  # Max tokens for response
-  max_tokens: 2000
-  # Enable AI reasoning for ambiguous cases
+  provider: openai   # openai = any OpenAI-compatible API | local = Ollama | none = disabled
+
+  # ┌──────────────────────────────────────────────────┐
+  # │         ACTIVE PROVIDER: OpenAI                  │
+  # │         export OPENAI_API_KEY=sk-...             │
+  # └──────────────────────────────────────────────────┘
+  api_base_url:    ""
+  api_key_env_var: OPENAI_API_KEY
+  ingestion_model: gpt-4o
+  redline_model:   o3
+
+  # ┌──────────────────────────────────────────────────┐
+  # │         xAI / Grok                               │
+  # │         export XAI_API_KEY=xai-...               │
+  # └──────────────────────────────────────────────────┘
+  # api_base_url:    "https://api.x.ai/v1"
+  # api_key_env_var: XAI_API_KEY
+  # ingestion_model: grok-2-vision-1212
+  # redline_model:   grok-2-vision-1212
+
+  # ┌──────────────────────────────────────────────────┐
+  # │         NVIDIA NIM                               │
+  # │         export NVIDIA_API_KEY=nvapi-...          │
+  # └──────────────────────────────────────────────────┘
+  # api_base_url:    "https://integrate.api.nvidia.com/v1"
+  # api_key_env_var: NVIDIA_API_KEY
+  # ingestion_model: meta/llama-3.2-90b-vision-instruct
+  # redline_model:   meta/llama-3.2-90b-vision-instruct
+
+  # ┌──────────────────────────────────────────────────┐
+  # │         Together AI                              │
+  # │         export TOGETHER_API_KEY=...              │
+  # └──────────────────────────────────────────────────┘
+  # api_base_url:    "https://api.together.xyz/v1"
+  # api_key_env_var: TOGETHER_API_KEY
+  # ingestion_model: meta-llama/Llama-3.2-90B-Vision-Instruct-Turbo
+  # redline_model:   meta-llama/Llama-3.2-90B-Vision-Instruct-Turbo
+
+  # ┌──────────────────────────────────────────────────┐
+  # │         Groq                                     │
+  # │         export GROQ_API_KEY=gsk_...              │
+  # └──────────────────────────────────────────────────┘
+  # api_base_url:    "https://api.groq.com/openai/v1"
+  # api_key_env_var: GROQ_API_KEY
+  # ingestion_model: llama-3.3-70b-versatile
+  # redline_model:   llama-3.3-70b-versatile
+
+  # ┌──────────────────────────────────────────────────┐
+  # │         Azure OpenAI                             │
+  # │         export AZURE_API_KEY=...                 │
+  # └──────────────────────────────────────────────────┘
+  # api_base_url:    "https://<resource>.openai.azure.com/openai/deployments/<deploy>/"
+  # api_key_env_var: AZURE_API_KEY
+  # ingestion_model: gpt-4o
+  # redline_model:   gpt-4o
+
+  # ── General AI Tuning ──────────────────────────────
+  temperature:      0.1
+  max_tokens:       2000
   enable_reasoning: true
-  # AI mode: "smart" (only re-checks FAIL/PARTIAL rules) or "full" (all rules)
-  ai_mode: smart
-  # Max rules per AI batch (smaller = better accuracy for local models)
-  batch_size: 5
+  ai_mode:          smart          # smart = only re-check FAIL/PARTIAL | full = all
+  batch_size:       5              # rules per AI batch
+
+  # ── Local Models (Ollama — only used when provider=local) ──
+  local_model: llama3.2-vision
+  text_model:  llama3.2
+
+  # ── Redline Pipeline Tuning ────────────────────────
+  redline_pass0_reasoning_effort:      low
+  redline_pass0_max_completion_tokens: 16000
+  redline_pass1_reasoning_effort:      medium
+  redline_pass1_max_completion_tokens: 16000
+  redline_pass2_reasoning_effort:      medium
+  redline_pass2_max_completion_tokens: 8000
+
+  # ── Panel Filtering ────────────────────────────────
+  redline_skip_panel_types:
+    - data_table
+    - title_block
+    - revision_table
+    - notes_block
+    - drawing_info
+  redline_skip_name_keywords:
+    - title block
+    - drawing information
+    - revision
+    - change history
+    - bom
+    - general notes
+    - drawing notes
+    - data table
+    - specification table
+
 
 # ── Processing ───────────────────────────────────────
 processing:
-  # Batch size for processing labels
-  batch_size: 50
-  # Max parallel workers
+  batch_size:  50
   max_workers: 4
-  # Resume from last checkpoint
-  resume: true
+  resume:      true
 
-# ── Logging ─────────────────────────────────────────
+
+# ── Logging ──────────────────────────────────────────
 logging:
-  level: INFO
-  # Log to file
-  file: outputs/logs/compliance.log
-  # Log format
+  level:  INFO
+  file:   outputs/logs/compliance.log
   format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"

@@ -107,6 +107,129 @@ def ingest(standards_dir: Path | None, rebuild: bool):
 
 
 # ═══════════════════════════════════════════════════════
+#  INGEST-AI — AI-powered ISO standard ingestion
+# ═══════════════════════════════════════════════════════
+@main.command("ingest-ai")
+@click.option(
+    "--pdf", "-p",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=None,
+    help="Specific ISO PDF to ingest. Default: all PDFs in standards dir.",
+)
+@click.option(
+    "--label-only", is_flag=True, default=False,
+    help="Only ingest labelling-relevant sections (11.x + Annex G).",
+)
+def ingest_ai(pdf: Path | None, label_only: bool):
+    """Ingest ISO standard PDFs using AI vision (GPT-4o).
+
+    Unlike the text-only 'ingest' command, this uses GPT-4o vision
+    to read each page including figures, tables, and diagrams.
+    Produces a richer knowledge base with Table G.2 surface
+    classification, figure descriptions, and precise requirements.
+
+    Examples:
+        label-compliance ingest-ai
+        label-compliance ingest-ai --pdf data/standards/ISO-14607-2024.pdf
+        label-compliance ingest-ai --label-only
+    """
+    from label_compliance.knowledge_base.ai_ingester import (
+        ingest_iso_with_ai,
+        ingest_all_with_ai,
+        _PAGE_GROUPS,
+        _LABEL_SECTIONS,
+    )
+
+    settings = get_settings()
+    settings.ensure_dirs()
+
+    if label_only:
+        groups = [g for g in _PAGE_GROUPS if g[0] in _LABEL_SECTIONS]
+        console.print("[dim]Label-only mode: processing labelling + surface classification sections[/dim]")
+    else:
+        groups = None  # use defaults
+
+    if pdf:
+        console.print(f"\n[bold]AI Ingestion — {pdf.name}[/bold]\n")
+        kb = ingest_iso_with_ai(pdf, page_groups=groups)
+        console.print(
+            f"  [green]✓[/green] {kb['iso_id']}: "
+            f"{kb['total_sections']} sections, {kb['total_requirements']} requirements, "
+            f"{kb['total_tables']} tables, {kb['total_figures']} figures"
+        )
+        console.print(f"  Time: {kb['total_time_seconds']}s")
+    else:
+        std_dir = Path(settings.paths.standards_dir)
+        pdfs = list(std_dir.glob("*.pdf"))
+        if not pdfs:
+            console.print(f"[yellow]No PDF files found in {std_dir}[/yellow]")
+            sys.exit(1)
+
+        console.print(f"\n[bold]AI Ingestion — {len(pdfs)} standard(s)[/bold]\n")
+        for p in sorted(pdfs):
+            console.print(f"  [cyan]Processing[/cyan] {p.name}…")
+            try:
+                kb = ingest_iso_with_ai(p, page_groups=groups)
+                console.print(
+                    f"  [green]✓[/green] {kb['iso_id']}: "
+                    f"{kb['total_sections']} sections, {kb['total_requirements']} reqs, "
+                    f"{kb['total_tables']} tables, {kb['total_figures']} figures "
+                    f"({kb['total_time_seconds']}s)"
+                )
+            except Exception as e:
+                console.print(f"  [red]✗[/red] {p.name}: {e}")
+
+    console.print(f"\n[bold green]Done.[/bold green] AI knowledge base saved to {settings.paths.knowledge_base_dir}/\n")
+
+
+# ═══════════════════════════════════════════════════════
+#  INGEST-SYMBOLS — AI-powered symbol library ingestion
+# ═══════════════════════════════════════════════════════
+@main.command("ingest-symbols")
+@click.option(
+    "--force", is_flag=True, default=False,
+    help="Re-ingest even if AI symbol library already exists.",
+)
+def ingest_symbols(force: bool):
+    """Ingest the Symbol Library Excel using AI vision (GPT-4o).
+
+    Reads each symbol's thumbnail image and metadata, then uses GPT-4o
+    to generate visual descriptions, ISO standard mappings, purpose,
+    placement requirements, and minimum size specs.
+
+    The base symbol library JSON must already exist
+    (run `python scripts/extract_symbol_library.py` first).
+
+    Examples:
+        label-compliance ingest-symbols
+        label-compliance ingest-symbols --force
+    """
+    from label_compliance.knowledge_base.ai_symbol_ingester import (
+        ingest_symbol_library_with_ai,
+    )
+
+    settings = get_settings()
+    settings.ensure_dirs()
+
+    console.print("\n[bold]AI Symbol Library Ingestion[/bold]\n")
+    console.print("[dim]Analyzing symbol thumbnails with GPT-4o vision...[/dim]\n")
+
+    try:
+        result = ingest_symbol_library_with_ai(force=force)
+        console.print(
+            f"  [green]✓[/green] {result['total_symbols']} symbols total, "
+            f"{result['ai_annotated_symbols']} AI-annotated"
+        )
+        console.print(f"  Model: {result.get('ai_model', 'gpt-4o')}")
+        console.print(f"  Saved to: {settings.paths.symbol_library_dir / 'symbol_library_ai.json'}")
+    except Exception as e:
+        console.print(f"  [red]✗[/red] Error: {e}")
+        raise SystemExit(1)
+
+    console.print(f"\n[bold green]Done.[/bold green]\n")
+
+
+# ═══════════════════════════════════════════════════════
 #  CHECK — check labels for compliance
 # ═══════════════════════════════════════════════════════
 @main.command()
@@ -270,6 +393,73 @@ def _print_results_table(results):
 
     console.print()
     console.print(table)
+
+
+# ═══════════════════════════════════════════════════════
+#  REDLINE — AI-powered redline generation
+# ═══════════════════════════════════════════════════════
+@main.command()
+@click.argument("paths", nargs=-1, type=click.Path(exists=True, path_type=Path))
+@click.option(
+    "--output-dir", "-o",
+    type=click.Path(file_okay=False, path_type=Path),
+    default=None,
+    help="Output directory for redlined PDFs.",
+)
+def redline(paths: tuple[Path, ...], output_dir: Path | None):
+    """Generate AI-powered redline annotations on label PDFs.
+
+    Uses GPT-4o vision to analyze the label and identify specific
+    compliance issues, then places redline annotations directly on
+    the original PDF — matching the manual reviewer's format.
+
+    Examples:
+        label-compliance redline data/labels/clean/DRWG107602_Rev\\ D\\ 1.pdf
+        label-compliance redline data/labels/clean/
+    """
+    from label_compliance.redline.ai_redliner import run_ai_redline
+
+    settings = get_settings()
+    settings.ensure_dirs()
+
+    # Collect PDF files
+    pdf_files: list[Path] = []
+    for p in paths:
+        p = Path(p)
+        if p.is_file() and p.suffix.lower() == ".pdf":
+            pdf_files.append(p)
+        elif p.is_dir():
+            pdf_files.extend(sorted(p.glob("**/*.pdf")))
+
+    if not pdf_files:
+        configured = Path(settings.paths.labels_dir)
+        if configured.exists():
+            pdf_files = sorted(configured.glob("**/*.pdf"))
+
+    # Filter out redline samples
+    pdf_files = [f for f in pdf_files if "_Redline" not in f.stem and "_redline" not in f.stem]
+
+    if not pdf_files:
+        console.print("[red]No label PDFs found.[/red]")
+        sys.exit(1)
+
+    console.print(f"\n[bold]AI Redline Analysis — {len(pdf_files)} label(s)[/bold]\n")
+
+    for pdf in pdf_files:
+        console.print(f"  [cyan]Analyzing[/cyan] {pdf.name}…")
+        try:
+            result, out_path = run_ai_redline(pdf, output_dir)
+            if out_path:
+                console.print(f"  [green]✓[/green] {len(result.issues)} issues → {out_path.name}")
+                for issue in result.issues:
+                    console.print(f"    [red]NC[/red] {issue.description}")
+            else:
+                console.print(f"  [yellow]No issues found[/yellow]")
+        except Exception as e:
+            logger.error("Redline failed for %s: %s", pdf.name, e, exc_info=True)
+            console.print(f"  [red]✗[/red] {pdf.name}: {e}")
+
+    console.print(f"\n[bold green]Done.[/bold green] See outputs in {settings.paths.redline_dir}/\n")
 
 
 # ═══════════════════════════════════════════════════════

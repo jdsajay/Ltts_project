@@ -246,13 +246,24 @@ Label text:
 Respond with JSON: {{"results":[{{"rule_id":"id","status":"PASS/PARTIAL/FAIL","confidence":0.0-1.0,"evidence":["found"],"reasoning":"why"}}]}}"""
 
 _AI_VISION_PROMPT = """\
-Check if the label image satisfies each ISO requirement.
-For each rule, examine the image carefully and decide PASS/PARTIAL/FAIL.
+You are auditing a medical device label image for ISO 14607 compliance.
+Look at this CROPPED label section image carefully. Analyze ALL visual elements:
 
-Rules:
+1. TEXT: Read all text including product name, manufacturer, warnings, field names
+2. SYMBOLS: Identify regulatory symbols (CE mark, sterile, manufacturer, single-use, MD, UDI, etc.)
+3. BARCODES: Check for 1D barcodes, 2D DataMatrix/QR codes
+4. LAYOUT: Note spacing, alignment, borders, grouping of elements
+5. VARIABLE FIELDS: Look for placeholder text (LOTNO, SERNO, EXPDATE, MFGDATE, etc.)
+
+For each rule below, examine the IMAGE (not just text) and decide:
+- PASS: Requirement is clearly met in the image
+- PARTIAL: Some evidence found but incomplete or unclear
+- FAIL: Requirement is NOT visible or clearly missing from the image
+
+Rules to check:
 {rules_list}
 
-Respond with JSON: {{"results":[{{"rule_id":"id","status":"PASS/PARTIAL/FAIL","confidence":0.0-1.0,"evidence":["found"],"reasoning":"why"}}]}}"""
+Respond with JSON: {{"results":[{{"rule_id":"id","status":"PASS/PARTIAL/FAIL","confidence":0.0-1.0,"evidence":["what you see in the image"],"reasoning":"visual observation"}}]}}"""
 
 
 def _parse_ai_json(raw: str) -> dict | list | None:

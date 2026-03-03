@@ -126,18 +126,36 @@ def detect_symbols_visual(
     matches = []
     templates = list(template_dir.glob("*.png"))
 
+    # Auto-compute scale range based on image vs template sizes
+    img_h, img_w = img.shape[:2]
+
     for tmpl_path in templates:
         tmpl = cv2.imread(str(tmpl_path), cv2.IMREAD_GRAYSCALE)
         if tmpl is None:
             continue
 
-        # Multi-scale template matching
+        # Multi-scale template matching with auto-computed scales
+        th, tw = tmpl.shape[:2]
         best_score = 0.0
         best_loc = None
         best_scale = 1.0
 
-        for scale in [0.5, 0.75, 1.0, 1.25, 1.5]:
-            th, tw = tmpl.shape[:2]
+        # Compute scales: symbols on label are typically 1-10% of image width
+        expected_sym_sizes = [
+            int(img_w * frac) for frac in [0.01, 0.02, 0.03, 0.05, 0.07, 0.10]
+        ]
+        scales = sorted(set(
+            round(sz / tw, 2)
+            for sz in expected_sym_sizes
+            if sz >= 10
+        ))
+        # Add fine-grained search around each scale
+        fine_scales = []
+        for s in scales:
+            fine_scales.extend([s * 0.8, s, s * 1.2])
+        scales = sorted(set(round(s, 2) for s in fine_scales if s >= 0.05))
+
+        for scale in scales:
             new_w = int(tw * scale)
             new_h = int(th * scale)
             if new_w < 10 or new_h < 10:
